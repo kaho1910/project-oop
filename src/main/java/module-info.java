@@ -1,8 +1,8 @@
-module com.example.projectoop {
+module game {
     requires javafx.controls;
     requires javafx.fxml;
 
 
-    opens com.example.projectoop to javafx.fxml;
-    exports com.example.projectoop;
+    opens game to javafx.fxml;
+    exports game;
 }
