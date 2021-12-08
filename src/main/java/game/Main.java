@@ -5,7 +5,6 @@ import javafx.scene.Group;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.StackPane;
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 public class Main extends Application {
@@ -16,8 +15,6 @@ public class Main extends Application {
     private static final int offSetX = 480;
     private static final int offSetY = 80;
     private static final int radius = 40;
-
-    private Player[] players = new Player[playerNum];
 
     private Group tileGroup = new Group();
 
@@ -34,6 +31,18 @@ public class Main extends Application {
                 tileGroup.getChildren().add(tile);
             }
         }
+//        try {
+//            Image img = new Image("img/map1.jpg");
+//            ImageView bgImg = new ImageView();
+//            bgImg.setImage(img);
+//            bgImg.setFitHeight(800);
+//            bgImg.setFitWidth(800);
+//            bgImg.setTranslateX(offSetX);
+//            bgImg.setTranslateY(offSetY);
+//            tileGroup.getChildren().addAll(bgImg);
+//        } catch (Exception e){
+//            System.out.println(e);
+//        }
 
         return root;
     }
@@ -44,17 +53,19 @@ public class Main extends Application {
         primaryStage.setScene(scene);
         primaryStage.show();
 
-        Thread[] thread = new Thread[4];
-        for(int i=0; i < playerNum; i++){
-            players[i] = new Player(i + 1, radius);
-            thread[i] = new Thread(players[i]);
-            thread[i].start();
-            tileGroup.getChildren().addAll(players[i]);
-        }
+        PlayerController playerController = new PlayerController(radius);
+        Thread t = new Thread(playerController);
+        t.start();
+
+        tileGroup.getChildren().addAll(playerController.getPlayers());
     }
 
     public static void main(String[] args){
         launch(args);
+    }
+
+    public static int getPlayerNum(){
+        return playerNum;
     }
 
     public static int getTileSize(){
