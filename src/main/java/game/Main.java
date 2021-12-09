@@ -4,8 +4,12 @@ import javafx.application.Application;
 import javafx.scene.Group;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+
+import java.net.MalformedURLException;
 
 public class Main extends Application {
     private static final int playerNum = 4;
@@ -31,18 +35,15 @@ public class Main extends Application {
                 tileGroup.getChildren().add(tile);
             }
         }
-//        try {
-//            Image img = new Image("img/map1.jpg");
-//            ImageView bgImg = new ImageView();
-//            bgImg.setImage(img);
-//            bgImg.setFitHeight(800);
-//            bgImg.setFitWidth(800);
-//            bgImg.setTranslateX(offSetX);
-//            bgImg.setTranslateY(offSetY);
-//            tileGroup.getChildren().addAll(bgImg);
-//        } catch (Exception e){
-//            System.out.println(e);
-//        }
+//        Image img = new Image("map1.jpg");
+        Image img = new Image(getClass().getResourceAsStream("/img/map1.jpg"));
+        ImageView bgImg = new ImageView(img);
+//        bgImg.setImage(img);
+        bgImg.setFitHeight(800);
+        bgImg.setFitWidth(800);
+        bgImg.setTranslateX(offSetX);
+        bgImg.setTranslateY(offSetY);
+        tileGroup.getChildren().add(bgImg);
 
         return root;
     }

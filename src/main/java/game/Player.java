@@ -10,15 +10,13 @@ import java.util.Random;
 public class Player extends Circle {
     private final int ID;
     private int position = 1;
-    private boolean turn = false;
     private PowerCard[] cards = new PowerCard[4];
-    private int tileSize = Main.getTileSize();
-    private int width = Main.getWidth();
-    private int height = Main.getHeight();
-    private int offSetX = Main.getOffSetX();
-    private int offSetY = Main.getOffSetY();
-    private int radius;
-    boolean alive = true;
+    private final int tileSize = Main.getTileSize();
+    private final int width = Main.getWidth();
+    private final int height = Main.getHeight();
+    private final int offSetX = Main.getOffSetX();
+    private final int offSetY = Main.getOffSetY();
+    private final int radius;
     Random rand = new Random();
 
     public Player(int id, int radius) {
@@ -59,7 +57,7 @@ public class Player extends Circle {
         animate.play();
         System.out.println("id: " + this.ID + " at [" +  this.position + "]");
         System.out.println("x : " + (this.position - 1) % width + ", " + coordinate[0]);
-        System.out.println("y : " + ((int) ((this.position - 1) / height)) + ", " + coordinate[1]);
+        System.out.println("y : " + ((this.position - 1) / height) + ", " + coordinate[1]);
         try {
             Thread.sleep(400);
         } catch (InterruptedException e) {
@@ -70,11 +68,17 @@ public class Player extends Circle {
     public void setPosition(int run){
         System.out.println("\nrun : " + run);
         if (run > 0) {
-            for(int i=0; i < run; i++) {
+            for (int i = 0; i < run; i++) {
+                if (this.position >= 100){
+                    break;
+                }
                 moveTo(this.position + 1);
             }
         } else {
-            for(int i=run; i < 0; i++) {
+            for (int i = run; i < 0; i++) {
+                if (this.position <= 0){
+                    break;
+                }
                 moveTo(this.position - 1);
             }
         }
