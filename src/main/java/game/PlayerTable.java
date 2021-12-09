@@ -1,35 +1,28 @@
 package game;
 
 import javafx.application.Application;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.geometry.Insets;
-import javafx.geometry.Pos;
 import javafx.scene.control.Button;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.StackPane;
-import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.image.*;
 
-import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.*;
 import javafx.stage.Stage;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 
-import java.io.IOException;
-import java.util.Collections;
+import java.util.Random;
 
 public class PlayerTable extends Application {
     private Scene scene;
     private StackPane layout;
     private Button dice_button;
-    @FXML
+    //@FXML
     private Rectangle player_frame, dice_frame, card_frame, card_frame2, card_frame3, inner_frame;
+   // @FXML
+    private Random random;
     @Override
     public void start(Stage stage) throws Exception {
         layout = new StackPane();
@@ -40,8 +33,8 @@ public class PlayerTable extends Application {
         card_frame = new Rectangle();
         card_frame2 = new Rectangle();
         card_frame3 = new Rectangle();
-        //layout.setBackground(new Background(new BackgroundFill[]{new BackgroundFill(Color.DARKGRAY, CornerRadii.EMPTY, Insets.EMPTY)}));
-        //player frame
+        random = new Random();
+
         player_frame.setWidth(170);
         player_frame.setHeight(170);
         player_frame.setTranslateX(0);
@@ -53,7 +46,6 @@ public class PlayerTable extends Application {
         inner_frame.setHeight(120);
         inner_frame.setTranslateX(0);
         inner_frame.setTranslateY(-99);
-
         Image im2 = new Image(getClass().getResourceAsStream("/img/map1.jpg"));
         inner_frame.setFill(new ImagePattern(im2));
         ///dice
@@ -61,17 +53,43 @@ public class PlayerTable extends Application {
         dice_frame.setHeight(80);
         dice_frame.setTranslateX(-120);
         dice_frame.setTranslateY(90);
+        Image im3 = new Image(getClass().getResourceAsStream("/img/dice/dice1.png"));
+        dice_frame.setFill(new ImagePattern(im3));
         //dice button
         dice_button.setText("Roll");
         dice_button.setTranslateX(-120);
         dice_button.setTranslateY(150);
+        //System.out.println("/img/dice/dice"+(random.nextInt(6)+1)+".png");
+
+        dice_button.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                dice_button.setDisable(true);
+                Thread thread = new Thread(){
+                    public void run(){
+                System.out.println("Thread run");
+                try{
+                    for (int i = 0;i < 15; i++){
+                        String url = new String();
+                        int k = random.nextInt(6)+1;
+                        url = "/img/dice/dice"+(k)+".png";
+                        System.out.println(url+"-alert");
+                        Image dm = new Image(getClass().getResourceAsStream(url));
+                        dice_frame.setFill(new ImagePattern(dm));
+                        Thread.sleep(50);
+                    }
+                    dice_button.setDisable(false);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }}
+            };
+                thread.start();
+        }});
         //card frame
         card_frame.setWidth(60);
         card_frame.setHeight(72);
         card_frame.setTranslateX(-20);
         card_frame.setTranslateY(90);
-
-        //card_frame.setFill(new ImagePattern(img));
         //card frame2
         card_frame2.setWidth(60);
         card_frame2.setHeight(72);
@@ -87,6 +105,9 @@ public class PlayerTable extends Application {
         stage.setScene(scene);
         stage.show();
     }
+
+
+
     public static void main(String[] args) {
         launch();
     }
