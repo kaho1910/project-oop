@@ -9,8 +9,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
-import java.net.MalformedURLException;
-
 public class Main extends Application {
     private static final int playerNum = 4;
     private static final int TileSize = 80;
