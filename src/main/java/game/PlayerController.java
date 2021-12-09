@@ -5,6 +5,7 @@ import java.util.Random;
 public class PlayerController implements Runnable  {
     private int playerNum = Main.getPlayerNum();
     private Player[] players;
+    private PlayerTable[] playerTable;
     private boolean lastTurn = false;
     Random rand = new Random();
 

@@ -16,9 +16,11 @@ public class Main extends Application {
     private static final int TileSize = 80;
     private static final int Width = 10;
     private static final int Height = 10;
-    private static final int offSetX = 480;
+    private static final int offSetX = 400;
     private static final int offSetY = 80;
     private static final int radius = 40;
+    private PlayerController playerController;
+    private Player[] players;
 
     private Group tileGroup = new Group();
 
@@ -45,6 +47,19 @@ public class Main extends Application {
         bgImg.setTranslateY(offSetY);
         tileGroup.getChildren().add(bgImg);
 
+        playerController = new PlayerController(radius);
+        players = playerController.getPlayers();
+        PlayerTable playerTable;
+        StackPane pane;
+        for(int i=0; i < playerNum; i++){
+            playerTable = players[i].getPlayerTable();
+            pane = playerTable.getLayout();
+            pane.setPrefSize(400, 400);
+            pane.setTranslateX((i % 2) * 1200);
+            pane.setTranslateY(i > 1 ? 480 : 80);
+            tileGroup.getChildren().add(pane);
+        }
+
         return root;
     }
 
@@ -54,7 +69,6 @@ public class Main extends Application {
         primaryStage.setScene(scene);
         primaryStage.show();
 
-        PlayerController playerController = new PlayerController(radius);
         Thread t = new Thread(playerController);
         t.start();
 

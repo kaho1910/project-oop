@@ -17,6 +17,7 @@ public class Player extends Circle {
     private final int offSetX = Main.getOffSetX();
     private final int offSetY = Main.getOffSetY();
     private final int radius;
+    private PlayerTable playerTable = new PlayerTable();
     Random rand = new Random();
 
     public Player(int id, int radius) {
@@ -86,5 +87,9 @@ public class Player extends Circle {
 
     public int getPosition() {
         return position;
+    }
+
+    public PlayerTable getPlayerTable() {
+        return playerTable;
     }
 }

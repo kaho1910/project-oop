@@ -18,13 +18,12 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Collections;
 
-public class PlayerTable extends Application {
+public class PlayerTable {
     private Scene scene;
     private StackPane layout;
     private Button dice_button;
     private Rectangle player_frame, dice_frame, card_frame, card_frame2, card_frame3;
-    @Override
-    public void start(Stage stage) throws Exception {
+    public PlayerTable() {
         layout = new StackPane();
         dice_button = new Button();
         player_frame = new Rectangle();
@@ -64,11 +63,16 @@ public class PlayerTable extends Application {
         card_frame3.setTranslateX(140);
         card_frame3.setTranslateY(90);
         layout.getChildren().addAll(player_frame, dice_frame, dice_button, card_frame, card_frame2, card_frame3);
-        scene = new Scene(layout, 400 ,400);
-        stage.setScene(scene);
-        stage.show();
+//        scene = new Scene(layout, 400 ,400);
+//        stage.setScene(scene);
+//        stage.show();
+//    }
+//    public static void main(String[] args) {
+//        launch();
     }
-    public static void main(String[] args) {
-        launch();
+
+    public StackPane getLayout() {
+        System.out.println(layout == null);
+        return layout;
     }
 }
