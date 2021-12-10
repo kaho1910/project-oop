@@ -69,7 +69,6 @@ public class Main extends Application {
         bgImg.setTranslateY(offSetY);
         groupMap.getChildren().add(bgImg);
 
-        playerController = new PlayerController(radius);
         players = playerController.getPlayers();
         PlayerTable playerTable;
         StackPane pane;
@@ -106,13 +105,17 @@ public class Main extends Application {
                     selector.getBtn()[i].setOnAction(new EventHandler<ActionEvent>() {
                         public void handle(ActionEvent actionEvent) {
                             //                GAME
+                            playerController = new PlayerController(radius);
                             int mapSelected;
                             if (actionEvent.getSource().equals(selector.getBtn()[0])){
                                 mapSelected = 1;
+                                playerController.setLadder(selector.getMap1Ladder());
                             } else if (actionEvent.getSource().equals(selector.getBtn()[1])){
                                 mapSelected = 2;
+                                playerController.setLadder(selector.getMap2Ladder());
                             } else {
                                 mapSelected = 3;
+                                playerController.setLadder(selector.getMap3Ladder());
                             }
                             Scene sceneGame = new Scene(mapGenerator(mapSelected));
                             primaryStage.setScene(sceneGame);

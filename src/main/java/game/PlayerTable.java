@@ -58,7 +58,6 @@ public class PlayerTable {
         dice_frame.setTranslateX(-120);
         dice_frame.setTranslateY(90);
         Image im3 = new Image(getClass().getResourceAsStream("/img/dice/dice1.png"));
-        System.out.println(getClass());
         dice_frame.setFill(new ImagePattern(im3));
         //dice button
         dice_button.setText("Roll");
