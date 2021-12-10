@@ -60,7 +60,7 @@ public class Main extends Application {
 //                tileGroupMap.getChildren().add(tile);
 //            }
 //        }
-        Image img = new Image(getClass().getResourceAsStream(String.format("/img/map%d.png", mapSelected)));
+        Image img = new Image(getClass().getResourceAsStream(String.format("/img/map/map%d.png", mapSelected)));
         ImageView bgImg = new ImageView(img);
 //        bgImg.setImage(img);
         bgImg.setFitHeight(800);
