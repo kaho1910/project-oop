@@ -31,11 +31,11 @@ public class Player extends Rectangle {
         }
         setHeight(60);
         setWidth(30);
-//        setFill(Color.rgb(rand.nextInt(255), rand.nextInt(255), rand.nextInt(255)));
         setFill(Color.TRANSPARENT);
         img = new Image(getClass().getResourceAsStream("/img/sprite/w" + "3" +"_2.png"));
         imgPattern = new ImagePattern(img);
         setFill(imgPattern);
+
         initPosition(position);
     }
 
