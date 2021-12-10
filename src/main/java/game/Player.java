@@ -47,7 +47,7 @@ public class Player extends Rectangle {
         }
         x = offSetX + (tileSize * x);
         y = offSetY + (tileSize * (height - 1 - y));
-        return new int[] {x + 25, y + 5};
+        return new int[] {x + 25, y + 10};
     }
 
     public void initPosition(int pos){
