@@ -4,6 +4,7 @@ public class PlayerController implements Runnable  {
     private int playerNum = Main.getPlayerNum();
     private Player[] players;
     private boolean lastTurn = false;
+    private int[][] ladder;
 
     public PlayerController(int radius){
         players = new Player[playerNum];
@@ -39,6 +40,15 @@ public class PlayerController implements Runnable  {
                         break;
                     }
                 }
+                onLadder(players[i]);
+            }
+        }
+    }
+
+    public void onLadder(Player player){
+        for(int j=0; j < ladder.length; j++){
+            if (player.getPosition() == ladder[j][0]){
+                player.moveTo(ladder[j][1]);
             }
         }
     }
@@ -49,5 +59,9 @@ public class PlayerController implements Runnable  {
 
     public boolean isLastTurn() {
         return lastTurn;
+    }
+
+    public void setLadder(int[][] ladder) {
+        this.ladder = ladder;
     }
 }
