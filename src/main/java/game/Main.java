@@ -29,7 +29,6 @@ public class Main extends Application {
     private static final int Height = 10;
     private static final int offSetX = 400;
     private static final int offSetY = 80;
-    private static final int radius = 40;
     private PlayerController playerController;
     private Player[] players;
 
@@ -139,7 +138,7 @@ public class Main extends Application {
                     selector.getBtn()[i].setOnAction(new EventHandler<ActionEvent>() {
                         public void handle(ActionEvent actionEvent) {
                             //                GAME
-                            playerController = new PlayerController(radius);
+                            playerController = new PlayerController();
                             int mapSelected;
                             if (actionEvent.getSource().equals(selector.getBtn()[0])){
                                 mapSelected = 1;

@@ -6,10 +6,10 @@ public class PlayerController implements Runnable  {
     private boolean lastTurn = false;
     private int[][] ladder;
 
-    public PlayerController(int radius){
+    public PlayerController(){
         players = new Player[playerNum];
         for(int i=0; i < playerNum; i++){
-            players[i] = new Player(i + 1, radius);
+            players[i] = new Player(i + 1);
         }
     }
 
