@@ -1,5 +1,6 @@
 package game;
 
+import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -26,6 +27,7 @@ public class MapSelector {
 
         VBox vBox = new VBox(btn[0], btn[1], btn[2]);
         vBox.setSpacing(20);
+        vBox.setAlignment(Pos.CENTER);
 
         root.setPrefSize(400, 400);
 
