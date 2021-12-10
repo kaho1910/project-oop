@@ -4,13 +4,21 @@ import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.scene.Cursor;
 import javafx.scene.Group;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.ImagePattern;
+import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
@@ -28,21 +36,47 @@ public class Main extends Application {
     private Group groupMap = new Group();
     private Group groupMainMenu = new Group();
 
-    private Button startBtn;
+    private Scene sceneMainMenu;
+    private Text startBtn;
 
     private Parent mainMenu(){
         StackPane root = new StackPane();
         root.getChildren().addAll(groupMainMenu);
         root.setPrefSize(Width * TileSize + offSetX * 2, Height * TileSize + offSetY * 2);
 
+        Image bg = new Image(getClass().getResourceAsStream("/img/menu.png"));
+        ImagePattern bgPattern = new ImagePattern(bg);
+        Rectangle rect = new Rectangle();
+        rect.setFill(bgPattern);
+        rect.setWidth(Width * TileSize + offSetX * 2);
+        rect.setHeight(Height * TileSize + offSetY * 2);
+
 //        Text gameTitle = new Text();
 //        gameTitle.setText("Snake And Ladder");
 //        gameTitle.setFont(Font.font(60));
 
-        startBtn = new Button("Start");
+//        startBtn = new Button("Start");
+//        startBtn = new Button("Start");
+        startBtn = new Text("Start");
+        startBtn.setFont(Font.font(null, FontWeight.BOLD, 72));
+        startBtn.setFill(Color.WHITE);
+        startBtn.setTranslateX(300);
+        startBtn.setTranslateY(500);
 //        Button devIntro = new Button("developer");
 
-        groupMainMenu.getChildren().addAll(startBtn);
+        startBtn.setOnMouseEntered(new EventHandler<MouseEvent>() {
+            public void handle(MouseEvent mouseEvent) {
+                sceneMainMenu.setCursor(Cursor.HAND);
+            }
+        });
+
+        startBtn.setOnMouseExited(new EventHandler<MouseEvent>() {
+            public void handle(MouseEvent mouseEvent) {
+                sceneMainMenu.setCursor(Cursor.DEFAULT);
+            }
+        });
+
+        groupMainMenu.getChildren().addAll(rect, startBtn);
 
         return root;
     }
@@ -85,8 +119,8 @@ public class Main extends Application {
     }
 
     public void start(Stage primaryStage){
-        Scene sceneMainMenu = new Scene(mainMenu());
-        primaryStage.setTitle("Snake and Ladder");
+        sceneMainMenu = new Scene(mainMenu());
+        primaryStage.setTitle("Snakes and Ladders");
         primaryStage.setScene(sceneMainMenu);
         primaryStage.show();
 
@@ -97,8 +131,8 @@ public class Main extends Application {
             }
         });
 
-        startBtn.setOnAction(new EventHandler<ActionEvent>() {
-            public void handle(ActionEvent actionEvent) {
+        startBtn.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            public void handle(MouseEvent mouseEvent) {
                 MapSelector selector = new MapSelector();
                 selector.display();
                 for(int i=0; i < selector.getMapNum(); i++){

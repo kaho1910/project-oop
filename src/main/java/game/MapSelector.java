@@ -14,11 +14,13 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 public class MapSelector {
     private static final int mapNum = 3;
     private Button[] btn = new Button[mapNum];
+    private String[] mapName = {"Yume no Taiki", "Judai in The City", "Yuji on Train"};
 
     private boolean selected = false;
     private int[][] map1Ladder = {{14, 7}, {16, 25}, {32, 49}, {60, 42}, {46, 66}, {89, 72}, {77, 84}, {98, 78}};
@@ -33,7 +35,10 @@ public class MapSelector {
         root.getChildren().add(group);
         root.setAlignment(Pos.CENTER);
 
-        rect.setFill(Color.TRANSPARENT);
+        Image bg = new Image(getClass().getResourceAsStream("/img/menuSqr.gif"));
+        ImagePattern bgPattern = new ImagePattern(bg);
+        rect.setFill(bgPattern);
+//        rect.setFill(Color.TRANSPARENT);
         rect.setWidth(400);
         rect.setHeight(400);
 
@@ -45,9 +50,15 @@ public class MapSelector {
             bgImg[i] = new ImagePattern(img[i]);
         }
 
-        btn[0] = new Button("Yume no Taiki");
-        btn[1] = new Button("Judai in The City");
-        btn[2] = new Button("Yuji on Train");
+        Image title = new Image(getClass().getResourceAsStream("/img/select.png"));
+        ImageView container = new ImageView(title);
+        container.setFitWidth(240);
+        container.setFitHeight(42.5);
+
+        for(int i=0; i < mapNum; i++){
+            btn[i] = new Button(mapName[i]);
+            btn[i].setFont(Font.font(16));
+        }
 
         btn[0].setOnMouseEntered(new EventHandler<MouseEvent>() {
             public void handle(MouseEvent mouseEvent) {
@@ -70,11 +81,16 @@ public class MapSelector {
         VBox vBox = new VBox(btn[0], btn[1], btn[2]);
         vBox.setSpacing(20);
         vBox.setAlignment(Pos.CENTER);
-        vBox.setPrefSize(400, 400);
+//        vBox.setPrefSize(400, 400);
+
+        VBox box = new VBox(container, vBox);
+        box.setSpacing(70);
+        box.setAlignment(Pos.CENTER);
+        box.setPrefSize(400, 400);
 
         root.setPrefSize(400, 400);
 
-        group.getChildren().addAll(rect, vBox);
+        group.getChildren().addAll(rect, box);
 
         return root;
     }
