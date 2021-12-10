@@ -1,15 +1,11 @@
 package game;
 
 
-import javafx.application.Application;
-
-import javafx.fxml.FXML;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
-import javafx.scene.Scene;
 import javafx.scene.image.*;
 
 import javafx.scene.paint.ImagePattern;
@@ -49,7 +45,7 @@ public class PlayerTable {
         inner_frame.setHeight(120);
         inner_frame.setTranslateX(0);
         inner_frame.setTranslateY(-99);
-        Image im2 = new Image(getClass().getResourceAsStream("/img/map1.jpg"));
+        Image im2 = new Image(getClass().getResourceAsStream("/img/1-normal.png"));
         inner_frame.setFill(new ImagePattern(im2));
         ///dice
         dice_frame.setWidth(80);
@@ -94,7 +90,7 @@ public class PlayerTable {
         card_frame.setHeight(72);
         card_frame.setTranslateX(-20);
         card_frame.setTranslateY(90);
-        this.setUrl1("/img/giftofdev.jpg");
+        this.setUrl1("/img/cards/giftofdev.jpg");
         Image cm = new Image(getClass().getResourceAsStream(url1));
         card_frame.setFill(new ImagePattern(cm));
         card_frame.setOnMouseClicked(new EventHandler<MouseEvent>() {
