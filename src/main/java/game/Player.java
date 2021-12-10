@@ -17,11 +17,12 @@ public class Player extends Circle {
     private final int offSetX = Main.getOffSetX();
     private final int offSetY = Main.getOffSetY();
     private final int radius;
-    private PlayerTable playerTable = new PlayerTable();
+    private PlayerTable playerTable;
     Random rand = new Random();
 
     public Player(int id, int radius) {
         this.ID = id;
+        playerTable = new PlayerTable(id);
         for(int i=0; i < cards.length; i++){
             cards[i] = new PowerCard();
         }
@@ -57,8 +58,8 @@ public class Player extends Circle {
         animate.setAutoReverse(false);
         animate.play();
         System.out.println("id: " + this.ID + " at [" +  this.position + "]");
-        System.out.println("x : " + (this.position - 1) % width + ", " + coordinate[0]);
-        System.out.println("y : " + ((this.position - 1) / height) + ", " + coordinate[1]);
+//        System.out.println("x : " + (this.position - 1) % width + ", " + coordinate[0]);
+//        System.out.println("y : " + ((this.position - 1) / height) + ", " + coordinate[1]);
         try {
             Thread.sleep(400);
         } catch (InterruptedException e) {
@@ -67,13 +68,21 @@ public class Player extends Circle {
     }
 
     public void setPosition(int run){
+        boolean gHundred = false;
+        int temp = 0;
         System.out.println("\nrun : " + run);
         if (run > 0) {
+            if (this.position + run > 100){
+                gHundred = true;
+                temp = -((this.position + run) - 100);
+                run += temp;
+                System.out.println("temp:" + temp + "\nnew :" + run);
+            }
             for (int i = 0; i < run; i++) {
-                if (this.position >= 100){
-                    break;
-                }
                 moveTo(this.position + 1);
+            }
+            if (gHundred){
+                setPosition(temp);
             }
         } else {
             for (int i = run; i < 0; i++) {
@@ -91,5 +100,9 @@ public class Player extends Circle {
 
     public PlayerTable getPlayerTable() {
         return playerTable;
+    }
+
+    public int getID() {
+        return ID;
     }
 }

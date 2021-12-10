@@ -19,16 +19,29 @@ public class PlayerController implements Runnable  {
     public void run() {
         while (!isLastTurn()){
             for(int i=0; i < playerNum; i++){
-                try {
-                    if (players[i].getPosition() < 99 || players[i].getPosition() > 1) {
-                        players[i].setPosition(rand.nextInt(6) + 1);
-                        if (players[i].getPosition() == 100){
-                            lastTurn = true;
+                players[i].getPlayerTable().getDice_button().setDisable(false);
+                players[i].getPlayerTable().setTurn(false);
+                while (true) {
+//                    if (players[i].getPlayerTable().getDice_button().isDisabled()) {
+                    System.out.print(""); // ศักดิ์สิทธิ์ ห้ามลบ
+                    if (players[i].getPlayerTable().isTurn()) {
+//                        System.out.println(players[i].getID() + "-check");
+                        try {
+                            if (players[i].getPosition() < 99 || players[i].getPosition() > 1) {
+//                                System.out.println(players[i].getPlayerTable().getK());
+//                                players[i].setPosition(rand.nextInt(6) + 1);
+                                players[i].setPosition(players[i].getPlayerTable().getK());
+                                if (players[i].getPosition() == 100) {
+                                    lastTurn = true;
+                                }
+                                Thread.sleep(1000);
+                            }
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
                         }
-                        Thread.sleep(1000);
+                        players[i].getPlayerTable().setTurn(false);
+                        break;
                     }
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
                 }
             }
         }
