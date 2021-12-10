@@ -2,15 +2,12 @@ package game;
 
 import javafx.animation.TranslateTransition;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
-import javafx.scene.shape.Circle;
+import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 
-import java.util.Random;
-
-public class Player {
+public class Player extends Rectangle {
     private final int ID;
     private int position = 1;
     private PowerCard[] cards = new PowerCard[4];
@@ -19,19 +16,26 @@ public class Player {
     private final int height = Main.getHeight();
     private final int offSetX = Main.getOffSetX();
     private final int offSetY = Main.getOffSetY();
-    private final int radius;
     private PlayerTable playerTable;
-    private ImageView imageView;
-    private Image img;
-    Random rand = new Random();
 
-    public Player(int id, int radius) {
+    private boolean threadRun;
+
+    private Image img;
+    private ImagePattern imgPattern;
+
+    public Player(int id) {
         this.ID = id;
         playerTable = new PlayerTable(id);
         for(int i=0; i < cards.length; i++){
             cards[i] = new PowerCard();
         }
-        this.radius = radius;
+        setHeight(60);
+        setWidth(30);
+        setFill(Color.TRANSPARENT);
+        img = new Image(getClass().getResourceAsStream("/img/sprite/w" + "3" +"_2.png"));
+        imgPattern = new ImagePattern(img);
+        setFill(imgPattern);
+
         initPosition(position);
     }
 
@@ -41,9 +45,9 @@ public class Player {
         if (y % 2 == 1){
             x = width - x - 1;
         }
-        x = offSetX + radius + (tileSize * x);
-        y = offSetY + radius + (tileSize * (height - 1 - y));
-        return new int[] {x, y};
+        x = offSetX + (tileSize * x);
+        y = offSetY + (tileSize * (height - 1 - y));
+        return new int[] {x + 25, y + 5};
     }
 
     public void initPosition(int pos){
@@ -73,23 +77,24 @@ public class Player {
     public void setPosition(int run){
         boolean gHundred = false;
         int temp = 0;
+        threadRun = true;
         System.out.println("\nrun : " + run);
         Thread thread = new Thread(){
             public void run(){
-//                        System.out.println("Dice rolled");
+                int k = 0;
                 try{
-                    for (int j=0;j<=20;j++){
-                        for (int k=1;k<=3;k++){
-                            img = new Image(getClass().getResourceAsStream("/img/sprite/w3_"+j+".png"));
-                            imageView = new ImageView(img);
-                            Thread.sleep(50);
-                        }
-
+                    while (threadRun | (k % 3) != 2) {
+                        img = new Image(getClass().getResourceAsStream("/img/sprite/w3_" + (k % 3 + 1) + ".png"));
+                        imgPattern = new ImagePattern(img);
+                        setFill(imgPattern);
+                        Thread.sleep(250);
+                        k++;
                     }
-                    } catch (InterruptedException e) {
+                } catch (InterruptedException e) {
                     e.printStackTrace();
-                }}
-            };
+                }
+            }
+        };
         thread.start();
         if (run > 0) {
             if (this.position + run > 100){
@@ -112,6 +117,7 @@ public class Player {
                 moveTo(this.position - 1);
             }
         }
+        threadRun = false;
     }
 
     public int getPosition() {
