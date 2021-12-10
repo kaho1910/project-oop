@@ -161,6 +161,38 @@ public class Main extends Application {
                             Scene sceneGame = new Scene(mapGenerator(mapSelected));
                             primaryStage.setScene(sceneGame);
 
+
+                            Player[] players = playerController.getPlayers();
+                            for (Player p:
+                                    playerController.getPlayers()) {
+                                Rectangle[] cardFrames = p.getPlayerTable().getCardFrame();
+                                for (Rectangle cardFrame:
+                                     cardFrames) {
+                                    cardFrame.setOnMouseEntered(new EventHandler<MouseEvent>() {
+                                        public void handle(MouseEvent mouseEvent) {
+                                            sceneGame.setCursor(Cursor.HAND);
+                                        }
+                                    });
+                                    cardFrame.setOnMouseExited(new EventHandler<MouseEvent>() {
+                                        public void handle(MouseEvent mouseEvent) {
+                                            sceneGame.setCursor(Cursor.DEFAULT);
+                                        }
+                                    });
+                                }
+                                p.getPlayerTable().getDiceButton().setOnMouseEntered(new EventHandler<MouseEvent>() {
+                                    public void handle(MouseEvent mouseEvent) {
+                                        if (!p.getPlayerTable().getDiceButton().isDisabled()) {
+                                            sceneGame.setCursor(Cursor.HAND);
+                                        }
+                                    }
+                                });
+                                p.getPlayerTable().getDiceButton().setOnMouseExited(new EventHandler<MouseEvent>() {
+                                    public void handle(MouseEvent mouseEvent) {
+                                        sceneGame.setCursor(Cursor.DEFAULT);
+                                    }
+                                });
+                            }
+
                             Thread t = new Thread(playerController);
                             t.start();
 

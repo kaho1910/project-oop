@@ -1,22 +1,42 @@
 package game;
 
+import javafx.event.EventHandler;
+import javafx.scene.image.Image;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.shape.Rectangle;
+
 public class PlayerController implements Runnable  {
     private int playerNum = Main.getPlayerNum();
     private Player[] players;
     private boolean lastTurn = false;
     private int[][] ladder;
+    private CardPopup popUp;
+    private Image tempImg;
 
     public PlayerController(){
         players = new Player[playerNum];
         for(int i=0; i < playerNum; i++){
             players[i] = new Player(i + 1);
+            Rectangle[] cardFrame = players[i].getPlayerTable().getCardFrame();
+            for(int j=0; j < players[i].getPlayerTable().getCardNumMax(); j++){
+                tempImg = players[i].getPlayerTable().getCardImg(j);
+                cardFrame[j].setOnMouseClicked(new EventHandler<MouseEvent>() {
+                    public void handle(MouseEvent mouseEvent) {
+                        if (popUp != null){
+                            popUp.getPopUpStage().close();
+                        }
+                        popUp = new CardPopup();
+                        popUp.display(tempImg);
+                    }
+                });
+            }
         }
     }
 
     public void run() {
         while (!isLastTurn()){
             for(int i=0; i < playerNum; i++){
-                players[i].getPlayerTable().getDice_button().setDisable(false);
+                players[i].getPlayerTable().getDiceButton().setDisable(false);
                 players[i].getPlayerTable().setTurn(false);
                 while (true) {
 //                    if (players[i].getPlayerTable().getDice_button().isDisabled()) {
@@ -49,6 +69,11 @@ public class PlayerController implements Runnable  {
         for(int j=0; j < ladder.length; j++){
             if (player.getPosition() == ladder[j][0]){
                 player.moveTo(ladder[j][1]);
+                try {
+                    Thread.sleep(400);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
             }
         }
     }

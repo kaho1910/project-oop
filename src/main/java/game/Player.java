@@ -10,7 +10,7 @@ import javafx.util.Duration;
 public class Player extends Rectangle {
     private final int ID;
     private int position = 1;
-    private PowerCard[] cards = new PowerCard[4];
+    private PowerCard[] cards = new PowerCard[3];
     private final int tileSize = Main.getTileSize();
     private final int width = Main.getWidth();
     private final int height = Main.getHeight();
