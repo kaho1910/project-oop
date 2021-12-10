@@ -1,14 +1,11 @@
 package game;
 
 
-import javafx.application.Application;
-
-import javafx.fxml.FXML;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
-import javafx.scene.Scene;
 import javafx.scene.image.*;
 
 import javafx.scene.paint.ImagePattern;
@@ -27,6 +24,8 @@ public class PlayerTable {
     private StackPane layout;
     private Button dice_button;
     private Rectangle player_frame, dice_frame, card_frame, card_frame2, card_frame3, inner_frame;
+    private String url1, url2, url3;
+    
     public PlayerTable(int id) {
         this.ID = id;
         layout = new StackPane();
@@ -51,7 +50,7 @@ public class PlayerTable {
         inner_frame.setHeight(120);
         inner_frame.setTranslateX(0);
         inner_frame.setTranslateY(-99);
-        Image im2 = new Image(getClass().getResourceAsStream("/img/map0.jpg"));
+        Image im2 = new Image(getClass().getResourceAsStream("/img/1-normal.png"));
         inner_frame.setFill(new ImagePattern(im2));
         ///dice
         dice_frame.setWidth(80);
@@ -59,6 +58,7 @@ public class PlayerTable {
         dice_frame.setTranslateX(-120);
         dice_frame.setTranslateY(90);
         Image im3 = new Image(getClass().getResourceAsStream("/img/dice/dice1.png"));
+        System.out.println(getClass());
         dice_frame.setFill(new ImagePattern(im3));
         //dice button
         dice_button.setText("Roll");
@@ -95,6 +95,16 @@ public class PlayerTable {
         card_frame.setHeight(72);
         card_frame.setTranslateX(-20);
         card_frame.setTranslateY(90);
+        this.setUrl1("/img/cards/giftofdev.jpg");
+        Image cm = new Image(getClass().getResourceAsStream(url1));
+        card_frame.setFill(new ImagePattern(cm));
+        card_frame.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                System.out.println(url1);
+                CardPopup.display(url1);
+            }
+        });
         //card frame2
         card_frame2.setWidth(60);
         card_frame2.setHeight(72);
@@ -141,5 +151,28 @@ public class PlayerTable {
 
     public void setID(int ID) {
         this.ID = ID;
+    }
+    public String getUrl1() {
+        return url1;
+    }
+
+    public void setUrl1(String url1) {
+        this.url1 = url1;
+    }
+
+    public String getUrl2() {
+        return url2;
+    }
+
+    public void setUrl2(String url2) {
+        this.url2 = url2;
+    }
+
+    public String getUrl3() {
+        return url3;
+    }
+
+    public void setUrl3(String url3) {
+        this.url3 = url3;
     }
 }
