@@ -3,6 +3,7 @@ package game;
 import javafx.application.Platform;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
+import javafx.scene.Cursor;
 import javafx.scene.Group;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -103,6 +104,21 @@ public class MapSelector {
         popUpStage.setTitle("Select map");
         popUpStage.setScene(scene);
         popUpStage.show();
+
+        for (Button b:
+             btn) {
+            b.setOnMouseEntered(new EventHandler<MouseEvent>() {
+                public void handle(MouseEvent mouseEvent) {
+                    scene.setCursor(Cursor.HAND);
+                }
+            });
+
+            b.setOnMouseExited(new EventHandler<MouseEvent>() {
+                public void handle(MouseEvent mouseEvent) {
+                    scene.setCursor(Cursor.DEFAULT);
+                }
+            });
+        }
 
         popUpStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
             public void handle(WindowEvent e) {
