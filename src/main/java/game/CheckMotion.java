@@ -1,9 +1,10 @@
 package game;
 
-import java.util.HashMap;
+import java.util.*;
 import java.util.Map;
 
 public class CheckMotion {
+
 //    private HashMap<String,String> motion = new HashMap<String,String>();
 //    motion.put("giftofdev", "sad");
 //    motion.put("cool", "sad");
@@ -24,4 +25,5 @@ public class CheckMotion {
 //    public String remotion(String cardname){
 //        return motion.get(cardname);
 //    }
+
 }

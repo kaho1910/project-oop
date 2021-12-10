@@ -50,7 +50,9 @@ public class PlayerTable {
         inner_frame.setHeight(120);
         inner_frame.setTranslateX(0);
         inner_frame.setTranslateY(-99);
+
         Image im2 = new Image(getClass().getResourceAsStream("/img/characters/1-normal.png"));
+
         inner_frame.setFill(new ImagePattern(im2));
         ///dice
         dice_frame.setWidth(80);
