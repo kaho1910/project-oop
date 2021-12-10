@@ -36,6 +36,7 @@ public class Main extends Application {
     private Group groupMainMenu = new Group();
 
     private Scene sceneMainMenu;
+    private MapSelector selector;
     private Text startBtn;
 
     private Parent mainMenu(){
@@ -61,8 +62,9 @@ public class Main extends Application {
         startBtn.setFill(Color.WHITE);
         startBtn.setTranslateX(300);
         startBtn.setTranslateY(500);
-//        Button devIntro = new Button("developer");
 
+        Button devIntro = new Button("developer");
+//
         startBtn.setOnMouseEntered(new EventHandler<MouseEvent>() {
             public void handle(MouseEvent mouseEvent) {
                 sceneMainMenu.setCursor(Cursor.HAND);
@@ -132,7 +134,10 @@ public class Main extends Application {
 
         startBtn.setOnMouseClicked(new EventHandler<MouseEvent>() {
             public void handle(MouseEvent mouseEvent) {
-                MapSelector selector = new MapSelector();
+                if (selector != null){
+                    selector.getPopUpStage().close();
+                }
+                selector = new MapSelector();
                 selector.display();
                 for(int i=0; i < selector.getMapNum(); i++){
                     selector.getBtn()[i].setOnAction(new EventHandler<ActionEvent>() {
@@ -150,8 +155,43 @@ public class Main extends Application {
                                 mapSelected = 3;
                                 playerController.setLadder(selector.getMap3Ladder());
                             }
+
+                            selector.getPopUpStage().close();
+
                             Scene sceneGame = new Scene(mapGenerator(mapSelected));
                             primaryStage.setScene(sceneGame);
+
+
+                            Player[] players = playerController.getPlayers();
+                            for (Player p:
+                                    playerController.getPlayers()) {
+                                Rectangle[] cardFrames = p.getPlayerTable().getCardFrame();
+                                for (Rectangle cardFrame:
+                                     cardFrames) {
+                                    cardFrame.setOnMouseEntered(new EventHandler<MouseEvent>() {
+                                        public void handle(MouseEvent mouseEvent) {
+                                            sceneGame.setCursor(Cursor.HAND);
+                                        }
+                                    });
+                                    cardFrame.setOnMouseExited(new EventHandler<MouseEvent>() {
+                                        public void handle(MouseEvent mouseEvent) {
+                                            sceneGame.setCursor(Cursor.DEFAULT);
+                                        }
+                                    });
+                                }
+                                p.getPlayerTable().getDiceButton().setOnMouseEntered(new EventHandler<MouseEvent>() {
+                                    public void handle(MouseEvent mouseEvent) {
+                                        if (!p.getPlayerTable().getDiceButton().isDisabled()) {
+                                            sceneGame.setCursor(Cursor.HAND);
+                                        }
+                                    }
+                                });
+                                p.getPlayerTable().getDiceButton().setOnMouseExited(new EventHandler<MouseEvent>() {
+                                    public void handle(MouseEvent mouseEvent) {
+                                        sceneGame.setCursor(Cursor.DEFAULT);
+                                    }
+                                });
+                            }
 
                             Thread t = new Thread(playerController);
                             t.start();
