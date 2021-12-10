@@ -84,6 +84,7 @@ public class PlayerTable {
                                 dice_frame.setFill(new ImagePattern(dm));
                                 Thread.sleep(50);
                             }
+                            Thread.sleep(500);
                             turn = true;
                         } catch (InterruptedException e) {
                             e.printStackTrace();
