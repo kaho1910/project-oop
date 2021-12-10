@@ -1,5 +1,6 @@
 package game;
 
+import javafx.application.Platform;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
@@ -16,6 +17,7 @@ import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 
 public class MapSelector {
     private static final int mapNum = 3;
@@ -29,6 +31,7 @@ public class MapSelector {
 
     private Rectangle rect = new Rectangle();
     private Group group = new Group();
+    private Stage popUpStage;
 
     private Parent mapSelect(){
         StackPane root = new StackPane();
@@ -95,11 +98,17 @@ public class MapSelector {
         return root;
     }
     public void display() {
-        Stage popUpStage = new Stage();
+        popUpStage = new Stage();
         Scene scene = new Scene(mapSelect());
         popUpStage.setTitle("Select map");
         popUpStage.setScene(scene);
         popUpStage.show();
+
+        popUpStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+            public void handle(WindowEvent e) {
+                popUpStage.close();
+            }
+        });
     }
 
     public Button[] getBtn() {
@@ -110,8 +119,8 @@ public class MapSelector {
         return mapNum;
     }
 
-    public boolean isSelected() {
-        return selected;
+    public Stage getPopUpStage() {
+        return popUpStage;
     }
 
     public int[][] getMap1Ladder() {
