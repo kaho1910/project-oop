@@ -51,7 +51,7 @@ public class PlayerTable {
         inner_frame.setTranslateX(0);
         inner_frame.setTranslateY(-99);
 
-        Image im2 = new Image(getClass().getResourceAsStream("/img/characters/1-normal.png"));
+        Image im2 = new Image(getClass().getResourceAsStream(String.format("/img/characters/%d-normal.png", id)));
 
         inner_frame.setFill(new ImagePattern(im2));
         ///dice
@@ -112,11 +112,31 @@ public class PlayerTable {
         card_frame2.setHeight(72);
         card_frame2.setTranslateX(60);
         card_frame2.setTranslateY(90);
+        this.setUrl2("/img/cards/giftofdev.jpg");
+        Image ck = new Image(getClass().getResourceAsStream(url2));
+        card_frame2.setFill(new ImagePattern(ck));
+        card_frame2.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+//                System.out.println(url);
+                CardPopup.display(url2);
+            }
+        });
         //card frame3
         card_frame3.setWidth(60);
         card_frame3.setHeight(72);
         card_frame3.setTranslateX(140);
         card_frame3.setTranslateY(90);
+        this.setUrl3("/img/cards/giftofdev.jpg");
+        Image cl = new Image(getClass().getResourceAsStream(url3));
+        card_frame3.setFill(new ImagePattern(cl));
+        card_frame3.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+//                System.out.println(url);
+                CardPopup.display(url3);
+            }
+        });
         layout.getChildren().addAll(player_frame,inner_frame, dice_frame, dice_button, card_frame, card_frame2, card_frame3);
 //        scene = new Scene(layout, 400 ,400);
 //        stage.setScene(scene);
