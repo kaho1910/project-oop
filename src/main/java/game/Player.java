@@ -1,13 +1,16 @@
 package game;
 
 import javafx.animation.TranslateTransition;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 import javafx.util.Duration;
 
 import java.util.Random;
 
-public class Player extends Circle {
+public class Player {
     private final int ID;
     private int position = 1;
     private PowerCard[] cards = new PowerCard[4];
@@ -18,6 +21,8 @@ public class Player extends Circle {
     private final int offSetY = Main.getOffSetY();
     private final int radius;
     private PlayerTable playerTable;
+    private ImageView imageView;
+    private Image img;
     Random rand = new Random();
 
     public Player(int id, int radius) {
@@ -27,8 +32,6 @@ public class Player extends Circle {
             cards[i] = new PowerCard();
         }
         this.radius = radius;
-        setRadius(radius);
-        setFill(Color.rgb(rand.nextInt(255), rand.nextInt(255), rand.nextInt(255)));
         initPosition(position);
     }
 
@@ -71,6 +74,23 @@ public class Player extends Circle {
         boolean gHundred = false;
         int temp = 0;
         System.out.println("\nrun : " + run);
+        Thread thread = new Thread(){
+            public void run(){
+//                        System.out.println("Dice rolled");
+                try{
+                    for (int j=0;j<=20;j++){
+                        for (int k=1;k<=3;k++){
+                            img = new Image(getClass().getResourceAsStream("/img/sprite/w3_"+j+".png"));
+                            imageView = new ImageView(img);
+                            Thread.sleep(50);
+                        }
+
+                    }
+                    } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }}
+            };
+        thread.start();
         if (run > 0) {
             if (this.position + run > 100){
                 gHundred = true;
