@@ -4,7 +4,6 @@ import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.geometry.Insets;
 import javafx.scene.Group;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -12,14 +11,10 @@ import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
-import javafx.scene.text.Font;
-import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
 public class Main extends Application {
-    private StackPane root = new StackPane();
-
     private static final int playerNum = 4;
     private static final int TileSize = 80;
     private static final int Width = 10;
@@ -52,7 +47,7 @@ public class Main extends Application {
         return root;
     }
 
-    private Parent mapGenerator(){
+    private Parent mapGenerator(int mapSelected){
         StackPane root = new StackPane();
         root.getChildren().addAll(groupMap);
         root.setPrefSize(Width * TileSize + offSetX * 2, Height * TileSize + offSetY * 2);
@@ -65,8 +60,7 @@ public class Main extends Application {
 //                tileGroupMap.getChildren().add(tile);
 //            }
 //        }
-
-        Image img = new Image(getClass().getResourceAsStream("/img/map1.jpg"));
+        Image img = new Image(getClass().getResourceAsStream(String.format("/img/map%d.png", mapSelected)));
         ImageView bgImg = new ImageView(img);
 //        bgImg.setImage(img);
         bgImg.setFitHeight(800);
@@ -98,7 +92,6 @@ public class Main extends Application {
         primaryStage.show();
 
         primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
-            @Override
             public void handle(WindowEvent e) {
                 Platform.exit();
                 System.exit(0);
@@ -107,17 +100,34 @@ public class Main extends Application {
 
         startBtn.setOnAction(new EventHandler<ActionEvent>() {
             public void handle(ActionEvent actionEvent) {
-//                GAME
-                Scene sceneGame = new Scene(mapGenerator());
-                primaryStage.setScene(sceneGame);
+                MapSelector selector = new MapSelector();
+                selector.display();
+                for(int i=0; i < selector.getMapNum(); i++){
+                    selector.getBtn()[i].setOnAction(new EventHandler<ActionEvent>() {
+                        public void handle(ActionEvent actionEvent) {
+                            //                GAME
+                            int mapSelected;
+                            if (actionEvent.getSource().equals(selector.getBtn()[0])){
+                                mapSelected = 1;
+                            } else if (actionEvent.getSource().equals(selector.getBtn()[1])){
+                                mapSelected = 2;
+                            } else {
+                                mapSelected = 3;
+                            }
+                            Scene sceneGame = new Scene(mapGenerator(mapSelected));
+                            primaryStage.setScene(sceneGame);
 
-                Thread t = new Thread(playerController);
-                t.start();
+                            Thread t = new Thread(playerController);
+                            t.start();
 
-                groupMap.getChildren().addAll(playerController.getPlayers());
+                            groupMap.getChildren().addAll(playerController.getPlayers());
+                        }
+                    });
+                }
             }
         });
-//
+
+
     }
 
     public static void main(String[] args){

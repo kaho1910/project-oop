@@ -23,11 +23,12 @@ public class PlayerTable {
     private Random random;
     private int k;
     private boolean turn;
+    private int ID;
     private StackPane layout;
     private Button dice_button;
     private Rectangle player_frame, dice_frame, card_frame, card_frame2, card_frame3, inner_frame;
-    public PlayerTable() {
-
+    public PlayerTable(int id) {
+        this.ID = id;
         layout = new StackPane();
         dice_button = new Button();
         player_frame = new Rectangle();
@@ -50,7 +51,7 @@ public class PlayerTable {
         inner_frame.setHeight(120);
         inner_frame.setTranslateX(0);
         inner_frame.setTranslateY(-99);
-        Image im2 = new Image(getClass().getResourceAsStream("/img/map1.jpg"));
+        Image im2 = new Image(getClass().getResourceAsStream("/img/map0.jpg"));
         inner_frame.setFill(new ImagePattern(im2));
         ///dice
         dice_frame.setWidth(80);
@@ -132,5 +133,13 @@ public class PlayerTable {
 
     public void setTurn(boolean turn) {
         this.turn = turn;
+    }
+
+    public int getID() {
+        return ID;
+    }
+
+    public void setID(int ID) {
+        this.ID = ID;
     }
 }

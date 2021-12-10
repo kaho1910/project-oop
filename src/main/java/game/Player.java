@@ -17,11 +17,12 @@ public class Player extends Circle {
     private final int offSetX = Main.getOffSetX();
     private final int offSetY = Main.getOffSetY();
     private final int radius;
-    private PlayerTable playerTable = new PlayerTable();
+    private PlayerTable playerTable;
     Random rand = new Random();
 
     public Player(int id, int radius) {
         this.ID = id;
+        playerTable = new PlayerTable(id);
         for(int i=0; i < cards.length; i++){
             cards[i] = new PowerCard();
         }
