@@ -22,11 +22,12 @@ public class PlayerTable {
     private Button diceButton;
     private Rectangle player_frame, dice_frame, inner_frame;
     private Rectangle[] cardFrame;
-    private String[] cardUrl;
     private Image[] cardImg;
+    private Player player;
     
-    public PlayerTable(int id) {
+    public PlayerTable(int id, Player player) {
         this.ID = id;
+        this.player = player;
         layout = new StackPane();
         diceButton = new Button();
         player_frame = new Rectangle();
@@ -34,7 +35,6 @@ public class PlayerTable {
         dice_frame = new Rectangle();
 
         cardFrame = new Rectangle[3];
-        cardUrl = new String[cardNumMax];
         cardImg = new Image[cardNumMax];
         random = new Random();
 
@@ -97,7 +97,6 @@ public class PlayerTable {
             cardFrame[i].setHeight(72);
             cardFrame[i].setTranslateX(-20 + 80 * i);
             cardFrame[i].setTranslateY(90);
-            cardUrl[i] = "/img/cards/giftofdev.jpg";
         }
         updateCard();
         layout.getChildren().addAll(player_frame,inner_frame, dice_frame, diceButton);
@@ -109,10 +108,11 @@ public class PlayerTable {
 
     public void updateCard(){
         for(int i=0; i < cardNumMax; i++) {
-            if (cardUrl[i] == "") {
+            String cardUrl = player.getCards()[i].getCardUrl();
+            if (cardUrl == "") {
                 cardFrame[i].setFill(Color.TRANSPARENT);
             } else {
-                cardImg[i] = new Image(getClass().getResourceAsStream(cardUrl[i]));
+                cardImg[i] = new Image(getClass().getResourceAsStream(cardUrl));
                 cardFrame[i].setFill(new ImagePattern(cardImg[i]));
             }
         }
@@ -148,10 +148,5 @@ public class PlayerTable {
 
     public Image getCardImg(int i) {
         return cardImg[i];
-    }
-
-    public void setCardUrl(String cardUrl, int i) {
-        this.cardUrl[i] = cardUrl;
-        updateCard();
     }
 }

@@ -1,13 +1,12 @@
 package game;
 
-import javafx.scene.image.Image;
-
 public class PowerCard implements Card{
-    private int id;
+    private int cardID;
     private String cardUrl;
-    private Image cardImg;
 
-    public PowerCard(){
+    public PowerCard(int cardID, String cardUrl){
+        this.cardID = cardID;
+        this.cardUrl = cardUrl;
     }
 
     public void action(){
@@ -16,9 +15,5 @@ public class PowerCard implements Card{
 
     public String getCardUrl() {
         return cardUrl;
-    }
-
-    public void setCardUrl(String cardUrl) {
-        this.cardUrl = cardUrl;
     }
 }
