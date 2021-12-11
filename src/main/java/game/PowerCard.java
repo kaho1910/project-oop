@@ -1,16 +1,21 @@
 package game;
 
+import java.util.Random;
+
 public class PowerCard implements Card{
     private int cardID;
     private String cardUrl;
     private boolean plsDisposeMe = false;
+    private PlayerController controller;
 
-    public PowerCard(int cardID){
-        this.cardID = cardID;
-        if (cardID % 10 == 0){
+    public PowerCard(PlayerController controller, boolean isInit, boolean isBlank){
+        this.controller = controller;
+
+        this.cardID = isBlank ? 0 : pushCardPool(isInit);
+        if (cardID == 0){
             this.cardUrl = "";
         } else {
-            this.cardUrl = new String(String.format("/img/cards/%d.jpg", this.cardID));
+            this.cardUrl = String.format("/img/cards/%d.jpg", this.cardID);
         }
     }
 
@@ -18,7 +23,25 @@ public class PowerCard implements Card{
         System.out.println("\nuse card:" + this.cardID);
 //        switch แยก action ของแต่ละ ID
         plsDisposeMe = true;
-    };
+    }
+
+    public int pushCardPool(boolean isInit){
+        int num;
+        int ans = 0;
+        Random rand = new Random();
+        while(true){
+            num = rand.nextInt(controller.getCardPool().length);
+            if (controller.getCardPool()[num] != 0 & !(isInit & (controller.getCardPool()[num] / 10 == 1))){
+//                System.out.println(controller.getCardPool()[num]);
+                ans += controller.getCardPool()[num];
+                controller.setCardPool(0, num);
+                break;
+            }
+        }
+
+        return ans;
+    }
+
 
     public String getCardUrl() {
         return cardUrl;
@@ -26,5 +49,9 @@ public class PowerCard implements Card{
 
     public boolean isPlsDisposeMe() {
         return plsDisposeMe;
+    }
+
+    public int getCardID() {
+        return cardID;
     }
 }

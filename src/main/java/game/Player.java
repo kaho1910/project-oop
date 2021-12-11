@@ -18,17 +18,23 @@ public class Player extends Rectangle {
     private final int offSetY = Main.getOffSetY();
     private PlayerTable playerTable;
     private int[] pickCardHistory;
+    private PlayerController controller;
 
     private boolean threadRun;
 
     private Image img;
     private ImagePattern imgPattern;
 
-    public Player(int id) {
+    public Player(int id, PlayerController controller) {
         this.ID = id;
+        this.controller = controller;
         for(int i=0; i < cards.length; i++){
-//            cards[i] = new PowerCard((i + 1) * 11);
-            cards[i] = new PowerCard((i) * 11);
+//            cards[i] = new PowerCard(i * 11);
+            if (i < 2) {
+                cards[i] = new PowerCard(controller, true, false);
+            } else {
+                cards[i] = new PowerCard(controller, true, true);
+            }
         }
         playerTable = new PlayerTable(id, this);
         setHeight(60);
