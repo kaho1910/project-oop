@@ -18,7 +18,7 @@ public class CardPopup {
         imgView.setFitWidth(500);
         card_pane.getChildren().add(imgView);
         Scene scene = new Scene(card_pane, 500,600);
-        popUpStage.setScene(card_pane.getScene());
+        popUpStage.setScene(scene);
         popUpStage.show();
 
         popUpStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
