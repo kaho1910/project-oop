@@ -23,6 +23,7 @@ public class PlayerTable {
     private Rectangle player_frame, dice_frame, inner_frame;
     private Rectangle[] cardFrame;
     private Image[] cardImg;
+    private Image im1, im2;
     private Player player;
     
     public PlayerTable(int id, Player player) {
@@ -42,7 +43,7 @@ public class PlayerTable {
         player_frame.setHeight(170);
         player_frame.setTranslateX(0);
         player_frame.setTranslateY(-100);
-        Image im1 = new Image(getClass().getResourceAsStream("/img/blog.png"));
+        im1 = new Image(getClass().getResourceAsStream("/img/blog.png"));
         player_frame.setFill(new ImagePattern(im1));
         //inner
         inner_frame.setWidth(120);
@@ -50,7 +51,7 @@ public class PlayerTable {
         inner_frame.setTranslateX(0);
         inner_frame.setTranslateY(-99);
 
-        Image im2 = new Image(getClass().getResourceAsStream(String.format("/img/characters/%d-normal.png", id)));
+        im2 = new Image(getClass().getResourceAsStream(String.format("/img/characters/%d-normal.png", id)));
 
         inner_frame.setFill(new ImagePattern(im2));
         ///dice
@@ -126,6 +127,13 @@ public class PlayerTable {
         return k;
     }
 
+    public Image getIm1() {
+        return im1;
+    }
+
+    public Image getIm2() {
+        return im2;
+    }
     public Button getDiceButton() {
         return diceButton;
     }
