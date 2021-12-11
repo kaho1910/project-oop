@@ -17,6 +17,7 @@ public class Player extends Rectangle {
     private final int offSetX = Main.getOffSetX();
     private final int offSetY = Main.getOffSetY();
     private PlayerTable playerTable;
+    private int[] pickCardHistory;
 
     private boolean threadRun;
 
@@ -139,5 +140,13 @@ public class Player extends Rectangle {
 
     public int getID() {
         return ID;
+    }
+
+    public int[] getPickCardHistory() {
+        return pickCardHistory;
+    }
+
+    public void setPickCardHistory(int[] pickCardHistory) {
+        this.pickCardHistory = pickCardHistory.clone();
     }
 }
