@@ -27,7 +27,8 @@ public class Player extends Rectangle {
     public Player(int id) {
         this.ID = id;
         for(int i=0; i < cards.length; i++){
-            cards[i] = new PowerCard((i + 1) * 11);
+//            cards[i] = new PowerCard((i + 1) * 11);
+            cards[i] = new PowerCard((i) * 11);
         }
         playerTable = new PlayerTable(id, this);
         setHeight(60);
