@@ -31,9 +31,9 @@ public class Player extends Rectangle {
         }
         playerTable = new PlayerTable(id, this);
         setHeight(60);
-        setWidth(30);
+        setWidth(45);
         setFill(Color.TRANSPARENT);
-        img = new Image(getClass().getResourceAsStream("/img/sprite/w" + "3" +"_2.png"));
+        img = new Image(getClass().getResourceAsStream(String.format("/img/sprite/%d_2.png",this.getID())));
         imgPattern = new ImagePattern(img);
         setFill(imgPattern);
 
@@ -48,7 +48,7 @@ public class Player extends Rectangle {
         }
         x = offSetX + (tileSize * x);
         y = offSetY + (tileSize * (height - 1 - y));
-        return new int[] {x + 25, y + 10};
+        return new int[] {x + 18, y + 10};
     }
 
     public void initPosition(int pos){
@@ -84,8 +84,9 @@ public class Player extends Rectangle {
             public void run(){
                 int k = 0;
                 try{
+                    //System.out.println(this.getId());
                     while (threadRun | (k % 3) != 2) {
-                        img = new Image(getClass().getResourceAsStream("/img/sprite/w3_" + (k % 3 + 1) + ".png"));
+                        img = new Image(getClass().getResourceAsStream("/img/sprite/"+ID+"_" + (k % 3 + 1) + ".png"));
                         imgPattern = new ImagePattern(img);
                         setFill(imgPattern);
                         Thread.sleep(250);

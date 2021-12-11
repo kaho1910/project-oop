@@ -22,7 +22,7 @@ public class PlayerTable {
     private StackPane layout;
     private Button diceButton;
     private Rectangle player_frame, dice_frame, inner_frame;
-    private Rectangle[] cardFrame;
+    private Rectangle[] cardFrame, innercardFrame;
     private Image[] cardImg;
     private Image im1, im2;
     private Player player;
@@ -35,7 +35,7 @@ public class PlayerTable {
         player_frame = new Rectangle();
         inner_frame = new Rectangle();
         dice_frame = new Rectangle();
-
+        innercardFrame = new Rectangle[3];
         cardFrame = new Rectangle[3];
         cardImg = new Image[cardNumMax];
         random = new Random();
@@ -99,13 +99,24 @@ public class PlayerTable {
             cardFrame[i].setHeight(72);
             cardFrame[i].setTranslateX(-20 + 80 * i);
             cardFrame[i].setTranslateY(90);
+            innercardFrame[i] = new Rectangle();
+            innercardFrame[i].setWidth(60);
+            innercardFrame[i].setHeight(72);
+            innercardFrame[i].setTranslateX(-20 + 80 * i);
+            innercardFrame[i].setTranslateY(90);
+            innercardFrame[i].setFill(new ImagePattern(new Image(getClass().getResourceAsStream("/img/cards/frameCard.jpg"))));
         }
         updateCard();
         layout.getChildren().addAll(player_frame,inner_frame, dice_frame, diceButton);
+        for (Rectangle k:
+                innercardFrame) {
+            layout.getChildren().add(k);
+        }
         for (Rectangle i:
              cardFrame) {
             layout.getChildren().add(i);
         }
+
     }
 
     public void updateCard(){
