@@ -161,10 +161,9 @@ public class Main extends Application {
                             Scene sceneGame = new Scene(mapGenerator(mapSelected));
                             primaryStage.setScene(sceneGame);
 
-
                             Player[] players = playerController.getPlayers();
                             for (Player p:
-                                    playerController.getPlayers()) {
+                                    players) {
                                 Rectangle[] cardFrames = p.getPlayerTable().getCardFrame();
                                 for (Rectangle cardFrame:
                                      cardFrames) {
