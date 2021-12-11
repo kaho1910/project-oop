@@ -31,16 +31,14 @@ public class PowerCard implements Card{
         Random rand = new Random();
         while(true){
             num = rand.nextInt(controller.getCardPool().length);
-            if (controller.getCardPool()[num] != 0 & !(isInit & (num / 10 == 1))){
+            if (controller.getCardPool()[num] != 0 & !(isInit & (controller.getCardPool()[num] / 10 == 1))){
 //                System.out.println(controller.getCardPool()[num]);
                 ans += controller.getCardPool()[num];
                 controller.setCardPool(0, num);
                 break;
             }
         }
-        if (isInit){
 
-        }
         return ans;
     }
 
