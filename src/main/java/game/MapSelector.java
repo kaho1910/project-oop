@@ -27,9 +27,9 @@ public class MapSelector {
     private int[][] map2Ladder = {{3, 18}, {30, 11}, {22, 37}, {66, 46}, {80, 61}, {90, 73}, {74, 87}, {77, 97}};
     private int[][] map3Ladder = {{18, 3}, {11, 30}, {25, 36}, {41, 61}, {68, 53}, {63, 78}, {92, 72}, {99, 82}};
 
-    private int[] map1Draw = {6, 20, 23, 28, 31, 35, 42, 48, 52, 56, 63, 67, 70, 73, 76, 79, 86, 90, 94, 97};
-    private int[] map2Draw = {8, 16, 24, 27, 32, 39, 43, 48, 56, 60, 64, 67, 69, 71, 76, 79, 86, 88, 92, 98};
-    private int[] map3Draw = {5, 14, 21, 29, 34, 37, 43, 48, 51, 55, 62, 65, 69, 74, 77, 80, 83, 88, 91, 96};
+    private int[] map1PickCard = {6, 20, 23, 28, 31, 35, 42, 48, 52, 56, 63, 67, 70, 73, 76, 79, 86, 90, 94, 97};
+    private int[] map2PickCard = {8, 16, 24, 27, 32, 39, 43, 48, 56, 60, 64, 67, 69, 71, 76, 79, 86, 88, 92, 98};
+    private int[] map3PickCard = {5, 14, 21, 29, 34, 37, 43, 48, 51, 55, 62, 65, 69, 74, 77, 80, 83, 88, 91, 96};
 
     private Rectangle rect = new Rectangle();
     private Group group = new Group();
@@ -157,5 +157,17 @@ public class MapSelector {
 
     public int[][] getMap3Ladder() {
         return map3Ladder;
+    }
+
+    public int[] getMap1PickCard() {
+        return map1PickCard;
+    }
+
+    public int[] getMap2PickCard() {
+        return map2PickCard;
+    }
+
+    public int[] getMap3PickCard() {
+        return map3PickCard;
     }
 }

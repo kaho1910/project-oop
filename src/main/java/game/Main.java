@@ -148,12 +148,15 @@ public class Main extends Application {
                             if (actionEvent.getSource().equals(selector.getBtn()[0])){
                                 mapSelected = 1;
                                 playerController.setLadder(selector.getMap1Ladder());
+                                playerController.setPickCard(selector.getMap1PickCard());
                             } else if (actionEvent.getSource().equals(selector.getBtn()[1])){
                                 mapSelected = 2;
                                 playerController.setLadder(selector.getMap2Ladder());
+                                playerController.setPickCard(selector.getMap2PickCard());
                             } else {
                                 mapSelected = 3;
                                 playerController.setLadder(selector.getMap3Ladder());
+                                playerController.setPickCard(selector.getMap3PickCard());
                             }
 
                             selector.getPopUpStage().close();

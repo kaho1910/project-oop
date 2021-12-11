@@ -10,6 +10,7 @@ public class PlayerController implements Runnable  {
     private Player[] players;
     private boolean lastTurn = false;
     private int[][] ladder;
+    private int[] pickCard;
     private CardPopup popUp;
     private Image tempImg;
 
@@ -17,12 +18,13 @@ public class PlayerController implements Runnable  {
         players = new Player[playerNum];
         for(int i=0; i < playerNum; i++){
             players[i] = new Player(i + 1);
+
             Rectangle[] cardFrame = players[i].getPlayerTable().getCardFrame();
             for(int j=0; j < players[i].getPlayerTable().getCardNumMax(); j++){
                 cardFrame[j].setOnMouseClicked(new EventHandler<MouseEvent>() {
                     int pNum, cNum;
                     public void handle(MouseEvent mouseEvent) {
-                        System.out.println(mouseEvent.getSource());
+//                        System.out.println(mouseEvent.getSource());
                         for(int m=0; m < players.length; m++){
                             for(int k=0; k < players[m].getPlayerTable().getCardNumMax(); k++){
                                 if (mouseEvent.getSource().equals(players[m].getPlayerTable().getCardFrame()[k])){
@@ -45,6 +47,9 @@ public class PlayerController implements Runnable  {
     }
 
     public void run() {
+        for (int i=0; i < playerNum; i++){
+            players[i].setPickCardHistory(pickCard);
+        }
         while (!isLastTurn()){
             for(int i=0; i < playerNum; i++){
                 players[i].getPlayerTable().getDiceButton().setDisable(false);
@@ -72,6 +77,7 @@ public class PlayerController implements Runnable  {
                     }
                 }
                 onLadder(players[i]);
+                onPickCard(players[i]);
             }
         }
     }
@@ -89,6 +95,15 @@ public class PlayerController implements Runnable  {
         }
     }
 
+    public void onPickCard(Player player){
+        for(int i=0; i < pickCard.length; i++){
+        if (player.getPosition() == pickCard[i] && player.getPickCardHistory()[i] != 0){
+                System.out.println("id: " + player.getID() + " Pick card");
+                player.getPickCardHistory()[i] = 0;
+            }
+        }
+    }
+
     public Player[] getPlayers() {
         return players;
     }
@@ -99,5 +114,9 @@ public class PlayerController implements Runnable  {
 
     public void setLadder(int[][] ladder) {
         this.ladder = ladder;
+    }
+
+    public void setPickCard(int[] pickCard) {
+        this.pickCard = pickCard;
     }
 }
