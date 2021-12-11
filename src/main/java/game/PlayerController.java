@@ -6,21 +6,27 @@ import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.Rectangle;
 
+import java.util.Random;
+
 public class PlayerController implements Runnable  {
     private int playerNum = Main.getPlayerNum();
     private Player[] players;
     private boolean lastTurn = false;
     private int[][] ladder;
     private int[] pickCard;
+    private int[] cardPool;
     private CardPopup popUp;
     private Image tempImg;
+    private PlayerController controller;
 
     private Button useCardBtn;
 
-    public PlayerController(){
+    public PlayerController(int[] cardPool){
+        controller = this;
+        this.cardPool = cardPool;
         players = new Player[playerNum];
         for(int i=0; i < playerNum; i++){
-            players[i] = new Player(i + 1);
+            players[i] = new Player(i + 1, this);
 
             Rectangle[] cardFrame = players[i].getPlayerTable().getCardFrame();
             for(int j=0; j < players[i].getPlayerTable().getCardNumMax(); j++){
@@ -53,7 +59,7 @@ public class PlayerController implements Runnable  {
                                     card.action();
                                     if (card.isPlsDisposeMe()){
                                         System.out.println("dispose card");
-                                        players[pNum].setCards(new PowerCard(0), cNum);
+                                        players[pNum].setCards(new PowerCard(controller, false, false), cNum);
                                     }
                                     popUp.getPopUpStage().close();
                                     popUp.setFlag(true);
@@ -152,5 +158,13 @@ public class PlayerController implements Runnable  {
 
     public void setPickCard(int[] pickCard) {
         this.pickCard = pickCard;
+    }
+
+    public int[] getCardPool() {
+        return cardPool;
+    }
+
+    public void setCardPool(int cardPool, int i) {
+        this.cardPool[i] = cardPool;
     }
 }

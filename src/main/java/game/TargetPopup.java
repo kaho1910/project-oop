@@ -27,7 +27,8 @@ public class TargetPopup extends Application{
         innerframebox = new Rectangle[4];
         pbutton = new Button[4];
         for (i=0; i<=3;i++){
-            player[i] = new Player(i + 1);
+//            MAKE THIS WORK!
+//            player[i] = new Player(i + 1);
             pbutton[i] = new Button();
             profile[i] = player[i].getPlayerTable().getIm2();
             frame[i] = player[i].getPlayerTable().getIm1();
