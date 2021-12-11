@@ -16,6 +16,7 @@ public class PlayerTable {
     private int cardNumMax = 3;
     private Random random;
     private int k;
+    private boolean pressed;
     private boolean turn;
     private int ID;
     private StackPane layout;
@@ -84,7 +85,7 @@ public class PlayerTable {
                                 Thread.sleep(50);
                             }
                             Thread.sleep(500);
-                            turn = true;
+                            pressed = true;
                         } catch (InterruptedException e) {
                             e.printStackTrace();
                         }}
@@ -136,6 +137,14 @@ public class PlayerTable {
     }
     public Button getDiceButton() {
         return diceButton;
+    }
+
+    public boolean isPressed() {
+        return pressed;
+    }
+
+    public void setPressed(boolean pressed) {
+        this.pressed = pressed;
     }
 
     public boolean isTurn() {

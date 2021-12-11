@@ -1,6 +1,7 @@
 package game;
 
 import javafx.event.EventHandler;
+import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.Rectangle;
@@ -13,6 +14,8 @@ public class PlayerController implements Runnable  {
     private int[] pickCard;
     private CardPopup popUp;
     private Image tempImg;
+
+    private Button useCardBtn;
 
     public PlayerController(){
         players = new Player[playerNum];
@@ -40,6 +43,31 @@ public class PlayerController implements Runnable  {
                         }
                         popUp = new CardPopup();
                         popUp.display(tempImg);
+
+                        useCardBtn = popUp.getUseCardBtn();
+                        useCardBtn.setDisable(true);
+                        useCardBtn.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                            public void handle(MouseEvent mouseEvent) {
+                                PowerCard card = players[pNum].getCards()[0];
+                                card.action();
+                                if (card.isPlsDisposeMe()){
+                                    System.out.println("dispose me");
+                                }
+                                popUp.getPopUpStage().close();
+                            }
+                        });
+                        Thread newThread = new Thread(){
+                            public void run() {
+                                while(true){
+                                    System.out.println(""); //ห้ามลบ
+                                    if (players[pNum].getPlayerTable().isTurn()){
+                                        useCardBtn.setDisable(false);
+                                        break;
+                                    }
+                                }
+                            }
+                        };
+                        newThread.start();
                     }
                 });
             }
@@ -52,12 +80,13 @@ public class PlayerController implements Runnable  {
         }
         while (!isLastTurn()){
             for(int i=0; i < playerNum; i++){
+                players[i].getPlayerTable().setTurn(true);
                 players[i].getPlayerTable().getDiceButton().setDisable(false);
-                players[i].getPlayerTable().setTurn(false);
+                players[i].getPlayerTable().setPressed(false);
                 while (true) {
 //                    if (players[i].getPlayerTable().getDice_button().isDisabled()) {
                     System.out.print(""); // ศักดิ์สิทธิ์ ห้ามลบ
-                    if (players[i].getPlayerTable().isTurn()) {
+                    if (players[i].getPlayerTable().isPressed()) {
 //                        System.out.println(players[i].getID() + "-check");
                         try {
                             if (players[i].getPosition() < 99 || players[i].getPosition() > 1) {
@@ -72,10 +101,11 @@ public class PlayerController implements Runnable  {
                         } catch (InterruptedException e) {
                             e.printStackTrace();
                         }
-                        players[i].getPlayerTable().setTurn(false);
+                        players[i].getPlayerTable().setPressed(false);
                         break;
                     }
                 }
+                players[i].getPlayerTable().setTurn(false);
                 onLadder(players[i]);
                 onPickCard(players[i]);
             }

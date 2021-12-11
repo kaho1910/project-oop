@@ -49,4 +49,8 @@ public class CardPopup {
     public static Stage getPopUpStage() {
         return popUpStage;
     }
+
+    public static Button getUseCardBtn() {
+        return useCardBtn;
+    }
 }
