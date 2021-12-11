@@ -45,6 +45,7 @@ public class PlayerController implements Runnable  {
 //                        System.out.println(pNum + " " + cNum);
                         tempImg = players[pNum].getPlayerTable().getCardImg(cNum);
                         if (popUp != null){
+                            popUp.setFlag(true);
                             popUp.getPopUpStage().close();
                         }
                         if (!players[pNum].getCards()[cNum].getCardUrl().equals("")) {
@@ -59,7 +60,7 @@ public class PlayerController implements Runnable  {
                                     card.action();
                                     if (card.isPlsDisposeMe()){
                                         System.out.println("dispose card");
-                                        players[pNum].setCards(new PowerCard(controller, false, false), cNum);
+                                        players[pNum].setCards(new PowerCard(controller, false, true), cNum);
                                     }
                                     popUp.getPopUpStage().close();
                                     popUp.setFlag(true);
