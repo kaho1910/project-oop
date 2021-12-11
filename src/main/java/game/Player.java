@@ -25,10 +25,10 @@ public class Player extends Rectangle {
 
     public Player(int id) {
         this.ID = id;
-        playerTable = new PlayerTable(id);
         for(int i=0; i < cards.length; i++){
-            cards[i] = new PowerCard();
+            cards[i] = new PowerCard((i + 1) * 11);
         }
+        playerTable = new PlayerTable(id, this);
         setHeight(60);
         setWidth(30);
         setFill(Color.TRANSPARENT);
@@ -122,6 +122,15 @@ public class Player extends Rectangle {
 
     public int getPosition() {
         return position;
+    }
+
+    public PowerCard[] getCards() {
+        return cards;
+    }
+
+    public void setCards(PowerCard cards, int i) {
+        this.cards[i] = cards;
+        getPlayerTable().updateCard();
     }
 
     public PlayerTable getPlayerTable() {

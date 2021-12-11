@@ -1,6 +1,5 @@
 package game;
 
-import javafx.application.Platform;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.Cursor;
@@ -13,7 +12,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
@@ -25,14 +23,18 @@ public class MapSelector {
     private Button[] btn = new Button[mapNum];
     private String[] mapName = {"Yume no Taiki", "Judai in The City", "Yuji on Train"};
 
-    private boolean selected = false;
     private int[][] map1Ladder = {{14, 7}, {16, 25}, {32, 49}, {60, 42}, {46, 66}, {89, 72}, {77, 84}, {98, 78}};
     private int[][] map2Ladder = {{3, 18}, {30, 11}, {22, 37}, {66, 46}, {80, 61}, {90, 73}, {74, 87}, {77, 97}};
     private int[][] map3Ladder = {{18, 3}, {11, 30}, {25, 36}, {41, 61}, {68, 53}, {63, 78}, {92, 72}, {99, 82}};
 
+    private int[] map1Draw = {6, 20, 23, 28, 31, 35, 42, 48, 52, 56, 63, 67, 70, 73, 76, 79, 86, 90, 94, 97};
+    private int[] map2Draw = {8, 16, 24, 27, 32, 39, 43, 48, 56, 60, 64, 67, 69, 71, 76, 79, 86, 88, 92, 98};
+    private int[] map3Draw = {5, 14, 21, 29, 34, 37, 43, 48, 51, 55, 62, 65, 69, 74, 77, 80, 83, 88, 91, 96};
+
     private Rectangle rect = new Rectangle();
     private Group group = new Group();
     private Stage popUpStage;
+    private Scene scene;
 
     private Parent mapSelect(){
         StackPane root = new StackPane();
@@ -67,18 +69,39 @@ public class MapSelector {
         btn[0].setOnMouseEntered(new EventHandler<MouseEvent>() {
             public void handle(MouseEvent mouseEvent) {
                 rect.setFill(new ImagePattern(img[0]));
+                scene.setCursor(Cursor.HAND);
             }
         });
 
         btn[1].setOnMouseEntered(new EventHandler<MouseEvent>() {
             public void handle(MouseEvent mouseEvent) {
                 rect.setFill(new ImagePattern(img[1]));
+                scene.setCursor(Cursor.HAND);
             }
         });
 
         btn[2].setOnMouseEntered(new EventHandler<MouseEvent>() {
             public void handle(MouseEvent mouseEvent) {
                 rect.setFill(new ImagePattern(img[2]));
+                scene.setCursor(Cursor.HAND);
+            }
+        });
+
+        btn[0].setOnMouseExited(new EventHandler<MouseEvent>() {
+            public void handle(MouseEvent mouseEvent) {
+                scene.setCursor(Cursor.DEFAULT);
+            }
+        });
+
+        btn[1].setOnMouseExited(new EventHandler<MouseEvent>() {
+            public void handle(MouseEvent mouseEvent) {
+                scene.setCursor(Cursor.DEFAULT);
+            }
+        });
+
+        btn[2].setOnMouseExited(new EventHandler<MouseEvent>() {
+            public void handle(MouseEvent mouseEvent) {
+                scene.setCursor(Cursor.DEFAULT);
             }
         });
 
@@ -100,25 +123,10 @@ public class MapSelector {
     }
     public void display() {
         popUpStage = new Stage();
-        Scene scene = new Scene(mapSelect());
+        scene = new Scene(mapSelect());
         popUpStage.setTitle("Select map");
         popUpStage.setScene(scene);
         popUpStage.show();
-
-        for (Button b:
-             btn) {
-            b.setOnMouseEntered(new EventHandler<MouseEvent>() {
-                public void handle(MouseEvent mouseEvent) {
-                    scene.setCursor(Cursor.HAND);
-                }
-            });
-
-            b.setOnMouseExited(new EventHandler<MouseEvent>() {
-                public void handle(MouseEvent mouseEvent) {
-                    scene.setCursor(Cursor.DEFAULT);
-                }
-            });
-        }
 
         popUpStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
             public void handle(WindowEvent e) {
