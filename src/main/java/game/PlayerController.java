@@ -19,9 +19,20 @@ public class PlayerController implements Runnable  {
             players[i] = new Player(i + 1);
             Rectangle[] cardFrame = players[i].getPlayerTable().getCardFrame();
             for(int j=0; j < players[i].getPlayerTable().getCardNumMax(); j++){
-                tempImg = players[i].getPlayerTable().getCardImg(j);
                 cardFrame[j].setOnMouseClicked(new EventHandler<MouseEvent>() {
+                    int pNum, cNum;
                     public void handle(MouseEvent mouseEvent) {
+                        System.out.println(mouseEvent.getSource());
+                        for(int m=0; m < players.length; m++){
+                            for(int k=0; k < players[m].getPlayerTable().getCardNumMax(); k++){
+                                if (mouseEvent.getSource().equals(players[m].getPlayerTable().getCardFrame()[k])){
+                                    pNum = m;
+                                    cNum = k;
+                                }
+                            }
+                        }
+//                        System.out.println(pNum + " " + cNum);
+                        tempImg = players[pNum].getPlayerTable().getCardImg(cNum);
                         if (popUp != null){
                             popUp.getPopUpStage().close();
                         }
