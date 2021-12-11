@@ -75,6 +75,7 @@ public class PlayerTable {
                 Thread thread = new Thread(){
                     public void run(){
 //                        System.out.println("Dice rolled");
+                        setTurn(false);
                         try{
                             for (int i = 0;i < 15; i++){
                                 k = random.nextInt(6)+1;

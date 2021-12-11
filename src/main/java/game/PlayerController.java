@@ -49,20 +49,28 @@ public class PlayerController implements Runnable  {
                             useCardBtn.setDisable(true);
                             useCardBtn.setOnMouseClicked(new EventHandler<MouseEvent>() {
                                 public void handle(MouseEvent mouseEvent) {
-                                    PowerCard card = players[pNum].getCards()[0];
+                                    PowerCard card = players[pNum].getCards()[cNum];
                                     card.action();
                                     if (card.isPlsDisposeMe()){
-                                        System.out.println("dispose me");
+                                        System.out.println("dispose card");
+                                        players[pNum].setCards(new PowerCard(0), cNum);
                                     }
                                     popUp.getPopUpStage().close();
                                 }
                             });
                             Thread newThread = new Thread(){
                                 public void run() {
-                                    while(true){
-                                        System.out.println(""); //ห้ามลบ
+                                    while (true){
+                                        System.out.print(""); //ห้ามลบ
                                         if (players[pNum].getPlayerTable().isTurn()){
                                             useCardBtn.setDisable(false);
+                                            break;
+                                        }
+                                    }
+                                    while (true){
+                                        System.out.print(""); //ห้ามลบ
+                                        if (!players[pNum].getPlayerTable().isTurn()){
+                                            useCardBtn.setDisable(true);
                                             break;
                                         }
                                     }
@@ -107,7 +115,6 @@ public class PlayerController implements Runnable  {
                         break;
                     }
                 }
-                players[i].getPlayerTable().setTurn(false);
                 onLadder(players[i]);
                 onPickCard(players[i]);
             }
