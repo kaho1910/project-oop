@@ -56,22 +56,17 @@ public class PlayerController implements Runnable  {
                                         players[pNum].setCards(new PowerCard(0), cNum);
                                     }
                                     popUp.getPopUpStage().close();
+                                    popUp.setFlag(true);
                                 }
                             });
                             Thread newThread = new Thread(){
                                 public void run() {
-                                    while (true){
+                                    while (!popUp.isFlag()){
                                         System.out.print(""); //ห้ามลบ
                                         if (players[pNum].getPlayerTable().isTurn()){
                                             useCardBtn.setDisable(false);
-                                            break;
-                                        }
-                                    }
-                                    while (true){
-                                        System.out.print(""); //ห้ามลบ
-                                        if (!players[pNum].getPlayerTable().isTurn()){
+                                        } else {
                                             useCardBtn.setDisable(true);
-                                            break;
                                         }
                                     }
                                 }
