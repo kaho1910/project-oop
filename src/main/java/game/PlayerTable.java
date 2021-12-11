@@ -28,8 +28,13 @@ public class PlayerTable {
     private Rectangle[] cardFrame;
     private String[] cardUrl;
     private Image[] cardImg;
+
+
+
+    private Image im1, im2;
 //    private String cardUrl1, cardUrl2, cardUrl3;
-    
+
+
     public PlayerTable(int id) {
         this.ID = id;
         layout = new StackPane();
@@ -51,7 +56,7 @@ public class PlayerTable {
         player_frame.setHeight(170);
         player_frame.setTranslateX(0);
         player_frame.setTranslateY(-100);
-        Image im1 = new Image(getClass().getResourceAsStream("/img/blog.png"));
+        im1 = new Image(getClass().getResourceAsStream("/img/blog.png"));
         player_frame.setFill(new ImagePattern(im1));
         //inner
         inner_frame.setWidth(120);
@@ -59,7 +64,7 @@ public class PlayerTable {
         inner_frame.setTranslateX(0);
         inner_frame.setTranslateY(-99);
 
-        Image im2 = new Image(getClass().getResourceAsStream(String.format("/img/characters/%d-normal.png", id)));
+        im2 = new Image(getClass().getResourceAsStream(String.format("/img/characters/%d-normal.png", id)));
 
         inner_frame.setFill(new ImagePattern(im2));
         ///dice
@@ -196,6 +201,13 @@ public class PlayerTable {
         return k;
     }
 
+    public Image getIm1() {
+        return im1;
+    }
+
+    public Image getIm2() {
+        return im2;
+    }
     public Button getDiceButton() {
         return diceButton;
     }
@@ -218,6 +230,13 @@ public class PlayerTable {
 
     public Image getCardImg(int i) {
         return cardImg[i];
+    }
+    public Rectangle getPlayer_frame() {
+        return player_frame;
+    }
+
+    public Rectangle getInner_frame() {
+        return inner_frame;
     }
 
     public void setCardUrl(String cardUrl, int i) {
