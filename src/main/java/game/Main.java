@@ -198,7 +198,7 @@ public class Main extends Application {
                             Thread t = new Thread(playerController);
                             t.start();
 
-                            groupMap.getChildren().addAll(playerController.getPlayers());
+                            groupMap.getChildren().addAll(playerController.getPlayers()[3], playerController.getPlayers()[2], playerController.getPlayers()[1], playerController.getPlayers()[0]);
                         }
                     });
                 }
