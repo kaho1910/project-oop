@@ -83,6 +83,13 @@ public class PowerCard implements Card{
                 break;
             case 43:
                 System.out.println("\nswitch card id: 43");
+                for (int i=0; i < 3; i++){
+                    if (i != 0) {
+                        player.setCards(new PowerCard(controller, player, false, true), i);
+                    } else {
+                        player.setCards(new PowerCard(controller, player, false, false), i);
+                    }
+                }
                 break;
             case 44:
                 System.out.println("\nswitch card id: 44");
@@ -228,7 +235,7 @@ public class PowerCard implements Card{
         }
 
 //        PowerCard test return HERE
-//        return rand.nextInt(2) + 41;
+//        return rand.nextInt(2) + 43;
 
 //        Production return HERE
         return ans;
