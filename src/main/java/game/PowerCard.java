@@ -133,7 +133,8 @@ public class PowerCard implements Card{
                     }
                     player.subtractNumCardOnHand();
 
-                    Player targetPlayer = controller.getPlayers()[needTarget];
+                    System.out.println(target);
+                    Player targetPlayer = controller.getPlayers()[target];
                     switch (needTarget){
                         case 13: case 14:
                             targetPlayer.setWillSkip(-1);

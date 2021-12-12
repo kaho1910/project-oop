@@ -21,7 +21,6 @@ public class Player extends Rectangle {
     private int[] pickCardHistory;
     private PlayerController controller;
     private int willSkip;
-    private int runPlus;
     private double runTimes;
 
     private boolean threadRun;
@@ -33,6 +32,7 @@ public class Player extends Rectangle {
         this.ID = id;
         this.controller = controller;
         this.numCardOnHand = 0;
+        this.runTimes = 1;
         this.willSkip = 0;
         for(int i=0; i < cards.length; i++){
 //            cards[i] = new PowerCard(i * 11);
@@ -92,10 +92,13 @@ public class Player extends Rectangle {
         boolean gHundred = false;
         int temp = 0;
         threadRun = true;
-        System.out.println("\nrun : (" + run + "* " + runTimes + ")" + " + " + runPlus);
-        run = (int)(run * runTimes) + runPlus;
+        if (runTimes != 1) {
+            System.out.println("\nrun : " + run + " * " + runTimes);
+        } else {
+            System.out.println("\nrun : " + run);
+        }
+        run = (int)(run * runTimes);
         runTimes = 1;
-        runPlus = 0;
         Thread thread = new Thread(){
             public void run(){
                 int k = 0;
@@ -187,10 +190,6 @@ public class Player extends Rectangle {
 
     public void setWillSkip(int willSkip) {
         this.willSkip = willSkip;
-    }
-
-    public void setRunPlus(int runPlus) {
-        this.runPlus = runPlus;
     }
 
     public void setRunTimes(double runTimes) {
