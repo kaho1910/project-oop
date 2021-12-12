@@ -9,6 +9,10 @@ public class PowerCard implements Card{
     private PlayerController controller;
     private Player player;
     private boolean powerCrisis;
+    private PowerCard thisCard;
+    private int needTarget;
+    private int target;
+    private TargetPopup targetPopup;
 
     public PowerCard(PlayerController controller, Player player, boolean isInit, boolean isBlank){
         this.controller = controller;
@@ -19,6 +23,8 @@ public class PowerCard implements Card{
         } else {
             this.cardUrl = String.format("/img/cards/%d.jpg", this.cardID);
         }
+        this.thisCard = this;
+        this.needTarget = 0;
     }
 
     public void action(){
@@ -38,7 +44,7 @@ public class PowerCard implements Card{
                 for (int i=0; i < 3; i++){
                     if (player.getCards()[i].getCardID() == 14){
                         powerCrisis = true;
-                        player.setCards(new PowerCard(controller, player, false, true), i);
+                        needTarget = 14;
                     }
                 }
                 break;
@@ -47,27 +53,64 @@ public class PowerCard implements Card{
                 for (int i=0; i < 3; i++){
                     if (player.getCards()[i].getCardID() == 13){
                         powerCrisis = true;
-                        player.setCards(new PowerCard(controller, player, false, true), i);
+                        needTarget = 13;
                     }
                 }
                 break;
+            default:
+                System.out.println("default case");
+                break;
         }
+
         if (!powerCrisis & (cardID == 13 | cardID == 14)){
             plsDisposeMe = true;
         }
+
         plsDisposeMe = !plsDisposeMe;
-        if (plsDisposeMe){
-            System.out.println("dispose card");
-            if (this.cardID == 13 | this.cardID == 14){
-                System.out.println("use card: " + "13, 14");
-                player.subtractNumCardOnHand();
-            } else {
-                System.out.println("use card: " + this.cardID);
-            }
-            player.subtractNumCardOnHand();
-        } else {
-            System.out.println("cannot use card: " + this.cardID);
+
+        targetPopup = new TargetPopup(controller);
+        if (needTarget != 0) {
+            targetPopup.display();
         }
+
+        Thread t = new Thread(){
+            public void run(){
+                if (needTarget != 0) {
+                    while (!targetPopup.isCancelled()) {
+                        System.out.print("");
+                        if (targetPopup.isSelected()){
+                            System.out.println("selected");
+                            target = targetPopup.getTarget();
+                            break;
+                        }
+                    }
+                }
+
+                if (needTarget != 0 & targetPopup.isCancelled()){
+                    System.out.println("cancel");
+                } else if (plsDisposeMe){
+                    System.out.println("dispose card");
+                    if (cardID == 13 | cardID == 14){
+                        System.out.println("use card: " + "13, 14");
+                        for (int i=0; i < 3; i++){
+                            if (player.getCards()[i].getCardID() ==  13 | player.getCards()[i].getCardID() == 14){
+                                player.setCards(new PowerCard(controller, player, false, true), i);
+                            }
+                        }
+                        player.subtractNumCardOnHand();
+                    } else {
+                        System.out.println("use card: " + cardID);
+                    }
+                    for (int i=0; i < 3; i++) {
+                        player.setCards(new PowerCard(controller, player, false, true), i);
+                    }
+                    player.subtractNumCardOnHand();
+                } else {
+                    System.out.println("cannot use card: " + cardID);
+                }
+            }
+        };
+        t.start();
     }
 
     public int pushCardPool(boolean isInit){

@@ -10,28 +10,48 @@ import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
-import javafx.application.*;
 
-public class TargetPopup extends Application{
+public class TargetPopup {
+    private Stage popUpStage;
     private Button[] pbutton;
-    private Player[] player;
+    private PlayerController controller;
+    private Player fromPlayer;
+    private Player[] players;
     private Image profile[], frame[];
     private Rectangle framebox[], innerframebox[];
-    private int selected,i=0, j;
-    public void start(Stage popUpStage){
+    private int target, j;
+    private boolean selected;
+    private boolean cancelled;
+
+    public TargetPopup(PlayerController controller){
+//        constructor += Player fromPlayer
+        this.controller = controller;
+        this.players = this.controller.getPlayers();
+        this.fromPlayer = this.controller.getPlayers()[0];
+    }
+//    public TargetPopup(){
+//        int[] cardPool = {11, 12, 13, 14, 21, 21, 22, 22, 23, 23, 24, 24, 31, 31, 31, 32, 32, 32, 33, 33, 33, 34, 34, 34, 41, 41, 41, 41, 42, 42, 42, 42, 43, 43, 43, 43, 44, 44, 44, 44};
+//        this.controller = new PlayerController(cardPool);
+//        this.players = this.controller.getPlayers();
+//        this.fromPlayer = this.controller.getPlayers()[0];
+//    }
+
+    public void display(){
+        this.selected = false;
+        this.cancelled = false;
+        popUpStage = new Stage();
         StackPane select_pane = new StackPane();
-        player = new Player[4];
         profile = new Image[4];
         frame = new Image[4];
         framebox = new Rectangle[4];
         innerframebox = new Rectangle[4];
         pbutton = new Button[4];
-        for (i=0; i<=3;i++){
+        for (int i=0; i<=3;i++){
 //            MAKE THIS WORK!
 //            player[i] = new Player(i + 1);
             pbutton[i] = new Button();
-            profile[i] = player[i].getPlayerTable().getIm2();
-            frame[i] = player[i].getPlayerTable().getIm1();
+            profile[i] = controller.getPlayers()[i].getPlayerTable().getIm2();
+            frame[i] = controller.getPlayers()[i].getPlayerTable().getIm1();
             framebox[i] = new Rectangle();
             innerframebox[i] = new Rectangle();
             pbutton[i].setText("select");
@@ -67,17 +87,18 @@ public class TargetPopup extends Application{
         }
         for (j=0;j<=3;j++) {
             pbutton[j].setOnMouseClicked(new EventHandler<MouseEvent>() {
-                String s = new String(pbutton[j].toString());
+                String s = pbutton[j].toString();
                 int num = j;
-                @Override
                 public void handle(MouseEvent mouseEvent) {
 //                    System.out.println(mouseEvent.getSource().toString().equals(s));
                     if (mouseEvent.getSource().toString().equals(s)){
                         for (int k=0;k<=3;k++){
                             pbutton[k].setDisable(true);
                         }
-                        selected = num;
-                        System.out.println("Target: " + selected);
+                        target = num;
+                        selected = true;
+//                        System.out.println("Target: " + target);
+                        popUpStage.close();
                     }
                 }
             });
@@ -90,15 +111,20 @@ public class TargetPopup extends Application{
 
         popUpStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
             public void handle(WindowEvent e) {
+                cancelled = true;
                 popUpStage.close();
             }
         });
     }
-    public int getSelected(){
-        return this.selected;
+    public int getTarget(){
+        return this.target;
     }
 
-    public static void main(String[] args) {
-        launch();
+    public boolean isSelected() {
+        return selected;
+    }
+
+    public boolean isCancelled() {
+        return cancelled;
     }
 }

@@ -61,9 +61,9 @@ public class PlayerController implements Runnable  {
                                 public void handle(MouseEvent mouseEvent) {
                                     PowerCard card = players[pNum].getCards()[cNum];
                                     card.action();
-                                    if (card.isPlsDisposeMe()){
-                                        players[pNum].setCards(new PowerCard(controller, players[pNum], false, true), cNum);
-                                    }
+//                                    if (card.isPlsDisposeMe()){
+//                                        players[pNum].setCards(new PowerCard(controller, players[pNum], false, true), cNum);
+//                                    }
                                     popUp.getPopUpStage().close();
                                     popUp.setFlag(true);
                                 }
