@@ -20,6 +20,9 @@ public class Player extends Rectangle {
     private PlayerTable playerTable;
     private int[] pickCardHistory;
     private PlayerController controller;
+    private int willSkip;
+    private double runTimes;
+    private int runPlus;
 
     private boolean threadRun;
 
@@ -30,6 +33,9 @@ public class Player extends Rectangle {
         this.ID = id;
         this.controller = controller;
         this.numCardOnHand = 0;
+        this.runTimes = 1;
+        this.runPlus = 0;
+        this.willSkip = 0;
         for(int i=0; i < cards.length; i++){
 //            cards[i] = new PowerCard(i * 11);
             if (i < 2) {
@@ -87,8 +93,21 @@ public class Player extends Rectangle {
     public void setPosition(int run){
         boolean gHundred = false;
         int temp = 0;
+
+        if (runTimes != 1 & runPlus != 0){
+            System.out.println("\nrun : (" + run + " * " + runTimes + ") + " + runPlus);
+        } else if (runTimes != 1) {
+            System.out.println("\nrun : " + run + " * " + runTimes);
+        } else if (runPlus != 0){
+            System.out.println("\nrun : " + run + " + " + runPlus);
+        } else {
+            System.out.println("\nrun : " + run);
+        }
+        run = (int)(run * runTimes) + runPlus;
+        runTimes = 1;
+        runPlus = 0;
+
         threadRun = true;
-        System.out.println("\nrun : " + run);
         Thread thread = new Thread(){
             public void run(){
                 int k = 0;
@@ -107,6 +126,7 @@ public class Player extends Rectangle {
             }
         };
         thread.start();
+
         if (run > 0) {
             if (this.position + run > 100){
                 gHundred = true;
@@ -122,7 +142,7 @@ public class Player extends Rectangle {
             }
         } else {
             for (int i = run; i < 0; i++) {
-                if (this.position <= 0){
+                if (this.position <= 1){
                     break;
                 }
                 moveTo(this.position - 1);
@@ -172,5 +192,21 @@ public class Player extends Rectangle {
 
     public void setPickCardHistory(int[] pickCardHistory) {
         this.pickCardHistory = pickCardHistory.clone();
+    }
+
+    public int getWillSkip() {
+        return willSkip;
+    }
+
+    public void setWillSkip(int willSkip) {
+        this.willSkip = willSkip;
+    }
+
+    public void setRunTimes(double runTimes) {
+        this.runTimes = runTimes;
+    }
+
+    public void setRunPlus(int runPlus) {
+        this.runPlus = runPlus;
     }
 }
