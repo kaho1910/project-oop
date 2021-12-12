@@ -140,16 +140,22 @@ public class PlayerController implements Runnable  {
     }
 
     public void onPickCard(Player player){
+        boolean k = false;
         for(int i=0; i < pickCard.length; i++){
             if (player.getPickCardHistory()[i] == 0){
                 System.out.println("id: " + player.getID() + " already been here");
-            }else if (getSumCardPool() == 0){
+                k = true;
+            } else if (getSumCardPool() == 0){
                 //alert card pool empty HERE
                 System.out.println("card pool is empty");
-                break;
+                k = true;
             } else if (player.getPosition() == pickCard[i]){
                 System.out.println("id: " + player.getID() + " Pick new card");
                 player.getPickCardHistory()[i] = 0;
+                k = true;
+            }
+            if (k){
+                break;
             }
         }
     }
