@@ -6,8 +6,6 @@ import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.Rectangle;
 
-import java.util.Random;
-
 public class PlayerController implements Runnable  {
     private int playerNum = Main.getPlayerNum();
     private Player[] players;
@@ -15,6 +13,7 @@ public class PlayerController implements Runnable  {
     private int[][] ladder;
     private int[] pickCard;
     private int[] cardPool;
+    private int sumCardPool;
     private CardPopup popUp;
     private Image tempImg;
     private PlayerController controller;
@@ -24,6 +23,10 @@ public class PlayerController implements Runnable  {
     public PlayerController(int[] cardPool){
         controller = this;
         this.cardPool = cardPool;
+        for (int i:
+             cardPool) {
+            sumCardPool += i;
+        }
         players = new Player[playerNum];
         for(int i=0; i < playerNum; i++){
             players[i] = new Player(i + 1, this);
@@ -33,7 +36,7 @@ public class PlayerController implements Runnable  {
                 cardFrame[j].setOnMouseClicked(new EventHandler<MouseEvent>() {
                     int pNum, cNum;
                     public void handle(MouseEvent mouseEvent) {
-//                        System.out.println(mouseEvent.getSource());
+//                        System.out.printlnprintln(mouseEvent.getSource());
                         for(int m=0; m < players.length; m++){
                             for(int k=0; k < players[m].getPlayerTable().getCardNumMax(); k++){
                                 if (mouseEvent.getSource().equals(players[m].getPlayerTable().getCardFrame()[k])){
@@ -59,8 +62,7 @@ public class PlayerController implements Runnable  {
                                     PowerCard card = players[pNum].getCards()[cNum];
                                     card.action();
                                     if (card.isPlsDisposeMe()){
-                                        System.out.println("dispose card");
-                                        players[pNum].setCards(new PowerCard(controller, false, true), cNum);
+                                        players[pNum].setCards(new PowerCard(controller, players[pNum], false, true), cNum);
                                     }
                                     popUp.getPopUpStage().close();
                                     popUp.setFlag(true);
@@ -87,6 +89,8 @@ public class PlayerController implements Runnable  {
     }
 
     public void run() {
+        boolean lastTurnAlert = false;
+        String playerAtGoal = new String();
         for (int i=0; i < playerNum; i++){
             players[i].setPickCardHistory(pickCard);
         }
@@ -119,8 +123,19 @@ public class PlayerController implements Runnable  {
                 }
                 onLadder(players[i]);
                 onPickCard(players[i]);
+                if (isLastTurn() & !lastTurnAlert){
+                    lastTurnAlert = true;
+                    System.out.println("\nPlayer " + players[i].getID() + " has TRIGGER Last Turn");
+                }
             }
         }
+        for(int i=0; i < players.length; i++){
+            if (players[i].getPosition() == 100){
+                playerAtGoal += "" + players[i].getID() + ", ";
+            }
+        }
+        System.out.println("\nGame END");
+        System.out.println("Player(s) ID: " + playerAtGoal.substring(0, playerAtGoal.length() - 2) + " win");
     }
 
     public void onLadder(Player player){
@@ -137,10 +152,23 @@ public class PlayerController implements Runnable  {
     }
 
     public void onPickCard(Player player){
-        for(int i=0; i < pickCard.length; i++){
-        if (player.getPosition() == pickCard[i] && player.getPickCardHistory()[i] != 0){
-                System.out.println("id: " + player.getID() + " Pick card");
-                player.getPickCardHistory()[i] = 0;
+        for (int i = 0; i < pickCard.length; i++) {
+            if (player.getPosition() == pickCard[i]) {
+                if (player.getPickCardHistory()[i] == 0) {
+                    System.out.println("id: " + player.getID() + " already been here");
+                } else if (player.getNumCardOnHand() == 3) {
+                    System.out.println("maximum card on hand");
+                }  else {
+                    for (int j=0; j < 3; j++){
+                        if (player.getCards()[j].getCardID() == 0){
+                            System.out.println("id: " + player.getID() + " Pick new card");
+                            player.setCards(new PowerCard(this, player, false, false), j);
+                            player.getPickCardHistory()[i] = 0;
+                            break;
+                        }
+                    }
+                }
+                break;
             }
         }
     }
@@ -163,6 +191,14 @@ public class PlayerController implements Runnable  {
 
     public int[] getCardPool() {
         return cardPool;
+    }
+
+    public int getSumCardPool() {
+        return sumCardPool;
+    }
+
+    public void cutSumCardPool(int sumCardPool) {
+        this.sumCardPool -= sumCardPool;
     }
 
     public void setCardPool(int cardPool, int i) {
