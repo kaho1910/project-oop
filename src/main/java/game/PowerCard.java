@@ -8,6 +8,7 @@ public class PowerCard implements Card{
     private boolean plsDisposeMe = false;
     private PlayerController controller;
     private Player player;
+    private boolean powerCrisis;
 
     public PowerCard(PlayerController controller, Player player, boolean isInit, boolean isBlank){
         this.controller = controller;
@@ -21,9 +22,52 @@ public class PowerCard implements Card{
     }
 
     public void action(){
-        System.out.println("\nuse card:" + this.cardID);
+        powerCrisis = false;
 //        switch แยก action ของแต่ละ ID
-        plsDisposeMe = true;
+        switch (this.getCardID()){
+            case 11:
+                System.out.println("\nswitch card id: 11");
+                plsDisposeMe = true;
+                break;
+            case 12:
+                System.out.println("\nswitch card id: 12");
+                player.getPlayerTable().setIsBlackGlass("-g");
+                break;
+            case 13:
+                System.out.println("\nswitch card id: 13");
+                for (int i=0; i < 3; i++){
+                    if (player.getCards()[i].getCardID() == 14){
+                        powerCrisis = true;
+                        player.setCards(new PowerCard(controller, player, false, true), i);
+                    }
+                }
+                break;
+            case 14:
+                System.out.println("\nswitch card id: 14");
+                for (int i=0; i < 3; i++){
+                    if (player.getCards()[i].getCardID() == 13){
+                        powerCrisis = true;
+                        player.setCards(new PowerCard(controller, player, false, true), i);
+                    }
+                }
+                break;
+        }
+        if (!powerCrisis & (cardID == 13 | cardID == 14)){
+            plsDisposeMe = true;
+        }
+        plsDisposeMe = !plsDisposeMe;
+        if (plsDisposeMe){
+            System.out.println("dispose card");
+            if (this.cardID == 13 | this.cardID == 14){
+                System.out.println("use card: " + "13, 14");
+                player.subtractNumCardOnHand();
+            } else {
+                System.out.println("use card: " + this.cardID);
+            }
+            player.subtractNumCardOnHand();
+        } else {
+            System.out.println("cannot use card: " + this.cardID);
+        }
     }
 
     public int pushCardPool(boolean isInit){
@@ -48,7 +92,11 @@ public class PowerCard implements Card{
             }
         }
 
-        return ans;
+//        PowerCard test return HERE
+        return rand.nextInt(2) + 13;
+
+//        Production return HERE
+//        return ans;
     }
 
 

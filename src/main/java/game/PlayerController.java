@@ -62,9 +62,7 @@ public class PlayerController implements Runnable  {
                                     PowerCard card = players[pNum].getCards()[cNum];
                                     card.action();
                                     if (card.isPlsDisposeMe()){
-                                        System.out.println("dispose card");
                                         players[pNum].setCards(new PowerCard(controller, players[pNum], false, true), cNum);
-                                        players[pNum].subtractNumCardOnHand();
                                     }
                                     popUp.getPopUpStage().close();
                                     popUp.setFlag(true);

@@ -26,10 +26,12 @@ public class PlayerTable {
     private Image[] cardImg;
     private Image im1, im2;
     private Player player;
+    private String isBlackGlass;
     
     public PlayerTable(int id, Player player) {
         this.ID = id;
         this.player = player;
+        isBlackGlass = "";
         layout = new StackPane();
         diceButton = new Button();
         player_frame = new Rectangle();
@@ -52,7 +54,7 @@ public class PlayerTable {
         inner_frame.setTranslateX(0);
         inner_frame.setTranslateY(-99);
 
-        im2 = new Image(getClass().getResourceAsStream(String.format("/img/characters/%d-normal.png", id)));
+        im2 = new Image(getClass().getResourceAsStream(String.format("/img/characters/%d-normal%s.png", id, isBlackGlass)));
 
         inner_frame.setFill(new ImagePattern(im2));
         ///dice
@@ -177,5 +179,9 @@ public class PlayerTable {
 
     public Image getCardImg(int i) {
         return cardImg[i];
+    }
+
+    public void setIsBlackGlass(String isBlackGlass) {
+        this.isBlackGlass = isBlackGlass;
     }
 }
