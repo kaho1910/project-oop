@@ -17,6 +17,7 @@ public class PlayerController implements Runnable  {
     private CardPopup popUp;
     private Image tempImg;
     private PlayerController controller;
+    private TargetPopup targetPopup;
 
     private Button useCardBtn;
 
@@ -203,5 +204,14 @@ public class PlayerController implements Runnable  {
 
     public void setCardPool(int cardPool, int i) {
         this.cardPool[i] = cardPool;
+    }
+
+    public TargetPopup newTargetPopUp(){
+        if (targetPopup != null){
+            System.out.println("targetPopUp");
+            targetPopup.getPopUpStage().close();
+        }
+        targetPopup = new TargetPopup(this);
+        return targetPopup;
     }
 }

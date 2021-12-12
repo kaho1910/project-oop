@@ -68,10 +68,8 @@ public class PowerCard implements Card{
 
         plsDisposeMe = !plsDisposeMe;
 
-        if (targetPopup != null){
-            targetPopup.getPopUpStage().close();
-        }
-        targetPopup = new TargetPopup(controller);
+        targetPopup = controller.newTargetPopUp();
+
         if (needTarget != 0) {
             targetPopup.display();
         }
@@ -86,11 +84,16 @@ public class PowerCard implements Card{
                             target = targetPopup.getTarget();
                             break;
                         }
-                        System.out.println(!player.getPlayerTable().isTurn());
                         if (!player.getPlayerTable().isTurn()){
-                            targetPopup.setCancelled(true);
+//                            targetPopup.setCancelled(true);
                             for (int i=0; i < targetPopup.getPbutton().length; i++){
                                 targetPopup.getPbutton()[i].setDisable(true);
+                            }
+                        }
+                        if (player.getPlayerTable().isTurn()){
+//                            targetPopup.setCancelled(true);
+                            for (int i=0; i < targetPopup.getPbutton().length; i++){
+                                targetPopup.getPbutton()[i].setDisable(false);
                             }
                         }
                     }
