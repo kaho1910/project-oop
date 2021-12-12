@@ -92,6 +92,8 @@ public class Player extends Rectangle {
         threadRun = true;
         System.out.println("\nrun : (" + run + "* " + runTimes + ")" + " + " + runPlus);
         run = (int)(run * runTimes) + runPlus;
+        runTimes = 1;
+        runPlus = 0;
         Thread thread = new Thread(){
             public void run(){
                 int k = 0;
