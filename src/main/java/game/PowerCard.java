@@ -132,6 +132,14 @@ public class PowerCard implements Card{
                         }
                     }
                     player.subtractNumCardOnHand();
+
+                    Player targetPlayer = controller.getPlayers()[needTarget];
+                    switch (needTarget){
+                        case 13: case 14:
+                            targetPlayer.setWillSkip(-1);
+                            break;
+                    }
+
                 } else {
                     System.out.println("cannot use card: " + cardID);
                 }

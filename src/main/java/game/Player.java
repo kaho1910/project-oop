@@ -20,6 +20,7 @@ public class Player extends Rectangle {
     private PlayerTable playerTable;
     private int[] pickCardHistory;
     private PlayerController controller;
+    private int willSkip;
     private int runPlus;
     private double runTimes;
 
@@ -32,6 +33,7 @@ public class Player extends Rectangle {
         this.ID = id;
         this.controller = controller;
         this.numCardOnHand = 0;
+        this.willSkip = 0;
         for(int i=0; i < cards.length; i++){
 //            cards[i] = new PowerCard(i * 11);
             if (i < 2) {
@@ -177,6 +179,14 @@ public class Player extends Rectangle {
 
     public void setPickCardHistory(int[] pickCardHistory) {
         this.pickCardHistory = pickCardHistory.clone();
+    }
+
+    public int getWillSkip() {
+        return willSkip;
+    }
+
+    public void setWillSkip(int willSkip) {
+        this.willSkip = willSkip;
     }
 
     public void setRunPlus(int runPlus) {

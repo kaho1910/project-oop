@@ -97,6 +97,10 @@ public class PlayerController implements Runnable  {
         }
         while (!isLastTurn()){
             for(int i=0; i < playerNum; i++){
+                if (players[i].getWillSkip() != 0){
+                    players[i].setWillSkip(players[i].getWillSkip() - 1);
+                    continue;
+                }
                 players[i].getPlayerTable().setTurn(true);
                 players[i].getPlayerTable().getDiceButton().setDisable(false);
                 players[i].getPlayerTable().setPressed(false);
