@@ -241,4 +241,7 @@ public class PlayerTable {
     public String getMotion() {
         return motion;
     }
+    public String getVictim_motion() {
+        return victim_motion;
+    }
 }
