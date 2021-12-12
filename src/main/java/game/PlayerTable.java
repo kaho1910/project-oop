@@ -22,20 +22,24 @@ public class PlayerTable {
     private StackPane layout;
     private Button diceButton;
     private Rectangle player_frame, dice_frame, inner_frame;
-    private Rectangle[] cardFrame;
+    private Rectangle[] cardFrame, innercardFrame;
     private Image[] cardImg;
     private Image im1, im2;
     private Player player;
-    
+    private String isBlackGlass, motion="normal", victim_motion="negative";
+
+
+
     public PlayerTable(int id, Player player) {
         this.ID = id;
         this.player = player;
+        isBlackGlass = "";
         layout = new StackPane();
         diceButton = new Button();
         player_frame = new Rectangle();
         inner_frame = new Rectangle();
         dice_frame = new Rectangle();
-
+        innercardFrame = new Rectangle[3];
         cardFrame = new Rectangle[3];
         cardImg = new Image[cardNumMax];
         random = new Random();
@@ -52,7 +56,7 @@ public class PlayerTable {
         inner_frame.setTranslateX(0);
         inner_frame.setTranslateY(-99);
 
-        im2 = new Image(getClass().getResourceAsStream(String.format("/img/characters/%d-normal.png", id)));
+        im2 = new Image(getClass().getResourceAsStream(String.format("/img/characters/%d-%s%s.png", id,this.getMotion(), isBlackGlass)));
 
         inner_frame.setFill(new ImagePattern(im2));
         ///dice
@@ -75,6 +79,7 @@ public class PlayerTable {
                 Thread thread = new Thread(){
                     public void run(){
 //                        System.out.println("Dice rolled");
+                        setTurn(false);
                         try{
                             for (int i = 0;i < 15; i++){
                                 k = random.nextInt(6)+1;
@@ -99,19 +104,30 @@ public class PlayerTable {
             cardFrame[i].setHeight(72);
             cardFrame[i].setTranslateX(-20 + 80 * i);
             cardFrame[i].setTranslateY(90);
+            innercardFrame[i] = new Rectangle();
+            innercardFrame[i].setWidth(60);
+            innercardFrame[i].setHeight(72);
+            innercardFrame[i].setTranslateX(-20 + 80 * i);
+            innercardFrame[i].setTranslateY(90);
+            innercardFrame[i].setFill(new ImagePattern(new Image(getClass().getResourceAsStream("/img/cards/frameCard.jpg"))));
         }
         updateCard();
         layout.getChildren().addAll(player_frame,inner_frame, dice_frame, diceButton);
+        for (Rectangle k:
+                innercardFrame) {
+            layout.getChildren().add(k);
+        }
         for (Rectangle i:
              cardFrame) {
             layout.getChildren().add(i);
         }
+
     }
 
     public void updateCard(){
         for(int i=0; i < cardNumMax; i++) {
             String cardUrl = player.getCards()[i].getCardUrl();
-            if (cardUrl == "") {
+            if (cardUrl.equals("")) {
                 cardFrame[i].setFill(Color.TRANSPARENT);
             } else {
                 cardImg[i] = new Image(getClass().getResourceAsStream(cardUrl));
@@ -165,5 +181,67 @@ public class PlayerTable {
 
     public Image getCardImg(int i) {
         return cardImg[i];
+    }
+
+    public void setIsBlackGlass(String isBlackGlass) {
+        this.isBlackGlass = isBlackGlass;
+    }
+    public void checkMotion(int card_id){
+        switch (card_id){
+            case 11:
+                this.motion = "negative";
+                break;
+            case 12:
+                this.motion = "normal";
+                break;
+            case 13:
+                this.motion = "normal";
+                break;
+            case 14:
+                this.motion = "normal";
+                break;
+            case 21:
+                this.motion = "positive";
+                break;
+            case 22:
+                this.motion = "positive";
+                break;
+            case 23:
+                this.motion = "positive";
+                break;
+            case 24:
+                this.motion = "positive";
+                break;
+            case 31:
+                this.motion = "positive";
+                break;
+            case 32:
+                this.motion = "positive";
+                break;
+            case 33:
+                this.motion = "positive";
+                break;
+            case 34:
+                this.motion = "positive";
+                break;
+            case 41:
+                this.motion = "positive";
+                break;
+            case 42:
+                this.motion = "negative";
+                break;
+            case 43:
+                this.motion = "normal";
+                break;
+            case 44:
+                this.motion = "positive";
+                break;
+        }
+    }
+    public String getMotion() {
+        return motion;
+    }
+    public String getVictim_motion() {
+        return victim_motion;
     }
 }

@@ -15,6 +15,14 @@ import javafx.stage.WindowEvent;
 public class CardPopup {
     private static Stage popUpStage;
     private static Button useCardBtn;
+    private static boolean flag;
+
+    public CardPopup(){
+        this.flag = false;
+        useCardBtn = new Button("USE THIS CARD");
+        useCardBtn.setDisable(true);
+    }
+
     public static void display(Image cardImg){
         popUpStage = new Stage();
         StackPane card_pane = new StackPane();
@@ -24,7 +32,6 @@ public class CardPopup {
 
 //        card_pane.getChildren().add(imgView);
 
-        useCardBtn = new Button("USE THIS CARD");
         useCardBtn.setFont(Font.font(24));
 
         VBox box = new VBox(imgView, useCardBtn);
@@ -42,6 +49,7 @@ public class CardPopup {
         popUpStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
             public void handle(WindowEvent e) {
                 popUpStage.close();
+                flag = true;
             }
         });
     }
@@ -52,5 +60,13 @@ public class CardPopup {
 
     public static Button getUseCardBtn() {
         return useCardBtn;
+    }
+
+    public static boolean isFlag() {
+        return flag;
+    }
+
+    public static void setFlag(boolean flag) {
+        CardPopup.flag = flag;
     }
 }

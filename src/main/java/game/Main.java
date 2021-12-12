@@ -31,6 +31,7 @@ public class Main extends Application {
     private static final int offSetY = 80;
     private PlayerController playerController;
     private Player[] players;
+    private int[] cardPool = {11, 12, 13, 14, 21, 21, 22, 22, 23, 23, 24, 24, 31, 31, 31, 32, 32, 32, 33, 33, 33, 34, 34, 34, 41, 41, 41, 41, 42, 42, 42, 42, 43, 43, 43, 43, 44, 44, 44, 44};
 
     private Group groupMap = new Group();
     private Group groupMainMenu = new Group();
@@ -143,7 +144,7 @@ public class Main extends Application {
                     selector.getBtn()[i].setOnAction(new EventHandler<ActionEvent>() {
                         public void handle(ActionEvent actionEvent) {
                             //                GAME
-                            playerController = new PlayerController();
+                            playerController = new PlayerController(cardPool);
                             int mapSelected;
                             if (actionEvent.getSource().equals(selector.getBtn()[0])){
                                 mapSelected = 1;
@@ -198,7 +199,7 @@ public class Main extends Application {
                             Thread t = new Thread(playerController);
                             t.start();
 
-                            groupMap.getChildren().addAll(playerController.getPlayers());
+                            groupMap.getChildren().addAll(playerController.getPlayers()[3], playerController.getPlayers()[2], playerController.getPlayers()[1], playerController.getPlayers()[0]);
                         }
                     });
                 }
