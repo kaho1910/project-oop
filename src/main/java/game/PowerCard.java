@@ -73,6 +73,21 @@ public class PowerCard implements Card{
                 System.out.println("\nswitch card id: 34");
                 needTarget = 34;
                 break;
+            case 41:
+                System.out.println("\nswitch card id: 41");
+                player.setRunPlus(1);
+                break;
+            case 42:
+                System.out.println("\nswitch card id: 42");
+                player.setRunPlus(-1);
+                break;
+            case 43:
+                System.out.println("\nswitch card id: 43");
+                break;
+            case 44:
+                System.out.println("\nswitch card id: 44");
+                plsDisposeMe = true;
+                break;
             default:
                 System.out.println("\ndefault case");
                 break;
@@ -139,29 +154,47 @@ public class PowerCard implements Card{
                     }
                     player.subtractNumCardOnHand();
 
-                    System.out.println("Target: " + target);
-                    Player targetPlayer = controller.getPlayers()[target];
+                    boolean isAngeled = false;
 
-                    switch (needTarget){
-                        case 13: case 14:
-                            targetPlayer.setWillSkip(-1);
-                            break;
-                        case 31:
-                            targetPlayer.setPosition(2);
-                            controller.endTurnChecker(targetPlayer);
-                            break;
-                        case 32:
-                            targetPlayer.setPosition(-2);
-                            controller.endTurnChecker(targetPlayer);
-                            break;
-                        case 33:
-                            targetPlayer.setRunTimes(2);
-                            break;
-                        case 34:
-                            targetPlayer.setRunTimes(0.5);
-                            break;
-                        default:
-                            break;
+                    if (needTarget != 0) {
+                        System.out.println("Target: " + target);
+                        Player targetPlayer = controller.getPlayers()[target];
+
+                        for (int i=0; i < 3; i++){
+                            if (targetPlayer.getCards()[i].getCardID() == 44){
+                                targetPlayer.getCards()[i].useAngelCard();
+                                isAngeled = true;
+                                break;
+                            }
+                        }
+
+                        if (isAngeled){
+                            needTarget = 0;
+                        }
+
+                        switch (needTarget) {
+                            case 13:
+                            case 14:
+                                targetPlayer.setWillSkip(-1);
+                                break;
+                            case 31:
+                                targetPlayer.setPosition(2);
+                                controller.endTurnChecker(targetPlayer);
+                                break;
+                            case 32:
+                                targetPlayer.setPosition(-2);
+                                controller.endTurnChecker(targetPlayer);
+                                break;
+                            case 33:
+                                targetPlayer.setRunTimes(2);
+                                break;
+                            case 34:
+                                targetPlayer.setRunTimes(0.5);
+                                break;
+                            default:
+                                System.out.println("Player " + targetPlayer.getID() + "is protected by Ohm-angel Card");
+                                break;
+                        }
                     }
 
                 } else {
@@ -195,10 +228,23 @@ public class PowerCard implements Card{
         }
 
 //        PowerCard test return HERE
-        return rand.nextInt(2) + 31;
+        return rand.nextInt(2) + 41;
 
 //        Production return HERE
 //        return ans;
+    }
+
+    public void useAngelCard(){
+        if (this.cardID == 44){
+            System.out.println("dispose card");
+            System.out.println("use card: 44");
+            for (int i=0; i < 3; i++) {
+                if (player.getCards()[i].equals(thisCard)) {
+                    player.setCards(new PowerCard(controller, player, false, true), i);
+                }
+            }
+            player.subtractNumCardOnHand();
+        }
     }
 
 
