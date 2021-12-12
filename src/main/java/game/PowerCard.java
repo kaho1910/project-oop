@@ -59,16 +59,19 @@ public class PowerCard implements Card{
                 break;
             case 31:
                 System.out.println("\nswitch card id: 31");
-
+                needTarget = 31;
                 break;
             case 32:
                 System.out.println("\nswitch card id: 32");
+                needTarget = 32;
                 break;
             case 33:
                 System.out.println("\nswitch card id: 33");
+                needTarget = 33;
                 break;
             case 34:
                 System.out.println("\nswitch card id: 34");
+                needTarget = 34;
                 break;
             default:
                 System.out.println("\ndefault case");
@@ -134,11 +137,26 @@ public class PowerCard implements Card{
                     }
                     player.subtractNumCardOnHand();
 
-                    System.out.println(target);
+                    System.out.println("Target: " + target);
                     Player targetPlayer = controller.getPlayers()[target];
+
                     switch (needTarget){
                         case 13: case 14:
                             targetPlayer.setWillSkip(-1);
+                            break;
+                        case 31:
+                            targetPlayer.setPosition(2);
+                            controller.endTurnChecker(targetPlayer);
+                            break;
+                        case 32:
+                            targetPlayer.setPosition(-2);
+                            controller.endTurnChecker(targetPlayer);
+                            break;
+                        case 33:
+                            targetPlayer.setRunTimes(2);
+                            break;
+                        case 34:
+                            targetPlayer.setRunTimes(0.5);
                             break;
                     }
 
