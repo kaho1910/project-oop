@@ -55,6 +55,7 @@ public class TargetPopup {
             framebox[i] = new Rectangle();
             innerframebox[i] = new Rectangle();
             pbutton[i].setText("select");
+            pbutton[i].setDisable(true);
             framebox[i].setHeight(170);
             framebox[i].setWidth(170);
             framebox[i].setFill(new ImagePattern(frame[i]));
