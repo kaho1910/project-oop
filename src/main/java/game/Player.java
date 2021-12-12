@@ -98,7 +98,7 @@ public class Player extends Rectangle {
             System.out.println("\nrun : (" + run + " * " + runTimes + ") + " + runPlus);
         } else if (runTimes != 1) {
             System.out.println("\nrun : " + run + " * " + runTimes);
-        } else if (runPlus != 1){
+        } else if (runPlus != 0){
             System.out.println("\nrun : " + run + " + " + runPlus);
         } else {
             System.out.println("\nrun : " + run);

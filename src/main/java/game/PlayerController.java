@@ -219,7 +219,6 @@ public class PlayerController implements Runnable  {
     public TargetPopup newTargetPopUp(){
         System.out.println(!targetPopup.equals(null));
         if (targetPopup.equals(null)){
-            System.out.println("targetPopUp");
             targetPopup.getPopUpStage().close();
         }
         targetPopup = new TargetPopup(this);
