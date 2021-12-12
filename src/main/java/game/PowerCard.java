@@ -68,6 +68,9 @@ public class PowerCard implements Card{
 
         plsDisposeMe = !plsDisposeMe;
 
+        if (targetPopup != null){
+            targetPopup.getPopUpStage().close();
+        }
         targetPopup = new TargetPopup(controller);
         if (needTarget != 0) {
             targetPopup.display();
@@ -82,6 +85,13 @@ public class PowerCard implements Card{
                             System.out.println("selected");
                             target = targetPopup.getTarget();
                             break;
+                        }
+                        System.out.println(!player.getPlayerTable().isTurn());
+                        if (!player.getPlayerTable().isTurn()){
+                            targetPopup.setCancelled(true);
+                            for (int i=0; i < targetPopup.getPbutton().length; i++){
+                                targetPopup.getPbutton()[i].setDisable(true);
+                            }
                         }
                     }
                 }
@@ -138,10 +148,10 @@ public class PowerCard implements Card{
         }
 
 //        PowerCard test return HERE
-//        return rand.nextInt(2) + 13;
+        return rand.nextInt(2) + 13;
 
 //        Production return HERE
-        return ans;
+//        return ans;
     }
 
 

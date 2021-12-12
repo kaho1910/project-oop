@@ -124,7 +124,19 @@ public class TargetPopup {
         return selected;
     }
 
+    public void setCancelled(boolean cancelled) {
+        this.cancelled = cancelled;
+    }
+
     public boolean isCancelled() {
         return cancelled;
+    }
+
+    public Stage getPopUpStage() {
+        return popUpStage;
+    }
+
+    public Button[] getPbutton() {
+        return pbutton;
     }
 }
