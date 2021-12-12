@@ -91,7 +91,7 @@ public class Player extends Rectangle {
     public void setPosition(int run){
         boolean gHundred = false;
         int temp = 0;
-        threadRun = true;
+
         if (runTimes != 1) {
             System.out.println("\nrun : " + run + " * " + runTimes);
         } else {
@@ -99,6 +99,8 @@ public class Player extends Rectangle {
         }
         run = (int)(run * runTimes);
         runTimes = 1;
+
+        threadRun = true;
         Thread thread = new Thread(){
             public void run(){
                 int k = 0;
@@ -117,6 +119,7 @@ public class Player extends Rectangle {
             }
         };
         thread.start();
+
         if (run > 0) {
             if (this.position + run > 100){
                 gHundred = true;
@@ -132,7 +135,7 @@ public class Player extends Rectangle {
             }
         } else {
             for (int i = run; i < 0; i++) {
-                if (this.position <= 0){
+                if (this.position <= 1){
                     break;
                 }
                 moveTo(this.position - 1);

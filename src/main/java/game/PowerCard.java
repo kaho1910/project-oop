@@ -160,6 +160,8 @@ public class PowerCard implements Card{
                         case 34:
                             targetPlayer.setRunTimes(0.5);
                             break;
+                        default:
+                            break;
                     }
 
                 } else {
@@ -193,7 +195,7 @@ public class PowerCard implements Card{
         }
 
 //        PowerCard test return HERE
-        return rand.nextInt(2) + 13;
+        return rand.nextInt(2) + 31;
 
 //        Production return HERE
 //        return ans;
