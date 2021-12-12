@@ -11,6 +11,7 @@ public class Player extends Rectangle {
     private final int ID;
     private int position = 1;
     private PowerCard[] cards = new PowerCard[3];
+    private int numCardOnHand;
     private final int tileSize = Main.getTileSize();
     private final int width = Main.getWidth();
     private final int height = Main.getHeight();
@@ -28,12 +29,13 @@ public class Player extends Rectangle {
     public Player(int id, PlayerController controller) {
         this.ID = id;
         this.controller = controller;
+        this.numCardOnHand = 0;
         for(int i=0; i < cards.length; i++){
 //            cards[i] = new PowerCard(i * 11);
             if (i < 2) {
-                cards[i] = new PowerCard(controller, true, false);
+                cards[i] = new PowerCard(controller, this, true, false);
             } else {
-                cards[i] = new PowerCard(controller, true, true);
+                cards[i] = new PowerCard(controller, this, true, true);
             }
         }
         playerTable = new PlayerTable(id, this);
@@ -131,6 +133,20 @@ public class Player extends Rectangle {
 
     public int getPosition() {
         return position;
+    }
+
+    public int getNumCardOnHand() {
+        return numCardOnHand;
+    }
+
+    public void addNumCardOnHand() {
+        this.numCardOnHand++;
+        System.out.println("id: " + ID + " numCardOnHand: " + numCardOnHand);
+    }
+
+    public void subtractNumCardOnHand() {
+        this.numCardOnHand--;
+        System.out.println("id: " + ID + " numCardOnHand: " + numCardOnHand);
     }
 
     public PowerCard[] getCards() {
