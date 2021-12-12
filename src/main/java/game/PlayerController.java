@@ -15,6 +15,7 @@ public class PlayerController implements Runnable  {
     private int[][] ladder;
     private int[] pickCard;
     private int[] cardPool;
+    private int sumCardPool;
     private CardPopup popUp;
     private Image tempImg;
     private PlayerController controller;
@@ -24,6 +25,10 @@ public class PlayerController implements Runnable  {
     public PlayerController(int[] cardPool){
         controller = this;
         this.cardPool = cardPool;
+        for (int i:
+             cardPool) {
+            sumCardPool += i;
+        }
         players = new Player[playerNum];
         for(int i=0; i < playerNum; i++){
             players[i] = new Player(i + 1, this);
@@ -141,7 +146,7 @@ public class PlayerController implements Runnable  {
             if (player.getPickCardHistory()[i] == 0){
                 System.out.println("id: " + player.getID() + " already been here");
             } else if (player.getPosition() == pickCard[i]){
-                 System.out.println("id: " + player.getID() + " Pick new card");
+                System.out.println("id: " + player.getID() + " Pick new card");
                 player.getPickCardHistory()[i] = 0;
             }
         }
@@ -165,6 +170,14 @@ public class PlayerController implements Runnable  {
 
     public int[] getCardPool() {
         return cardPool;
+    }
+
+    public int getSumCardPool() {
+        return sumCardPool;
+    }
+
+    public void setSumCardPool(int sumCardPool) {
+        this.sumCardPool -= sumCardPool;
     }
 
     public void setCardPool(int cardPool, int i) {
