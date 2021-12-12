@@ -26,8 +26,10 @@ public class PlayerTable {
     private Image[] cardImg;
     private Image im1, im2;
     private Player player;
-    private String isBlackGlass;
-    
+    private String isBlackGlass, motion="normal", victim_motion="negative";
+
+
+
     public PlayerTable(int id, Player player) {
         this.ID = id;
         this.player = player;
@@ -54,7 +56,7 @@ public class PlayerTable {
         inner_frame.setTranslateX(0);
         inner_frame.setTranslateY(-99);
 
-        im2 = new Image(getClass().getResourceAsStream(String.format("/img/characters/%d-normal%s.png", id, isBlackGlass)));
+        im2 = new Image(getClass().getResourceAsStream(String.format("/img/characters/%d-%s%s.png", id,this.getMotion(), isBlackGlass)));
 
         inner_frame.setFill(new ImagePattern(im2));
         ///dice
@@ -183,5 +185,63 @@ public class PlayerTable {
 
     public void setIsBlackGlass(String isBlackGlass) {
         this.isBlackGlass = isBlackGlass;
+    }
+    public void checkMotion(int card_id){
+        switch (card_id){
+            case 11:
+                this.motion = "negative";
+                break;
+            case 12:
+                this.motion = "normal";
+                break;
+            case 13:
+                this.motion = "normal";
+                break;
+            case 14:
+                this.motion = "normal";
+                break;
+            case 21:
+                this.motion = "positive";
+                break;
+            case 22:
+                this.motion = "positive";
+                break;
+            case 23:
+                this.motion = "positive";
+                break;
+            case 24:
+                this.motion = "positive";
+                break;
+            case 31:
+                this.motion = "positive";
+                break;
+            case 32:
+                this.motion = "positive";
+                break;
+            case 33:
+                this.motion = "positive";
+                break;
+            case 34:
+                this.motion = "positive";
+                break;
+            case 41:
+                this.motion = "positive";
+                break;
+            case 42:
+                this.motion = "negative";
+                break;
+            case 43:
+                this.motion = "normal";
+                break;
+            case 44:
+                this.motion = "positive";
+                break;
+        }
+    }
+    public String getMotion() {
+        return motion;
+    }
+    public String getVictim_motion() {
+        return victim_motion;
     }
 }
