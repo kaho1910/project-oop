@@ -91,6 +91,8 @@ public class PlayerController implements Runnable  {
     }
 
     public void run() {
+        boolean lastTurnAlert = false;
+        String playerAtGoal = new String();
         for (int i=0; i < playerNum; i++){
             players[i].setPickCardHistory(pickCard);
         }
@@ -123,8 +125,19 @@ public class PlayerController implements Runnable  {
                 }
                 onLadder(players[i]);
                 onPickCard(players[i]);
+                if (isLastTurn() & !lastTurnAlert){
+                    lastTurnAlert = true;
+                    System.out.println("\nPlayer " + players[i].getID() + " has TRIGGER Last Turn");
+                }
             }
         }
+        for(int i=0; i < players.length; i++){
+            if (players[i].getPosition() == 100){
+                playerAtGoal += "" + players[i].getID() + ", ";
+            }
+        }
+        System.out.println("\nGame END");
+        System.out.println("Player(s) ID: " + playerAtGoal.substring(0, playerAtGoal.length() - 2) + " win");
     }
 
     public void onLadder(Player player){
