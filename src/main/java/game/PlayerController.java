@@ -6,8 +6,6 @@ import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.Rectangle;
 
-import java.util.Random;
-
 public class PlayerController implements Runnable  {
     private int playerNum = Main.getPlayerNum();
     private Player[] players;
@@ -145,6 +143,10 @@ public class PlayerController implements Runnable  {
         for(int i=0; i < pickCard.length; i++){
             if (player.getPickCardHistory()[i] == 0){
                 System.out.println("id: " + player.getID() + " already been here");
+            }else if (getSumCardPool() == 0){
+                //alert card pool empty HERE
+                System.out.println("card pool is empty");
+                break;
             } else if (player.getPosition() == pickCard[i]){
                 System.out.println("id: " + player.getID() + " Pick new card");
                 player.getPickCardHistory()[i] = 0;
@@ -176,7 +178,7 @@ public class PlayerController implements Runnable  {
         return sumCardPool;
     }
 
-    public void setSumCardPool(int sumCardPool) {
+    public void cutSumCardPool(int sumCardPool) {
         this.sumCardPool -= sumCardPool;
     }
 
