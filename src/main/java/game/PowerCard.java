@@ -58,7 +58,7 @@ public class PowerCard implements Card{
                 }
                 break;
             default:
-                System.out.println("default case");
+                System.out.println("\ndefault case");
                 break;
         }
 
@@ -102,7 +102,9 @@ public class PowerCard implements Card{
                         System.out.println("use card: " + cardID);
                     }
                     for (int i=0; i < 3; i++) {
-                        player.setCards(new PowerCard(controller, player, false, true), i);
+                        if (player.getCards()[i].equals(thisCard)) {
+                            player.setCards(new PowerCard(controller, player, false, true), i);
+                        }
                     }
                     player.subtractNumCardOnHand();
                 } else {
@@ -136,10 +138,10 @@ public class PowerCard implements Card{
         }
 
 //        PowerCard test return HERE
-        return rand.nextInt(2) + 13;
+//        return rand.nextInt(2) + 13;
 
 //        Production return HERE
-//        return ans;
+        return ans;
     }
 
 
