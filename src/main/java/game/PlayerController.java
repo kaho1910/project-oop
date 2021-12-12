@@ -88,6 +88,7 @@ public class PlayerController implements Runnable  {
                 });
             }
         }
+        this.targetPopup = new TargetPopup(controller);
     }
 
     public void run() {
@@ -216,7 +217,8 @@ public class PlayerController implements Runnable  {
     }
 
     public TargetPopup newTargetPopUp(){
-        if (targetPopup != null){
+        System.out.println(!targetPopup.equals(null));
+        if (targetPopup.equals(null)){
             System.out.println("targetPopUp");
             targetPopup.getPopUpStage().close();
         }

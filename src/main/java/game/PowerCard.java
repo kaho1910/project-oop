@@ -228,10 +228,10 @@ public class PowerCard implements Card{
         }
 
 //        PowerCard test return HERE
-        return rand.nextInt(2) + 41;
+//        return rand.nextInt(2) + 41;
 
 //        Production return HERE
-//        return ans;
+        return ans;
     }
 
     public void useAngelCard(){
