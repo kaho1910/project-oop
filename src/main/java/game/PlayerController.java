@@ -18,6 +18,7 @@ public class PlayerController implements Runnable  {
     private Image tempImg;
     private PlayerController controller;
     private TargetPopup targetPopup;
+    private boolean lastTurnAlert;
 
     private Button useCardBtn;
 
@@ -90,7 +91,7 @@ public class PlayerController implements Runnable  {
     }
 
     public void run() {
-        boolean lastTurnAlert = false;
+        lastTurnAlert = false;
         String playerAtGoal = new String();
         for (int i=0; i < playerNum; i++){
             players[i].setPickCardHistory(pickCard);
@@ -126,12 +127,7 @@ public class PlayerController implements Runnable  {
                         break;
                     }
                 }
-                onLadder(players[i]);
-                onPickCard(players[i]);
-                if (isLastTurn() & !lastTurnAlert){
-                    lastTurnAlert = true;
-                    System.out.println("\nPlayer " + players[i].getID() + " has TRIGGER Last Turn");
-                }
+                endTurnChecker(players[i]);
             }
         }
         for(int i=0; i < players.length; i++){
@@ -208,6 +204,15 @@ public class PlayerController implements Runnable  {
 
     public void setCardPool(int cardPool, int i) {
         this.cardPool[i] = cardPool;
+    }
+
+    public void endTurnChecker(Player player){
+        onLadder(player);
+        onPickCard(player);
+        if (isLastTurn() & !lastTurnAlert){
+            lastTurnAlert = true;
+            System.out.println("\nPlayer " + player.getID() + " has TRIGGER Last Turn");
+        }
     }
 
     public TargetPopup newTargetPopUp(){
