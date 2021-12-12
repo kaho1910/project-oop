@@ -20,6 +20,8 @@ public class Player extends Rectangle {
     private PlayerTable playerTable;
     private int[] pickCardHistory;
     private PlayerController controller;
+    private int runPlus;
+    private double runTimes;
 
     private boolean threadRun;
 
@@ -88,7 +90,8 @@ public class Player extends Rectangle {
         boolean gHundred = false;
         int temp = 0;
         threadRun = true;
-        System.out.println("\nrun : " + run);
+        System.out.println("\nrun : (" + run + "* " + runTimes + ")" + " + " + runPlus);
+        run = (int)(run * runTimes) + runPlus;
         Thread thread = new Thread(){
             public void run(){
                 int k = 0;
@@ -172,5 +175,13 @@ public class Player extends Rectangle {
 
     public void setPickCardHistory(int[] pickCardHistory) {
         this.pickCardHistory = pickCardHistory.clone();
+    }
+
+    public void setRunPlus(int runPlus) {
+        this.runPlus = runPlus;
+    }
+
+    public void setRunTimes(double runTimes) {
+        this.runTimes = runTimes;
     }
 }

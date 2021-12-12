@@ -57,6 +57,18 @@ public class PowerCard implements Card{
                     }
                 }
                 break;
+            case 31:
+                System.out.println("\nswitch card id: 31");
+                break;
+            case 32:
+                System.out.println("\nswitch card id: 32");
+                break;
+            case 33:
+                System.out.println("\nswitch card id: 33");
+                break;
+            case 34:
+                System.out.println("\nswitch card id: 34");
+                break;
             default:
                 System.out.println("\ndefault case");
                 break;
