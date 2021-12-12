@@ -138,8 +138,10 @@ public class PlayerController implements Runnable  {
 
     public void onPickCard(Player player){
         for(int i=0; i < pickCard.length; i++){
-        if (player.getPosition() == pickCard[i] && player.getPickCardHistory()[i] != 0){
-                System.out.println("id: " + player.getID() + " Pick card");
+            if (player.getPickCardHistory()[i] == 0){
+                System.out.println("id: " + player.getID() + " already been here");
+            } else if (player.getPosition() == pickCard[i]){
+                 System.out.println("id: " + player.getID() + " Pick new card");
                 player.getPickCardHistory()[i] = 0;
             }
         }
