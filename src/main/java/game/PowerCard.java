@@ -57,6 +57,10 @@ public class PowerCard implements Card{
                     }
                 }
                 break;
+            case 21: case 22: case 23: case 24:
+                System.out.println("\nswitch card id: " + cardID);
+                controller.setTrapTiles(new TrapTile(player, cardID));
+                break;
             case 31:
                 System.out.println("\nswitch card id: 31");
                 needTarget = 31;
