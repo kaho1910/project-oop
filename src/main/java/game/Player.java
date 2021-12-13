@@ -2,6 +2,8 @@ package game;
 
 import javafx.animation.TranslateTransition;
 import javafx.scene.image.Image;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
@@ -31,6 +33,9 @@ public class Player extends Rectangle {
 
     private Image img;
     private ImagePattern imgPattern;
+
+    private MediaPlayer mediaPlayer;
+    private Media media;
 
     public Player(int id, PlayerController controller) {
         this.ID = id;
@@ -117,12 +122,18 @@ public class Player extends Rectangle {
                 try {
                     //System.out.println(this.getId());
                     while (threadRun | (k % 3) != 2) {
+                        media = new Media(getClass().getResource("/game/sound/map%d.mp3").toExternalForm());
+                        mediaPlayer = new MediaPlayer(media);
+                        mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
+                        mediaPlayer.play();
+
                         img = new Image(getClass().getResourceAsStream("/img/sprite/" + ID + "_" + (k % 3 + 1) + ".png"));
                         imgPattern = new ImagePattern(img);
                         setFill(imgPattern);
                         Thread.sleep(250);
                         k++;
                     }
+                    mediaPlayer.stop();
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }

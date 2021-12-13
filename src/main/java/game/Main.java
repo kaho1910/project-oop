@@ -155,6 +155,11 @@ public class Main extends Application {
         primaryStage.setScene(sceneMainMenu);
         primaryStage.show();
 
+        media = new Media(getClass().getResource("/sound/BGM.mp3").toExternalForm());
+        mediaPlayer = new MediaPlayer(media);
+        mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
+        mediaPlayer.play();
+
         info = new Info("How to play");
         info.getMainStage().close();
 
@@ -199,7 +204,9 @@ public class Main extends Application {
 
                             selector.getPopUpStage().close();
 
-                            media = new Media(getClass().getResource(String.format("/game/sound/map%d.mp3", mapSelected)).toExternalForm());
+                            mediaPlayer.stop();
+
+                            media = new Media(getClass().getResource(String.format("/sound/map%d.mp3", mapSelected)).toExternalForm());
                             mediaPlayer = new MediaPlayer(media);
                             mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
                             mediaPlayer.play();

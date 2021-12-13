@@ -5,18 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0ca7bf75-45b4-4a3c-ab30-c8b2c9d260a8" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_openjfx_javafx_media_18_ea_8.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_openjfx_javafx_media_win_18_ea_8.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Project-OOP.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Project-OOP.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/game/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/game/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/game/PlayerController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/game/PlayerController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/game/hello-view.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/game/projectoop/hello-view.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/game/Main$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/game/Main$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/game/Main$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/game/Main$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/game/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/game/Player.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/game/Main$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/game/Main$3.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/game/Main$4$1$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/game/Main$4$1$1.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/game/Main$4$1$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/game/Main$4$1$2.class" afterDir="false" />
@@ -28,12 +19,8 @@
       <change beforePath="$PROJECT_DIR$/target/classes/game/Main$6.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/game/Main$6.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/game/Main$7.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/game/Main$7.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/game/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/game/Main.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/game/PlayerController$1$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/game/PlayerController$1$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/game/PlayerController$1$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/game/PlayerController$1$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/game/PlayerController$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/game/PlayerController$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/game/PlayerController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/game/PlayerController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/game/TrapTile.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/game/TrapTile.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/module-info.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/module-info.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/game/Player$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/game/Player$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/game/Player.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/game/Player.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -100,7 +87,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1639403788554</updated>
-      <workItem from="1639403792612" duration="6671000" />
+      <workItem from="1639403792612" duration="7473000" />
     </task>
     <servers />
   </component>
