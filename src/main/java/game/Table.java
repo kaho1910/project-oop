@@ -2,7 +2,11 @@ package game;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.geometry.Insets;
 import javafx.scene.control.Button;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.StackPane;
 import javafx.scene.image.*;
 
@@ -38,6 +42,7 @@ public class Table {
         this.player = player;
         isBlackGlass = "";
         layout = new StackPane();
+        layout.setBackground(new Background(new BackgroundFill(Color.web("#ffffff"), CornerRadii.EMPTY, Insets.EMPTY)));
         diceButton = new Button();
         player_frame = new Rectangle();
         inner_frame = new Rectangle();
