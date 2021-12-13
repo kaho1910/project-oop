@@ -59,10 +59,10 @@ public class Table {
         im1 = new Image(getClass().getResourceAsStream("/img/blog.png"));
         player_frame.setFill(new ImagePattern(im1));
         //inner
-        inner_frame.setWidth(120);
-        inner_frame.setHeight(120);
-        inner_frame.setTranslateX(0);
-        inner_frame.setTranslateY(-99);
+        inner_frame.setWidth(147);
+        inner_frame.setHeight(147);
+        inner_frame.setTranslateX(-0);
+        inner_frame.setTranslateY(-100);
 
         im2 = new Image(getClass().getResourceAsStream(String.format("/img/characters/%d-%s%s.png", id, "normal", isBlackGlass)));
 
