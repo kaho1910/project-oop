@@ -41,12 +41,15 @@ public class PowerCard implements Card{
     }
 
     public void action(){
+        String emotion = "normal";
         powerCrisis = false;
 //        switch แยก action ของแต่ละ ID
+        player.getPlayerTable().updateEmotion("negative");
         switch (this.getCardID()){
             case 11:
                 System.out.println("\nswitch card id: 11");
                 plsDisposeMe = true;
+                emotion = "negative";
                 break;
             case 12:
                 System.out.println("\nswitch card id: 12");
@@ -73,26 +76,32 @@ public class PowerCard implements Card{
             case 21: case 22: case 23: case 24:
                 System.out.println("\nswitch card id: " + cardID);
                 controller.setTrapTiles(new TrapTile(player, controller, cardID));
+                emotion = "positive";
                 break;
             case 31:
                 System.out.println("\nswitch card id: 31");
                 needTarget = 31;
+                emotion = "positive";
                 break;
             case 32:
                 System.out.println("\nswitch card id: 32");
                 needTarget = 32;
+                emotion = "positive";
                 break;
             case 33:
                 System.out.println("\nswitch card id: 33");
                 needTarget = 33;
+                emotion = "positive";
                 break;
             case 34:
                 System.out.println("\nswitch card id: 34");
                 needTarget = 34;
+                emotion = "positive";
                 break;
             case 41:
                 System.out.println("\nswitch card id: 41");
                 player.setRunPlus(1);
+                emotion = "positive";
                 break;
             case 42:
                 System.out.println("\nswitch card id: 42");
@@ -116,6 +125,8 @@ public class PowerCard implements Card{
                 System.out.println("\nswitch default case");
                 break;
         }
+
+        player.getPlayerTable().updateEmotion(emotion);
 
         if (!powerCrisis & (cardID == 13 | cardID == 14)){
             plsDisposeMe = true;
@@ -167,6 +178,7 @@ public class PowerCard implements Card{
                                 player.setCards(new PowerCard(controller, player, false, true), i);
                             }
                         }
+                        player.getPlayerTable().updateEmotion("positive");
                         player.subtractNumCardOnHand();
                     } else {
                         System.out.println("use card: " + cardID);
@@ -196,6 +208,8 @@ public class PowerCard implements Card{
                             needTarget = 0;
                         }
 
+                        String targetEmotion = "negative";
+
                         switch (needTarget) {
                             case 13:
                             case 14:
@@ -217,8 +231,11 @@ public class PowerCard implements Card{
                                 break;
                             default:
                                 System.out.println("Player " + targetPlayer.getID() + " is protected by Ohm-angel Card");
+                                targetEmotion = "positive";
+                                player.getPlayerTable().updateEmotion("negative");
                                 break;
                         }
+                        targetPlayer.getPlayerTable().updateEmotion(targetEmotion);
                     }
 
                 } else {
