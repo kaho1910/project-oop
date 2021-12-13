@@ -148,6 +148,9 @@ public class Main extends Application {
         primaryStage.setScene(sceneMainMenu);
         primaryStage.show();
 
+        info = new Info("How to play");
+        info.getMainStage().close();
+
         primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
             public void handle(WindowEvent e) {
                 Platform.exit();
