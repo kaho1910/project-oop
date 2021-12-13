@@ -106,6 +106,7 @@ public class PowerCard implements Card{
             case 42:
                 System.out.println("\nswitch card id: 42");
                 player.setRunPlus(-1);
+                emotion = "negative";
                 break;
             case 43:
                 System.out.println("\nswitch card id: 43");
