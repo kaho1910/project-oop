@@ -181,7 +181,7 @@ public class PlayerController implements Runnable  {
 
     public void onTrap(Player player){
         for (int i=0; i < numTrapTiles; i++){
-            if (player.getPosition() == trapTiles[i].getTileNum() & !trapTiles[i].isUsed()){
+            if (player.getPosition() == trapTiles[i].getTileNum() & !trapTiles[i].isUsed() & player.getID() != trapTiles[i].getFromPlayer().getID()){
                 trapTiles[i].action(player);
             }
         }

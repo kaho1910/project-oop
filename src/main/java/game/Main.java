@@ -27,7 +27,7 @@ public class Main extends Application {
     private static final int TileSize = 80;
     private static final int Width = 10;
     private static final int Height = 10;
-    private static final int offSetX = 400;
+    private static final int offSetX = TileSize * Width / 2;
     private static final int offSetY = 80;
     private PlayerController playerController;
     private Player[] players;
@@ -99,8 +99,8 @@ public class Main extends Application {
         Image img = new Image(getClass().getResourceAsStream(String.format("/img/map/map%d.png", mapSelected)));
         ImageView bgImg = new ImageView(img);
 //        bgImg.setImage(img);
-        bgImg.setFitHeight(800);
-        bgImg.setFitWidth(800);
+        bgImg.setFitHeight(Height * TileSize);
+        bgImg.setFitWidth(Width * TileSize);
         bgImg.setTranslateX(offSetX);
         bgImg.setTranslateY(offSetY);
         groupMap.getChildren().add(bgImg);
@@ -111,9 +111,9 @@ public class Main extends Application {
         for(int i=0; i < playerNum; i++){
             playerTable = players[i].getPlayerTable();
             pane = playerTable.getLayout();
-            pane.setPrefSize(400, 400);
-            pane.setTranslateX((i % 2) * 1200);
-            pane.setTranslateY(i > 1 ? 480 : 80);
+            pane.setPrefSize(Width * TileSize / 2, Height * TileSize / 2);
+            pane.setTranslateX((i % 2) * Width * TileSize / 2 * 3);
+            pane.setTranslateY(i > 1 ?  Width * TileSize / 2 + 80 : 80);
             groupMap.getChildren().add(pane);
         }
 
