@@ -18,11 +18,11 @@ public class PowerCard implements Card{
         this.controller = controller;
         this.player = player;
         this.cardID = cardID;
-        if (cardID == 0){
-            this.cardUrl = "";
-        } else {
+//        if (cardID == 0){
+//            this.cardUrl = "";
+//        } else {
             this.cardUrl = String.format("/img/cards/%d.jpg", this.cardID);
-        }
+//        }
         this.thisCard = this;
         this.needTarget = 0;
     }
@@ -252,7 +252,7 @@ public class PowerCard implements Card{
         }
 
 //        PowerCard test return HERE
-        return rand.nextInt(4) + 31;
+        return rand.nextInt(4) + 21;
 
 //        Production return HERE
 //        return ans;

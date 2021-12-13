@@ -29,16 +29,16 @@ public class TrapTile {
         switch (trapID){
             case 1:
                 System.out.println("switch trap id: 1");
-                int cardIDFromPlayer = -1;
+                int cardIDFromPlayer = 0;
                 int fromPlayerIndex = 0;
-                int cardIDFromTarget = -1;
+                int cardIDFromTarget = 0;
                 int targetPlayerIndex = 0;
                 if (fromPlayer.cardCount() != 0 & targetPlayer.cardCount() != 0){
-                    while (cardIDFromPlayer != 0){
+                    while (cardIDFromPlayer == 0){
                         fromPlayerIndex = random.nextInt(3);
                         cardIDFromPlayer = fromPlayer.getCards()[fromPlayerIndex].getCardID();
                     }
-                    while (cardIDFromTarget != 0){
+                    while (cardIDFromTarget == 0){
                         targetPlayerIndex = random.nextInt(3);
                         cardIDFromTarget = targetPlayer.getCards()[targetPlayerIndex].getCardID();
                     }
@@ -51,10 +51,10 @@ public class TrapTile {
                 break;
             case 2:
                 System.out.println("switch trap id: 2");
-                int cardID = -1;
+                int cardID = 0;
                 int cardIndex = 0;
                 if (targetPlayer.cardCount() != 0){
-                    while (cardID != 0){
+                    while (cardID == 0){
                         cardIndex = random.nextInt(3);
                         cardID = targetPlayer.getCards()[cardIndex].getCardID();
                     }
