@@ -12,6 +12,8 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
@@ -20,6 +22,8 @@ import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
+
+import java.nio.file.Paths;
 
 public class Main extends Application {
     private static final int playerNum = 4;
@@ -41,6 +45,9 @@ public class Main extends Application {
     private String[] txtBtn = {"Start", "How to play", "Cards", "Developers"};
     private Info info;
     private Text teams;
+
+    private MediaPlayer mediaPlayer;
+    private Media media;
 
     private Parent mainMenu() {
         StackPane root = new StackPane();
@@ -191,6 +198,11 @@ public class Main extends Application {
                             }
 
                             selector.getPopUpStage().close();
+
+                            media = new Media(getClass().getResource(String.format("/game/sound/map%d.mp3", mapSelected)).toExternalForm());
+                            mediaPlayer = new MediaPlayer(media);
+                            mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
+                            mediaPlayer.play();
 
                             Scene sceneGame = new Scene(mapGenerator(mapSelected));
                             primaryStage.setScene(sceneGame);
