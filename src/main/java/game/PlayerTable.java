@@ -196,7 +196,7 @@ public class PlayerTable {
                 try {
                     im2 = new Image(getClass().getResourceAsStream(String.format("/img/characters/%d-%s%s.png", ID, feedback, isBlackGlass)));
                     inner_frame.setFill(new ImagePattern(im2));
-                    Thread.sleep(2500);
+                    Thread.sleep(4500);
                     im2 = new Image(getClass().getResourceAsStream(String.format("/img/characters/%d-%s%s.png", ID, "normal", isBlackGlass)));
                     inner_frame.setFill(new ImagePattern(im2));
                 } catch (InterruptedException e) {

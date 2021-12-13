@@ -194,7 +194,7 @@ public class PowerCard implements Card{
                     boolean isAngeled = false;
 
                     if (needTarget != 0) {
-                        System.out.println("Target: " + target);
+                        System.out.println("Target: " + (target + 1));
                         Player targetPlayer = controller.getPlayers()[target];
 
                         for (int i=0; i < 3; i++){
@@ -210,6 +210,7 @@ public class PowerCard implements Card{
                         }
 
                         String targetEmotion = "negative";
+                        String playerEmotion = "positive";
 
                         switch (needTarget) {
                             case 13:
@@ -219,6 +220,8 @@ public class PowerCard implements Card{
                             case 31:
                                 targetPlayer.setPosition(2);
                                 controller.endTurnChecker(targetPlayer);
+                                targetEmotion = "positive";
+                                playerEmotion = "negative";
                                 break;
                             case 32:
                                 targetPlayer.setPosition(-2);
@@ -226,6 +229,8 @@ public class PowerCard implements Card{
                                 break;
                             case 33:
                                 targetPlayer.setRunTimes(2);
+                                targetEmotion = "positive";
+                                playerEmotion = "negative";
                                 break;
                             case 34:
                                 targetPlayer.setRunTimes(0.5);
@@ -233,9 +238,10 @@ public class PowerCard implements Card{
                             default:
                                 System.out.println("Player " + targetPlayer.getID() + " is protected by Ohm-angel Card");
                                 targetEmotion = "positive";
-                                player.getPlayerTable().updateEmotion("negative");
+                                playerEmotion = "negative";
                                 break;
                         }
+                        player.getPlayerTable().updateEmotion(playerEmotion);
                         targetPlayer.getPlayerTable().updateEmotion(targetEmotion);
                     }
 
@@ -271,7 +277,7 @@ public class PowerCard implements Card{
 
 //        PowerCard test return HERE
 
-        //return rand.nextInt(4) + 21;
+//        return rand.nextInt(2) + 41;
 
 
 //        Production return HERE

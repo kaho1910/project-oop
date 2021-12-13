@@ -96,18 +96,18 @@ public class Player extends Rectangle {
         boolean gHundred = false;
         int temp = 0;
 
-        if (runTimes != 1 & runPlus != 0){
-            System.out.println("\nrun : (" + run + " * " + runTimes + ") + " + runPlus);
-        } else if (runTimes != 1) {
-            System.out.println("\nrun : " + run + " * " + runTimes);
-        } else if (runPlus != 0){
-            System.out.println("\nrun : " + run + " + " + runPlus);
+        if (this.runTimes != 1 & this.runPlus != 0){
+            System.out.println("\nrun : (" + run + " * " + this.runTimes + ") + " + this.runPlus);
+        } else if (this.runTimes != 1) {
+            System.out.println("\nrun : " + run + " * " + this.runTimes);
+        } else if (this.runPlus != 0){
+            System.out.println("\nrun : " + run + " + " + this.runPlus);
         } else {
             System.out.println("\nrun : " + run);
         }
-        run = (int)(run * runTimes) + runPlus;
-        runTimes = 1;
-        runPlus = 0;
+        run =( (int)(run * this.runTimes)) + this.runPlus;
+        this.runTimes = 1;
+        this.runPlus = 0;
 
         threadRun = true;
         Thread thread = new Thread(){
@@ -205,7 +205,7 @@ public class Player extends Rectangle {
     }
 
     public void setRunTimes(double runTimes) {
-        this.runTimes = runTimes;
+        this.runTimes *= runTimes;
     }
 
     public void setRunPlus(int runPlus) {

@@ -25,63 +25,87 @@ public class TrapTile {
         this.targetPlayer = targetPlayer;
 
         System.out.println("\nTrap triggered\nid: " + targetPlayer.getID() + " tileNum: " + tileNum + "\nfrom id: " + fromPlayer.getID());
-//        switch HERE
-        switch (trapID){
-            case 1:
-                System.out.println("switch trap id: 1");
-                int cardIDFromPlayer = 0;
-                int fromPlayerIndex = 0;
-                int cardIDFromTarget = 0;
-                int targetPlayerIndex = 0;
-                if (fromPlayer.cardCount() != 0 & targetPlayer.cardCount() != 0){
-                    while (cardIDFromPlayer == 0){
-                        fromPlayerIndex = random.nextInt(3);
-                        cardIDFromPlayer = fromPlayer.getCards()[fromPlayerIndex].getCardID();
-                    }
-                    while (cardIDFromTarget == 0){
-                        targetPlayerIndex = random.nextInt(3);
-                        cardIDFromTarget = targetPlayer.getCards()[targetPlayerIndex].getCardID();
-                    }
-                    fromPlayer.setCards(new PowerCard(controller, fromPlayer, cardIDFromTarget), fromPlayerIndex);
-                    targetPlayer.setCards(new PowerCard(controller, targetPlayer, cardIDFromPlayer), targetPlayerIndex);
-                } else {
-                    int playerNoCard = fromPlayer.cardCount() == 0 ? fromPlayer.getID() : targetPlayer.getID();
-                    System.out.println("id: " + playerNoCard + " has no card");
-                }
+
+        boolean isAngeled = false;
+        for (int i=0; i < 3; i++){
+            if (targetPlayer.getCards()[i].getCardID() == 44){
+                targetPlayer.getCards()[i].useAngelCard();
+                isAngeled = true;
                 break;
-            case 2:
-                System.out.println("switch trap id: 2");
-                int cardID = 0;
-                int cardIndex = 0;
-                if (targetPlayer.cardCount() != 0){
-                    while (cardID == 0){
-                        cardIndex = random.nextInt(3);
-                        cardID = targetPlayer.getCards()[cardIndex].getCardID();
+            }
+        }
+
+        String playerEmotion = "positive";
+        String targetEmotion = "negative";
+
+        if (isAngeled){
+            System.out.println("Player " + targetPlayer.getID() + " is protected by Ohm-angel Card");
+            playerEmotion = "negative";
+            targetEmotion = "positive";
+        } else {
+            switch (trapID) {
+                case 1:
+                    System.out.println("switch trap id: 1");
+                    int cardIDFromPlayer = 0;
+                    int fromPlayerIndex = 0;
+                    int cardIDFromTarget = 0;
+                    int targetPlayerIndex = 0;
+                    if (fromPlayer.cardCount() != 0 & targetPlayer.cardCount() != 0) {
+                        while (cardIDFromPlayer == 0) {
+                            fromPlayerIndex = random.nextInt(3);
+                            cardIDFromPlayer = fromPlayer.getCards()[fromPlayerIndex].getCardID();
+                        }
+                        while (cardIDFromTarget == 0) {
+                            targetPlayerIndex = random.nextInt(3);
+                            cardIDFromTarget = targetPlayer.getCards()[targetPlayerIndex].getCardID();
+                        }
+                        fromPlayer.setCards(new PowerCard(controller, fromPlayer, cardIDFromTarget), fromPlayerIndex);
+                        targetPlayer.setCards(new PowerCard(controller, targetPlayer, cardIDFromPlayer), targetPlayerIndex);
+                    } else {
+                        playerEmotion = "negative";
+                        targetEmotion = "negative";
+                        int playerNoCard = fromPlayer.cardCount() == 0 ? fromPlayer.getID() : targetPlayer.getID();
+                        System.out.println("id: " + playerNoCard + " has no card");
                     }
-                    targetPlayer.setCards(new PowerCard(controller, targetPlayer, false, true), cardIndex);
-                    if (fromPlayer.cardCount() != 3){
-                        for (int i=0; i < 3; i++){
-                            if (fromPlayer.getCards()[i].getCardID() == 0){
-                                fromPlayer.setCards(new PowerCard(controller, fromPlayer, cardID), i);
-                                break;
+                    break;
+                case 2:
+                    System.out.println("switch trap id: 2");
+                    int cardID = 0;
+                    int cardIndex = 0;
+                    if (targetPlayer.cardCount() != 0) {
+                        while (cardID == 0) {
+                            cardIndex = random.nextInt(3);
+                            cardID = targetPlayer.getCards()[cardIndex].getCardID();
+                        }
+                        targetPlayer.setCards(new PowerCard(controller, targetPlayer, false, true), cardIndex);
+                        if (fromPlayer.cardCount() != 3) {
+                            for (int i = 0; i < 3; i++) {
+                                if (fromPlayer.getCards()[i].getCardID() == 0) {
+                                    fromPlayer.setCards(new PowerCard(controller, fromPlayer, cardID), i);
+                                    break;
+                                }
                             }
+                        } else {
+                            System.out.println("id: " + fromPlayer.getID() + " has no card slot left");
                         }
                     } else {
-                        System.out.println("id: " + fromPlayer.getID() + " has no card slot left");
+                        playerEmotion = "negative";
+                        targetEmotion = "positive";
+                        System.out.println("id: " + targetPlayer.getID() + " has no card");
                     }
-                } else {
-                    System.out.println("id: " + targetPlayer.getID() + " has no card");
-                }
-                break;
-            case 3:
-                System.out.println("switch trap id: 3");
-                targetPlayer.setWillSkip(1);
-                break;
-            case 4:
-                System.out.println("switch trap id: 4");
-                targetPlayer.setPosition(random.nextInt(2) == 0 ? 5 : -5);
-                break;
+                    break;
+                case 3:
+                    System.out.println("switch trap id: 3");
+                    targetPlayer.setWillSkip(1);
+                    break;
+                case 4:
+                    System.out.println("switch trap id: 4");
+                    targetPlayer.setPosition(random.nextInt(2) == 0 ? 5 : -5);
+                    break;
+            }
         }
+        fromPlayer.getPlayerTable().updateEmotion(playerEmotion);
+        targetPlayer.getPlayerTable().updateEmotion(targetEmotion);
         this.used = true;
     }
 
