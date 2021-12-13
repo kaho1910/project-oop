@@ -14,6 +14,8 @@ public class PlayerController implements Runnable  {
     private int[] pickCard;
     private int[] cardPool;
     private int sumCardPool;
+    private TrapTile[] trapTiles;
+    private int numTrapTiles;
     private CardPopup popUp;
     private Image tempImg;
     private PlayerController controller;
@@ -89,6 +91,8 @@ public class PlayerController implements Runnable  {
             }
         }
         this.targetPopup = new TargetPopup(controller);
+        this.trapTiles = new TrapTile[8];
+        this.numTrapTiles = 0;
     }
 
     public void run() {
@@ -175,6 +179,14 @@ public class PlayerController implements Runnable  {
         }
     }
 
+    public void onTrap(Player player){
+        for (int i=0; i < numTrapTiles; i++){
+            if (player.getPosition() == trapTiles[i].getTileNum() & !trapTiles[i].isUsed() & player.getID() != trapTiles[i].getFromPlayer().getID()){
+                trapTiles[i].action(player);
+            }
+        }
+    }
+
     public Player[] getPlayers() {
         return players;
     }
@@ -209,6 +221,7 @@ public class PlayerController implements Runnable  {
 
     public void endTurnChecker(Player player){
         onLadder(player);
+        onTrap(player);
         onPickCard(player);
         if (isLastTurn() & !lastTurnAlert){
             lastTurnAlert = true;
@@ -217,11 +230,19 @@ public class PlayerController implements Runnable  {
     }
 
     public TargetPopup newTargetPopUp(){
-        System.out.println(!targetPopup.equals(null));
-        if (targetPopup.equals(null)){
-            targetPopup.getPopUpStage().close();
-        }
+//        System.out.println(!targetPopup.equals(null));
+//        if (!targetPopup.equals(null)){
+//            targetPopup.getPopUpStage().close();
+//        }
         targetPopup = new TargetPopup(this);
         return targetPopup;
+    }
+
+    public void setTrapTiles(TrapTile trapTiles) {
+        this.trapTiles[numTrapTiles++] = trapTiles;
+    }
+
+    public int getNumTrapTiles() {
+        return numTrapTiles;
     }
 }

@@ -14,6 +14,19 @@ public class PowerCard implements Card{
     private int target;
     private TargetPopup targetPopup;
 
+    public PowerCard(PlayerController controller, Player player, int cardID){
+        this.controller = controller;
+        this.player = player;
+        this.cardID = cardID;
+//        if (cardID == 0){
+//            this.cardUrl = "";
+//        } else {
+            this.cardUrl = String.format("/img/cards/%d.jpg", this.cardID);
+//        }
+        this.thisCard = this;
+        this.needTarget = 0;
+    }
+
     public PowerCard(PlayerController controller, Player player, boolean isInit, boolean isBlank){
         this.controller = controller;
         this.player = player;
@@ -57,6 +70,10 @@ public class PowerCard implements Card{
                     }
                 }
                 break;
+            case 21: case 22: case 23: case 24:
+                System.out.println("\nswitch card id: " + cardID);
+                controller.setTrapTiles(new TrapTile(player, controller, cardID));
+                break;
             case 31:
                 System.out.println("\nswitch card id: 31");
                 needTarget = 31;
@@ -83,20 +100,20 @@ public class PowerCard implements Card{
                 break;
             case 43:
                 System.out.println("\nswitch card id: 43");
-                for (int i=0; i < 3; i++){
-                    if (i != 0) {
-                        player.setCards(new PowerCard(controller, player, false, true), i);
-                    } else {
-                        player.setCards(new PowerCard(controller, player, false, false), i);
-                    }
+                if (player.getCards()[0].getCardID() == 11){
+                    player.setCards(new PowerCard(controller, player, false, false), 1);
+                } else {
+                    player.setCards(new PowerCard(controller, player, false, false), 0);
+                    player.setCards(new PowerCard(controller, player, false, false), 1);
                 }
+                player.setCards(new PowerCard(controller, player, false, true), 2);
                 break;
             case 44:
                 System.out.println("\nswitch card id: 44");
                 plsDisposeMe = true;
                 break;
             default:
-                System.out.println("\ndefault case");
+                System.out.println("\nswitch default case");
                 break;
         }
 
@@ -235,7 +252,9 @@ public class PowerCard implements Card{
         }
 
 //        PowerCard test return HERE
-//        return rand.nextInt(2) + 43;
+
+        //return rand.nextInt(4) + 21;
+
 
 //        Production return HERE
         return ans;
