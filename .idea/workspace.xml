@@ -6,8 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="0ca7bf75-45b4-4a3c-ab30-c8b2c9d260a8" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/game/MapSelector.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/game/MapSelector.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/game/Player$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/game/Player$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/game/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/game/Player.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/game/MapSelector.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/game/MapSelector.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/game/Player.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/game/Player.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -61,7 +61,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1639403788554</updated>
-      <workItem from="1639403792612" duration="2572000" />
+      <workItem from="1639403792612" duration="2848000" />
     </task>
     <servers />
   </component>

@@ -27,6 +27,7 @@ public class Player extends Rectangle {
     private int runPlus;
 
     private boolean threadRun;
+    private TranslateTransition animate;
 
     private Image img;
     private ImagePattern imgPattern;
@@ -77,7 +78,7 @@ public class Player extends Rectangle {
     public void moveTo(int pos) {
         this.position = pos;
         int[] coordinate = calculateXY();
-        TranslateTransition animate = new TranslateTransition(Duration.millis(400), this);
+        animate = new TranslateTransition(Duration.millis(400), this);
         animate.setToX(coordinate[0]);
         animate.setToY(coordinate[1]);
         animate.setAutoReverse(false);
