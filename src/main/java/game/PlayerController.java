@@ -220,8 +220,8 @@ public class PlayerController implements Runnable  {
     }
 
     public void endTurnChecker(Player player){
-        onTrap(player);
         onLadder(player);
+        onTrap(player);
         onPickCard(player);
         if (isLastTurn() & !lastTurnAlert){
             lastTurnAlert = true;
@@ -230,10 +230,10 @@ public class PlayerController implements Runnable  {
     }
 
     public TargetPopup newTargetPopUp(){
-        System.out.println(!targetPopup.equals(null));
-        if (targetPopup.equals(null)){
-            targetPopup.getPopUpStage().close();
-        }
+//        System.out.println(!targetPopup.equals(null));
+//        if (!targetPopup.equals(null)){
+//            targetPopup.getPopUpStage().close();
+//        }
         targetPopup = new TargetPopup(this);
         return targetPopup;
     }
