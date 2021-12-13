@@ -8,7 +8,6 @@ import javafx.scene.Cursor;
 import javafx.scene.Group;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -38,7 +37,9 @@ public class Main extends Application {
 
     private Scene sceneMainMenu;
     private MapSelector selector;
-    private Text startBtn;
+    private Text[] mainMenuBtn;
+    private String[] txtBtn = {"Start", "How to play", "Cards", "Developers"};
+    private Info info;
 
     private Parent mainMenu(){
         StackPane root = new StackPane();
@@ -52,33 +53,47 @@ public class Main extends Application {
         rect.setWidth(Width * TileSize + offSetX * 2);
         rect.setHeight(Height * TileSize + offSetY * 2);
 
-//        Text gameTitle = new Text();
-//        gameTitle.setText("Snake And Ladder");
-//        gameTitle.setFont(Font.font(60));
+        mainMenuBtn = new Text[4];
+        for (int i=0; i < mainMenuBtn.length; i++){
+            mainMenuBtn[i] = new Text(txtBtn[i]);
+            mainMenuBtn[i].setFont(Font.font(null, FontWeight.BOLD, 72));
+            mainMenuBtn[i].setFill(Color.WHITE);
+            mainMenuBtn[i].setTranslateX(200);
+            mainMenuBtn[i].setTranslateY(470 + i * 110);
 
-//        startBtn = new Button("Start");
-//        startBtn = new Button("Start");
-        startBtn = new Text("Start");
-        startBtn.setFont(Font.font(null, FontWeight.BOLD, 72));
-        startBtn.setFill(Color.WHITE);
-        startBtn.setTranslateX(300);
-        startBtn.setTranslateY(500);
+            mainMenuBtn[i].setOnMouseEntered(new EventHandler<MouseEvent>() {
+                public void handle(MouseEvent mouseEvent) {
+                    sceneMainMenu.setCursor(Cursor.HAND);
+                }
+            });
 
-        Button devIntro = new Button("developer");
-//
-        startBtn.setOnMouseEntered(new EventHandler<MouseEvent>() {
-            public void handle(MouseEvent mouseEvent) {
-                sceneMainMenu.setCursor(Cursor.HAND);
-            }
-        });
+            mainMenuBtn[i].setOnMouseExited(new EventHandler<MouseEvent>() {
+                public void handle(MouseEvent mouseEvent) {
+                    sceneMainMenu.setCursor(Cursor.DEFAULT);
+                }
+            });
+        }
 
-        startBtn.setOnMouseExited(new EventHandler<MouseEvent>() {
-            public void handle(MouseEvent mouseEvent) {
-                sceneMainMenu.setCursor(Cursor.DEFAULT);
-            }
-        });
+        Image title = new Image(getClass().getResourceAsStream("/img/title.png"));
+        ImagePattern titleBox = new ImagePattern(title);
+        Rectangle titleRect = new Rectangle();
+        titleRect.setFill(titleBox);
+        titleRect.setWidth(1105);
+        titleRect.setHeight(123.5);
+        titleRect.setTranslateX(100);
+        titleRect.setTranslateY(130);
 
-        groupMainMenu.getChildren().addAll(rect, startBtn);
+        Image subTitle = new Image(getClass().getResourceAsStream("/img/subtitle.png"));
+        ImagePattern subTitleBox = new ImagePattern(subTitle);
+        Rectangle subTitleRect = new Rectangle();
+        subTitleRect.setFill(subTitleBox);
+        subTitleRect.setWidth(433);
+        subTitleRect.setHeight(61);
+        subTitleRect.setTranslateX(110);
+        subTitleRect.setTranslateY(290);
+
+        groupMainMenu.getChildren().addAll(rect, titleRect, subTitleRect);
+        groupMainMenu.getChildren().addAll(mainMenuBtn);
 
         return root;
     }
@@ -133,13 +148,18 @@ public class Main extends Application {
             }
         });
 
-        startBtn.setOnMouseClicked(new EventHandler<MouseEvent>() {
+        mainMenuBtn[0].setOnMouseClicked(new EventHandler<MouseEvent>() {
             public void handle(MouseEvent mouseEvent) {
                 if (selector != null){
                     selector.getPopUpStage().close();
                 }
                 selector = new MapSelector();
                 selector.display();
+
+                if (info != null){
+                    info.getMainStage().close();
+                }
+
                 for(int i=0; i < selector.getMapNum(); i++){
                     selector.getBtn()[i].setOnAction(new EventHandler<ActionEvent>() {
                         public void handle(ActionEvent actionEvent) {
@@ -206,7 +226,32 @@ public class Main extends Application {
             }
         });
 
+        mainMenuBtn[1].setOnMouseClicked(new EventHandler<MouseEvent>() {
+            public void handle(MouseEvent mouseEvent) {
+                if (info != null){
+                    info.getMainStage().close();
+                }
+                info = new Info(txtBtn[1]);
+            }
+        });
 
+        mainMenuBtn[2].setOnMouseClicked(new EventHandler<MouseEvent>() {
+            public void handle(MouseEvent mouseEvent) {
+                if (info != null){
+                    info.getMainStage().close();
+                }
+                info = new Info(txtBtn[2]);
+            }
+        });
+
+        mainMenuBtn[3].setOnMouseClicked(new EventHandler<MouseEvent>() {
+            public void handle(MouseEvent mouseEvent) {
+                if (info != null){
+                    info.getMainStage().close();
+                }
+                info = new Info(txtBtn[3]);
+            }
+        });
     }
 
     public static void main(String[] args){

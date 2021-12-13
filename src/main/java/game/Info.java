@@ -1,6 +1,5 @@
 package game;
 
-import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.layout.StackPane;
@@ -8,9 +7,19 @@ import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 
-public class Info extends Application {
-
-    public void start(Stage mainStage){
+public class Info {
+    private Stage mainStage;
+    private String checker;
+    public Info(String checker){
+        if (checker.equals("How to play")){
+            checker = "htp";
+        } else if (checker.equals("Cards")){
+            checker = "cardinfo";
+        }
+        else if (checker.equals("Developers")) {
+            checker = "dev";
+        }
+        mainStage = new Stage();
         Rectangle out = new Rectangle();
         Rectangle in = new Rectangle();
         out.setWidth(1080);
@@ -18,7 +27,7 @@ public class Info extends Application {
         in.setWidth(1080);
         in.setHeight(810);
         StackPane panel = new StackPane();
-        Image out_img = new Image(getClass().getResourceAsStream("/img/htp.png"));
+        Image out_img = new Image(getClass().getResourceAsStream("/img/" + checker + ".png"));
         Image in_img = new Image(getClass().getResourceAsStream("/img/4_3.png"));
         in.setFill(new ImagePattern(in_img));
         out.setFill(new ImagePattern(out_img));
@@ -28,9 +37,8 @@ public class Info extends Application {
         mainStage.show();
     }
 
-    public static void main(String[] args) {
-        launch();
+    public Stage getMainStage() {
+        return mainStage;
     }
-
 }
 
