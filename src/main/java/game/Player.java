@@ -19,7 +19,7 @@ public class Player extends Rectangle {
     private final int height = Main.getHeight();
     private final int offSetX = Main.getOffSetX();
     private final int offSetY = Main.getOffSetY();
-    private PlayerTable playerTable;
+    private Table table;
     private int[] pickCardHistory;
     private PlayerController controller;
     private int willSkip;
@@ -38,7 +38,7 @@ public class Player extends Rectangle {
         this.runTimes = 1;
         this.runPlus = 0;
         this.willSkip = 0;
-        for(int i=0; i < cards.length; i++){
+        for (int i = 0; i < cards.length; i++) {
 //            cards[i] = new PowerCard(i * 11);
             if (i < 2) {
                 cards[i] = new PowerCard(controller, this, true, false);
@@ -46,29 +46,29 @@ public class Player extends Rectangle {
                 cards[i] = new PowerCard(controller, this, true, true);
             }
         }
-        playerTable = new PlayerTable(id, this);
+        table = new Table(id, this);
         setHeight(60);
         setWidth(45);
         setFill(Color.TRANSPARENT);
-        img = new Image(getClass().getResourceAsStream(String.format("/img/sprite/%d_2.png",this.getID())));
+        img = new Image(getClass().getResourceAsStream(String.format("/img/sprite/%d_2.png", this.getID())));
         imgPattern = new ImagePattern(img);
         setFill(imgPattern);
 
         initPosition(position);
     }
 
-    private int[] calculateXY(){
+    private int[] calculateXY() {
         int x = (this.position - 1) % width;
         int y = (this.position - 1) / height;
-        if (y % 2 == 1){
+        if (y % 2 == 1) {
             x = width - x - 1;
         }
         x = offSetX + (tileSize * x);
         y = offSetY + (tileSize * (height - 1 - y));
-        return new int[] {x + 18, y + 10};
+        return new int[]{x + 18, y + 10};
     }
 
-    public void initPosition(int pos){
+    public void initPosition(int pos) {
         int[] coordinate = calculateXY();
         setTranslateX(coordinate[0]);
         setTranslateY(coordinate[1]);
@@ -82,7 +82,7 @@ public class Player extends Rectangle {
         animate.setToY(coordinate[1]);
         animate.setAutoReverse(false);
         animate.play();
-        System.out.println("id: " + this.ID + " at [" +  this.position + "]");
+        System.out.println("id: " + this.ID + " at [" + this.position + "]");
 //        System.out.println("x : " + (this.position - 1) % width + ", " + coordinate[0]);
 //        System.out.println("y : " + ((this.position - 1) / height) + ", " + coordinate[1]);
         try {
@@ -92,31 +92,31 @@ public class Player extends Rectangle {
         }
     }
 
-    public void setPosition(int run){
+    public void setPosition(int run) {
         boolean gHundred = false;
         int temp = 0;
 
-        if (this.runTimes != 1 & this.runPlus != 0){
+        if (this.runTimes != 1 & this.runPlus != 0) {
             System.out.println("\nrun : (" + run + " * " + this.runTimes + ") + " + this.runPlus);
         } else if (this.runTimes != 1) {
             System.out.println("\nrun : " + run + " * " + this.runTimes);
-        } else if (this.runPlus != 0){
+        } else if (this.runPlus != 0) {
             System.out.println("\nrun : " + run + " + " + this.runPlus);
         } else {
             System.out.println("\nrun : " + run);
         }
-        run =( (int)(run * this.runTimes)) + this.runPlus;
+        run = ((int) (run * this.runTimes)) + this.runPlus;
         this.runTimes = 1;
         this.runPlus = 0;
 
         threadRun = true;
-        Thread thread = new Thread(){
-            public void run(){
+        Thread thread = new Thread() {
+            public void run() {
                 int k = 0;
-                try{
+                try {
                     //System.out.println(this.getId());
                     while (threadRun | (k % 3) != 2) {
-                        img = new Image(getClass().getResourceAsStream("/img/sprite/"+ID+"_" + (k % 3 + 1) + ".png"));
+                        img = new Image(getClass().getResourceAsStream("/img/sprite/" + ID + "_" + (k % 3 + 1) + ".png"));
                         imgPattern = new ImagePattern(img);
                         setFill(imgPattern);
                         Thread.sleep(250);
@@ -130,7 +130,7 @@ public class Player extends Rectangle {
         thread.start();
 
         if (run > 0) {
-            if (this.position + run > 100){
+            if (this.position + run > 100) {
                 gHundred = true;
                 temp = -((this.position + run) - 100);
                 run += temp;
@@ -139,12 +139,12 @@ public class Player extends Rectangle {
             for (int i = 0; i < run; i++) {
                 moveTo(this.position + 1);
             }
-            if (gHundred){
+            if (gHundred) {
                 setPosition(temp);
             }
         } else {
             for (int i = run; i < 0; i++) {
-                if (this.position <= 1){
+                if (this.position <= 1) {
                     break;
                 }
                 moveTo(this.position - 1);
@@ -180,8 +180,8 @@ public class Player extends Rectangle {
         getPlayerTable().updateCard();
     }
 
-    public PlayerTable getPlayerTable() {
-        return playerTable;
+    public Table getPlayerTable() {
+        return table;
     }
 
     public int getID() {
@@ -212,10 +212,10 @@ public class Player extends Rectangle {
         this.runPlus += runPlus;
     }
 
-    public int cardCount(){
+    public int cardCount() {
         int num = 0;
-        for (int i=0; i < 3; i++){
-            if (getCards()[i].getCardID() != 0){
+        for (int i = 0; i < 3; i++) {
+            if (getCards()[i].getCardID() != 0) {
                 num++;
             }
         }

@@ -36,7 +36,7 @@ public class MapSelector {
     private Stage popUpStage;
     private Scene scene;
 
-    private Parent mapSelect(){
+    private Parent mapSelect() {
         StackPane root = new StackPane();
         root.getChildren().add(group);
         root.setAlignment(Pos.CENTER);
@@ -51,7 +51,7 @@ public class MapSelector {
         Image[] img = new Image[mapNum];
         ImagePattern[] bgImg = new ImagePattern[mapNum];
 
-        for(int i=0; i < mapNum; i++){
+        for (int i = 0; i < mapNum; i++) {
             img[i] = new Image(getClass().getResourceAsStream(String.format("/img/map/preview%d.jpg", i + 1)));
             bgImg[i] = new ImagePattern(img[i]);
         }
@@ -61,7 +61,7 @@ public class MapSelector {
         container.setFitWidth(240);
         container.setFitHeight(42.5);
 
-        for(int i=0; i < mapNum; i++){
+        for (int i = 0; i < mapNum; i++) {
             btn[i] = new Button(mapName[i]);
             btn[i].setFont(Font.font(16));
         }
@@ -121,6 +121,7 @@ public class MapSelector {
 
         return root;
     }
+
     public void display() {
         popUpStage = new Stage();
         scene = new Scene(mapSelect());
@@ -139,7 +140,7 @@ public class MapSelector {
         return btn;
     }
 
-    public static int getMapNum(){
+    public static int getMapNum() {
         return mapNum;
     }
 

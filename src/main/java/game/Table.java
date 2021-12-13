@@ -12,7 +12,7 @@ import javafx.scene.shape.*;
 
 import java.util.Random;
 
-public class PlayerTable {
+public class Table {
     private int cardNumMax = 3;
     private Random random;
     private int k;
@@ -29,8 +29,7 @@ public class PlayerTable {
     private String isBlackGlass;
 
 
-
-    public PlayerTable(int id, Player player) {
+    public Table(int id, Player player) {
         this.ID = id;
         this.player = player;
         isBlackGlass = "";
@@ -76,14 +75,14 @@ public class PlayerTable {
             @Override
             public void handle(ActionEvent event) {
                 diceButton.setDisable(true);
-                Thread thread = new Thread(){
-                    public void run(){
+                Thread thread = new Thread() {
+                    public void run() {
 //                        System.out.println("Dice rolled");
                         setTurn(false);
-                        try{
-                            for (int i = 0;i < 15; i++){
-                                k = random.nextInt(6)+1;
-                                String url = "/img/dice/dice"+(k)+".png";
+                        try {
+                            for (int i = 0; i < 15; i++) {
+                                k = random.nextInt(6) + 1;
+                                String url = "/img/dice/dice" + (k) + ".png";
 //                                System.out.println(url+"-alert");
                                 Image dm = new Image(getClass().getResourceAsStream(url));
                                 dice_frame.setFill(new ImagePattern(dm));
@@ -93,12 +92,13 @@ public class PlayerTable {
                             pressed = true;
                         } catch (InterruptedException e) {
                             e.printStackTrace();
-                        }}
+                        }
+                    }
                 };
                 thread.start();
             }
         });
-        for(int i=0; i < cardNumMax; i++){
+        for (int i = 0; i < cardNumMax; i++) {
             cardFrame[i] = new Rectangle();
             cardFrame[i].setWidth(60);
             cardFrame[i].setHeight(72);
@@ -112,20 +112,20 @@ public class PlayerTable {
             innercardFrame[i].setFill(new ImagePattern(new Image(getClass().getResourceAsStream("/img/cards/frameCard.jpg"))));
         }
         updateCard();
-        layout.getChildren().addAll(player_frame,inner_frame, dice_frame, diceButton);
-        for (Rectangle k:
+        layout.getChildren().addAll(player_frame, inner_frame, dice_frame, diceButton);
+        for (Rectangle k :
                 innercardFrame) {
             layout.getChildren().add(k);
         }
-        for (Rectangle i:
-             cardFrame) {
+        for (Rectangle i :
+                cardFrame) {
             layout.getChildren().add(i);
         }
 
     }
 
-    public void updateCard(){
-        for(int i=0; i < cardNumMax; i++) {
+    public void updateCard() {
+        for (int i = 0; i < cardNumMax; i++) {
             String cardUrl = player.getCards()[i].getCardUrl();
             if (cardUrl.equals("")) {
                 cardFrame[i].setFill(Color.TRANSPARENT);
@@ -151,6 +151,7 @@ public class PlayerTable {
     public Image getIm2() {
         return im2;
     }
+
     public Button getDiceButton() {
         return diceButton;
     }
@@ -187,12 +188,12 @@ public class PlayerTable {
         this.isBlackGlass = isBlackGlass;
     }
 
-    public void updateEmotion(String feedback){
-        if (feedback.equals("normal")){
+    public void updateEmotion(String feedback) {
+        if (feedback.equals("normal")) {
             return;
         }
-        Thread t = new Thread(){
-            public void run(){
+        Thread t = new Thread() {
+            public void run() {
                 try {
                     im2 = new Image(getClass().getResourceAsStream(String.format("/img/characters/%d-%s%s.png", ID, feedback, isBlackGlass)));
                     inner_frame.setFill(new ImagePattern(im2));

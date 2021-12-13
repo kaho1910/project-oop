@@ -42,7 +42,7 @@ public class Main extends Application {
     private Info info;
     private Text teams;
 
-    private Parent mainMenu(){
+    private Parent mainMenu() {
         StackPane root = new StackPane();
         root.getChildren().addAll(groupMainMenu);
         root.setPrefSize(Width * TileSize + offSetX * 2, Height * TileSize + offSetY * 2);
@@ -55,7 +55,7 @@ public class Main extends Application {
         rect.setHeight(Height * TileSize + offSetY * 2);
 
         mainMenuBtn = new Text[4];
-        for (int i=0; i < mainMenuBtn.length; i++){
+        for (int i = 0; i < mainMenuBtn.length; i++) {
             mainMenuBtn[i] = new Text(txtBtn[i]);
             mainMenuBtn[i].setFont(Font.font(null, FontWeight.BOLD, 72));
             mainMenuBtn[i].setFill(Color.WHITE);
@@ -105,7 +105,7 @@ public class Main extends Application {
         return root;
     }
 
-    private Parent mapGenerator(int mapSelected){
+    private Parent mapGenerator(int mapSelected) {
         StackPane root = new StackPane();
         root.getChildren().addAll(groupMap);
         root.setPrefSize(Width * TileSize + offSetX * 2, Height * TileSize + offSetY * 2);
@@ -128,21 +128,21 @@ public class Main extends Application {
         groupMap.getChildren().add(bgImg);
 
         players = playerController.getPlayers();
-        PlayerTable playerTable;
+        Table ptb;
         StackPane pane;
-        for(int i=0; i < playerNum; i++){
-            playerTable = players[i].getPlayerTable();
-            pane = playerTable.getLayout();
+        for (int i = 0; i < playerNum; i++) {
+            ptb = players[i].getPlayerTable();
+            pane = ptb.getLayout();
             pane.setPrefSize(Width * TileSize / 2, Height * TileSize / 2);
             pane.setTranslateX((i % 2) * Width * TileSize / 2 * 3);
-            pane.setTranslateY(i > 1 ?  Width * TileSize / 2 + 80 : 80);
+            pane.setTranslateY(i > 1 ? Width * TileSize / 2 + 80 : 80);
             groupMap.getChildren().add(pane);
         }
 
         return root;
     }
 
-    public void start(Stage primaryStage){
+    public void start(Stage primaryStage) {
         sceneMainMenu = new Scene(mainMenu());
         primaryStage.setTitle("Snakes and Ladders");
         primaryStage.setScene(sceneMainMenu);
@@ -160,27 +160,27 @@ public class Main extends Application {
 
         mainMenuBtn[0].setOnMouseClicked(new EventHandler<MouseEvent>() {
             public void handle(MouseEvent mouseEvent) {
-                if (selector != null){
+                if (selector != null) {
                     selector.getPopUpStage().close();
                 }
                 selector = new MapSelector();
                 selector.display();
 
-                if (!info.equals(null)){
+                if (!info.equals(null)) {
                     info.getMainStage().close();
                 }
 
-                for(int i=0; i < selector.getMapNum(); i++){
+                for (int i = 0; i < selector.getMapNum(); i++) {
                     selector.getBtn()[i].setOnAction(new EventHandler<ActionEvent>() {
                         public void handle(ActionEvent actionEvent) {
                             //                GAME
                             playerController = new PlayerController(cardPool);
                             int mapSelected;
-                            if (actionEvent.getSource().equals(selector.getBtn()[0])){
+                            if (actionEvent.getSource().equals(selector.getBtn()[0])) {
                                 mapSelected = 1;
                                 playerController.setLadder(selector.getMap1Ladder());
                                 playerController.setPickCard(selector.getMap1PickCard());
-                            } else if (actionEvent.getSource().equals(selector.getBtn()[1])){
+                            } else if (actionEvent.getSource().equals(selector.getBtn()[1])) {
                                 mapSelected = 2;
                                 playerController.setLadder(selector.getMap2Ladder());
                                 playerController.setPickCard(selector.getMap2PickCard());
@@ -196,11 +196,11 @@ public class Main extends Application {
                             primaryStage.setScene(sceneGame);
 
                             Player[] players = playerController.getPlayers();
-                            for (Player p:
+                            for (Player p :
                                     players) {
                                 Rectangle[] cardFrames = p.getPlayerTable().getCardFrame();
-                                for (Rectangle cardFrame:
-                                     cardFrames) {
+                                for (Rectangle cardFrame :
+                                        cardFrames) {
                                     cardFrame.setOnMouseEntered(new EventHandler<MouseEvent>() {
                                         public void handle(MouseEvent mouseEvent) {
                                             sceneGame.setCursor(Cursor.HAND);
@@ -238,7 +238,7 @@ public class Main extends Application {
 
         mainMenuBtn[1].setOnMouseClicked(new EventHandler<MouseEvent>() {
             public void handle(MouseEvent mouseEvent) {
-                if (info != null){
+                if (info != null) {
                     info.getMainStage().close();
                 }
                 info = new Info(txtBtn[1]);
@@ -247,7 +247,7 @@ public class Main extends Application {
 
         mainMenuBtn[2].setOnMouseClicked(new EventHandler<MouseEvent>() {
             public void handle(MouseEvent mouseEvent) {
-                if (info != null){
+                if (info != null) {
                     info.getMainStage().close();
                 }
                 info = new Info(txtBtn[2]);
@@ -256,7 +256,7 @@ public class Main extends Application {
 
         mainMenuBtn[3].setOnMouseClicked(new EventHandler<MouseEvent>() {
             public void handle(MouseEvent mouseEvent) {
-                if (info != null){
+                if (info != null) {
                     info.getMainStage().close();
                 }
                 info = new Info(txtBtn[3]);
@@ -264,23 +264,23 @@ public class Main extends Application {
         });
     }
 
-    public static void main(String[] args){
+    public static void main(String[] args) {
         launch(args);
     }
 
-    public static int getPlayerNum(){
+    public static int getPlayerNum() {
         return playerNum;
     }
 
-    public static int getTileSize(){
+    public static int getTileSize() {
         return TileSize;
     }
 
-    public static int getWidth(){
+    public static int getWidth() {
         return Width;
     }
 
-    public static int getHeight(){
+    public static int getHeight() {
         return Height;
     }
 

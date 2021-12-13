@@ -6,7 +6,7 @@ import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.Rectangle;
 
-public class PlayerController implements Runnable  {
+public class PlayerController implements Runnable {
     private int playerNum = Main.getPlayerNum();
     private Player[] players;
     private boolean lastTurn = false;
@@ -24,26 +24,27 @@ public class PlayerController implements Runnable  {
 
     private Button useCardBtn;
 
-    public PlayerController(int[] cardPool){
+    public PlayerController(int[] cardPool) {
         controller = this;
         this.cardPool = cardPool;
-        for (int i:
-             cardPool) {
+        for (int i :
+                cardPool) {
             sumCardPool += i;
         }
         players = new Player[playerNum];
-        for(int i=0; i < playerNum; i++){
+        for (int i = 0; i < playerNum; i++) {
             players[i] = new Player(i + 1, this);
 
             Rectangle[] cardFrame = players[i].getPlayerTable().getCardFrame();
-            for(int j=0; j < players[i].getPlayerTable().getCardNumMax(); j++){
+            for (int j = 0; j < players[i].getPlayerTable().getCardNumMax(); j++) {
                 cardFrame[j].setOnMouseClicked(new EventHandler<MouseEvent>() {
                     int pNum, cNum;
+
                     public void handle(MouseEvent mouseEvent) {
 //                        System.out.printlnprintln(mouseEvent.getSource());
-                        for(int m=0; m < players.length; m++){
-                            for(int k=0; k < players[m].getPlayerTable().getCardNumMax(); k++){
-                                if (mouseEvent.getSource().equals(players[m].getPlayerTable().getCardFrame()[k])){
+                        for (int m = 0; m < players.length; m++) {
+                            for (int k = 0; k < players[m].getPlayerTable().getCardNumMax(); k++) {
+                                if (mouseEvent.getSource().equals(players[m].getPlayerTable().getCardFrame()[k])) {
                                     pNum = m;
                                     cNum = k;
                                 }
@@ -51,7 +52,7 @@ public class PlayerController implements Runnable  {
                         }
 //                        System.out.println(pNum + " " + cNum);
                         tempImg = players[pNum].getPlayerTable().getCardImg(cNum);
-                        if (popUp != null){
+                        if (popUp != null) {
                             popUp.setFlag(true);
                             popUp.getPopUpStage().close();
                         }
@@ -72,11 +73,11 @@ public class PlayerController implements Runnable  {
                                     popUp.setFlag(true);
                                 }
                             });
-                            Thread newThread = new Thread(){
+                            Thread newThread = new Thread() {
                                 public void run() {
-                                    while (!popUp.isFlag()){
+                                    while (!popUp.isFlag()) {
                                         System.out.print(""); //ห้ามลบ
-                                        if (players[pNum].getPlayerTable().isTurn()){
+                                        if (players[pNum].getPlayerTable().isTurn()) {
                                             useCardBtn.setDisable(false);
                                         } else {
                                             useCardBtn.setDisable(true);
@@ -98,12 +99,12 @@ public class PlayerController implements Runnable  {
     public void run() {
         lastTurnAlert = false;
         String playerAtGoal = new String();
-        for (int i=0; i < playerNum; i++){
+        for (int i = 0; i < playerNum; i++) {
             players[i].setPickCardHistory(pickCard);
         }
-        while (!isLastTurn()){
-            for(int i=0; i < playerNum; i++){
-                if (players[i].getWillSkip() != 0){
+        while (!isLastTurn()) {
+            for (int i = 0; i < playerNum; i++) {
+                if (players[i].getWillSkip() != 0) {
                     players[i].setWillSkip(players[i].getWillSkip() - 1);
                     continue;
                 }
@@ -135,8 +136,8 @@ public class PlayerController implements Runnable  {
                 endTurnChecker(players[i]);
             }
         }
-        for(int i=0; i < players.length; i++){
-            if (players[i].getPosition() == 100){
+        for (int i = 0; i < players.length; i++) {
+            if (players[i].getPosition() == 100) {
                 playerAtGoal += "" + players[i].getID() + ", ";
             }
         }
@@ -144,9 +145,9 @@ public class PlayerController implements Runnable  {
         System.out.println("Player(s) ID: " + playerAtGoal.substring(0, playerAtGoal.length() - 2) + " win");
     }
 
-    public void onLadder(Player player){
-        for(int j=0; j < ladder.length; j++){
-            if (player.getPosition() == ladder[j][0]){
+    public void onLadder(Player player) {
+        for (int j = 0; j < ladder.length; j++) {
+            if (player.getPosition() == ladder[j][0]) {
                 player.moveTo(ladder[j][1]);
                 try {
                     Thread.sleep(400);
@@ -157,16 +158,16 @@ public class PlayerController implements Runnable  {
         }
     }
 
-    public void onPickCard(Player player){
+    public void onPickCard(Player player) {
         for (int i = 0; i < pickCard.length; i++) {
             if (player.getPosition() == pickCard[i]) {
                 if (player.getPickCardHistory()[i] == 0) {
                     System.out.println("id: " + player.getID() + " already been here");
                 } else if (player.getNumCardOnHand() == 3) {
                     System.out.println("maximum card on hand");
-                }  else {
-                    for (int j=0; j < 3; j++){
-                        if (player.getCards()[j].getCardID() == 0){
+                } else {
+                    for (int j = 0; j < 3; j++) {
+                        if (player.getCards()[j].getCardID() == 0) {
                             System.out.println("id: " + player.getID() + " Pick new card");
                             player.setCards(new PowerCard(this, player, false, false), j);
                             player.getPickCardHistory()[i] = 0;
@@ -179,9 +180,9 @@ public class PlayerController implements Runnable  {
         }
     }
 
-    public void onTrap(Player player){
-        for (int i=0; i < numTrapTiles; i++){
-            if (player.getPosition() == trapTiles[i].getTileNum() & !trapTiles[i].isUsed() & player.getID() != trapTiles[i].getFromPlayer().getID()){
+    public void onTrap(Player player) {
+        for (int i = 0; i < numTrapTiles; i++) {
+            if (player.getPosition() == trapTiles[i].getTileNum() & !trapTiles[i].isUsed() & player.getID() != trapTiles[i].getFromPlayer().getID()) {
                 trapTiles[i].action(player);
             }
         }
@@ -219,17 +220,17 @@ public class PlayerController implements Runnable  {
         this.cardPool[i] = cardPool;
     }
 
-    public void endTurnChecker(Player player){
+    public void endTurnChecker(Player player) {
         onLadder(player);
         onTrap(player);
         onPickCard(player);
-        if (isLastTurn() & !lastTurnAlert){
+        if (isLastTurn() & !lastTurnAlert) {
             lastTurnAlert = true;
             System.out.println("\nPlayer " + player.getID() + " has TRIGGER Last Turn");
         }
     }
 
-    public TargetPopup newTargetPopUp(){
+    public TargetPopup newTargetPopUp() {
 //        System.out.println(!targetPopup.equals(null));
 //        if (!targetPopup.equals(null)){
 //            targetPopup.getPopUpStage().close();

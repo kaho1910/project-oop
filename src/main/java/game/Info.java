@@ -10,13 +10,13 @@ import javafx.stage.Stage;
 public class Info {
     private Stage mainStage;
     private String checker;
-    public Info(String checker){
-        if (checker.equals("How to play")){
+
+    public Info(String checker) {
+        if (checker.equals("How to play")) {
             checker = "htp";
-        } else if (checker.equals("Cards")){
+        } else if (checker.equals("Cards")) {
             checker = "cardinfo";
-        }
-        else if (checker.equals("Developers")) {
+        } else if (checker.equals("Developers")) {
             checker = "dev";
         }
         mainStage = new Stage();
@@ -32,7 +32,7 @@ public class Info {
         in.setFill(new ImagePattern(in_img));
         out.setFill(new ImagePattern(out_img));
         panel.getChildren().addAll(in, out);
-        Scene scene = new Scene(panel, 1080,810);
+        Scene scene = new Scene(panel, 1080, 810);
         mainStage.setScene(scene);
         mainStage.show();
     }

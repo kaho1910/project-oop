@@ -17,13 +17,13 @@ public class CardPopup {
     private static Button useCardBtn;
     private static boolean flag;
 
-    public CardPopup(){
+    public CardPopup() {
         this.flag = false;
         useCardBtn = new Button("USE THIS CARD");
         useCardBtn.setDisable(true);
     }
 
-    public static void display(Image cardImg){
+    public static void display(Image cardImg) {
         popUpStage = new Stage();
         StackPane card_pane = new StackPane();
         ImageView imgView = new ImageView(cardImg);
@@ -42,7 +42,7 @@ public class CardPopup {
 
 //        card_pane.getChildren().add(useCardBtn);
 
-        Scene scene = new Scene(card_pane, 500,690);
+        Scene scene = new Scene(card_pane, 500, 690);
         popUpStage.setScene(scene);
         popUpStage.show();
 

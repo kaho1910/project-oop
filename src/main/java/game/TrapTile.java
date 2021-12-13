@@ -11,7 +11,7 @@ public class TrapTile {
     private Player targetPlayer;
     private Random random;
 
-    public TrapTile(Player player, PlayerController controller, int trapID){
+    public TrapTile(Player player, PlayerController controller, int trapID) {
         this.fromPlayer = player;
         this.controller = controller;
         this.trapID = trapID % 10;
@@ -21,14 +21,14 @@ public class TrapTile {
         System.out.println("\nTrap is set at " + tileNum + " trapID: " + this.trapID);
     }
 
-    public void action(Player targetPlayer){
+    public void action(Player targetPlayer) {
         this.targetPlayer = targetPlayer;
 
         System.out.println("\nTrap triggered\nid: " + targetPlayer.getID() + " tileNum: " + tileNum + "\nfrom id: " + fromPlayer.getID());
 
         boolean isAngeled = false;
-        for (int i=0; i < 3; i++){
-            if (targetPlayer.getCards()[i].getCardID() == 44){
+        for (int i = 0; i < 3; i++) {
+            if (targetPlayer.getCards()[i].getCardID() == 44) {
                 targetPlayer.getCards()[i].useAngelCard();
                 isAngeled = true;
                 break;
@@ -38,7 +38,7 @@ public class TrapTile {
         String playerEmotion = "positive";
         String targetEmotion = "negative";
 
-        if (isAngeled){
+        if (isAngeled) {
             System.out.println("Player " + targetPlayer.getID() + " is protected by Ohm-angel Card");
             playerEmotion = "negative";
             targetEmotion = "positive";
