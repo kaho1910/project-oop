@@ -7,6 +7,8 @@ import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 
+import java.util.concurrent.TimeUnit;
+
 public class Player extends Rectangle {
     private final int ID;
     private int position = 1;
@@ -84,7 +86,7 @@ public class Player extends Rectangle {
 //        System.out.println("x : " + (this.position - 1) % width + ", " + coordinate[0]);
 //        System.out.println("y : " + ((this.position - 1) / height) + ", " + coordinate[1]);
         try {
-            Thread.sleep(400);
+            TimeUnit.MILLISECONDS.sleep(400);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
