@@ -209,4 +209,14 @@ public class Player extends Rectangle {
     public void setRunPlus(int runPlus) {
         this.runPlus = runPlus;
     }
+
+    public int cardCount(){
+        int num = 0;
+        for (int i=0; i < 3; i++){
+            if (getCards()[i].getCardID() != 0){
+                num++;
+            }
+        }
+        return num;
+    }
 }

@@ -14,6 +14,15 @@ public class PowerCard implements Card{
     private int target;
     private TargetPopup targetPopup;
 
+    public PowerCard(PlayerController controller, Player player, int cardID){
+        this.controller = controller;
+        this.player = player;
+        this.cardID = cardID;
+        this.cardUrl = String.format("/img/cards/%d.jpg", this.cardID);
+        this.thisCard = this;
+        this.needTarget = 0;
+    }
+
     public PowerCard(PlayerController controller, Player player, boolean isInit, boolean isBlank){
         this.controller = controller;
         this.player = player;
@@ -59,7 +68,7 @@ public class PowerCard implements Card{
                 break;
             case 21: case 22: case 23: case 24:
                 System.out.println("\nswitch card id: " + cardID);
-                controller.setTrapTiles(new TrapTile(player, cardID));
+                controller.setTrapTiles(new TrapTile(player, controller, cardID));
                 break;
             case 31:
                 System.out.println("\nswitch card id: 31");
@@ -100,7 +109,7 @@ public class PowerCard implements Card{
                 plsDisposeMe = true;
                 break;
             default:
-                System.out.println("\ndefault case");
+                System.out.println("\nswitch default case");
                 break;
         }
 
@@ -239,10 +248,10 @@ public class PowerCard implements Card{
         }
 
 //        PowerCard test return HERE
-//        return rand.nextInt(2) + 43;
+        return rand.nextInt(4) + 21;
 
 //        Production return HERE
-        return ans;
+//        return ans;
     }
 
     public void useAngelCard(){

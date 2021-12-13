@@ -220,9 +220,9 @@ public class PlayerController implements Runnable  {
     }
 
     public void endTurnChecker(Player player){
+        onTrap(player);
         onLadder(player);
         onPickCard(player);
-        onTrap(player);
         if (isLastTurn() & !lastTurnAlert){
             lastTurnAlert = true;
             System.out.println("\nPlayer " + player.getID() + " has TRIGGER Last Turn");
