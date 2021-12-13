@@ -122,7 +122,7 @@ public class Player extends Rectangle {
                 try {
                     //System.out.println(this.getId());
                     while (threadRun | (k % 3) != 2) {
-                        media = new Media(getClass().getResource("/game/sound/map%d.mp3").toExternalForm());
+                        media = new Media(getClass().getResource("/sound/Walk.mp3").toExternalForm());
                         mediaPlayer = new MediaPlayer(media);
                         mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
                         mediaPlayer.play();

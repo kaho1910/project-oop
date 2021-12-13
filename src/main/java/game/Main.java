@@ -12,6 +12,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
+import javafx.scene.media.AudioClip;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
@@ -54,7 +55,7 @@ public class Main extends Application {
         root.getChildren().addAll(groupMainMenu);
         root.setPrefSize(Width * TileSize + offSetX * 2, Height * TileSize + offSetY * 2);
 
-        Image bg = new Image(getClass().getResourceAsStream("/img/menu.png"));
+        Image bg = new Image(getClass().getResourceAsStream("/img/menu.gif"));
         ImagePattern bgPattern = new ImagePattern(bg);
         Rectangle rect = new Rectangle();
         rect.setFill(bgPattern);
@@ -155,7 +156,7 @@ public class Main extends Application {
         primaryStage.setScene(sceneMainMenu);
         primaryStage.show();
 
-        media = new Media(getClass().getResource("/sound/BGM.mp3").toExternalForm());
+        media = new Media(getClass().getResource("/sound/BGM-LOCO.mp3").toExternalForm());
         mediaPlayer = new MediaPlayer(media);
         mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
         mediaPlayer.play();
@@ -209,6 +210,7 @@ public class Main extends Application {
                             media = new Media(getClass().getResource(String.format("/sound/map%d.mp3", mapSelected)).toExternalForm());
                             mediaPlayer = new MediaPlayer(media);
                             mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
+                            mediaPlayer.setVolume(0.65);
                             mediaPlayer.play();
 
                             Scene sceneGame = new Scene(mapGenerator(mapSelected));

@@ -6,6 +6,8 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.StackPane;
 import javafx.scene.image.*;
 
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.*;
@@ -28,6 +30,8 @@ public class Table {
     private Player player;
     private String isBlackGlass;
 
+    private MediaPlayer mediaPlayer;
+    private Media media;
 
     public Table(int id, Player player) {
         this.ID = id;
@@ -75,6 +79,10 @@ public class Table {
             @Override
             public void handle(ActionEvent event) {
                 diceButton.setDisable(true);
+                media = new Media(getClass().getResource("/sound/Dice.mp3").toExternalForm());
+                mediaPlayer = new MediaPlayer(media);
+                mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
+                mediaPlayer.play();
                 Thread thread = new Thread() {
                     public void run() {
 //                        System.out.println("Dice rolled");
@@ -90,6 +98,7 @@ public class Table {
                             }
                             Thread.sleep(500);
                             pressed = true;
+                            mediaPlayer.stop();
                         } catch (InterruptedException e) {
                             e.printStackTrace();
                         }
