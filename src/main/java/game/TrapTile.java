@@ -92,4 +92,8 @@ public class TrapTile {
     public boolean isUsed() {
         return used;
     }
+
+    public Player getFromPlayer() {
+        return fromPlayer;
+    }
 }
