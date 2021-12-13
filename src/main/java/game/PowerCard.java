@@ -253,7 +253,7 @@ public class PowerCard implements Card{
 
 //        PowerCard test return HERE
 
-//        return rand.nextInt(4) + 21;
+        //return rand.nextInt(4) + 21;
 
 
 //        Production return HERE
