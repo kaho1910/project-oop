@@ -104,7 +104,7 @@ public class PowerCard implements Card{
                     player.setCards(new PowerCard(controller, player, false, false), 1);
                 } else {
                     player.setCards(new PowerCard(controller, player, false, false), 0);
-                    player.setCards(new PowerCard(controller, player, false, false), 1);
+                    player.setCards(new PowerCard(controller, player, false, true), 1);
                 }
                 player.setCards(new PowerCard(controller, player, false, true), 2);
                 break;

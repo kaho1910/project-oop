@@ -163,7 +163,7 @@ public class Main extends Application {
                 selector = new MapSelector();
                 selector.display();
 
-                if (info != null){
+                if (!info.equals(null)){
                     info.getMainStage().close();
                 }
 

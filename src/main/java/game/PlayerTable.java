@@ -127,7 +127,6 @@ public class PlayerTable {
     public void updateCard(){
         for(int i=0; i < cardNumMax; i++) {
             String cardUrl = player.getCards()[i].getCardUrl();
-            System.out.println(cardUrl);
             if (cardUrl.equals("")) {
                 cardFrame[i].setFill(Color.TRANSPARENT);
             } else {
