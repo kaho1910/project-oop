@@ -40,6 +40,7 @@ public class Main extends Application {
     private Text[] mainMenuBtn;
     private String[] txtBtn = {"Start", "How to play", "Cards", "Developers"};
     private Info info;
+    private Text teams;
 
     private Parent mainMenu(){
         StackPane root = new StackPane();
@@ -92,7 +93,13 @@ public class Main extends Application {
         subTitleRect.setTranslateX(110);
         subTitleRect.setTranslateY(290);
 
-        groupMainMenu.getChildren().addAll(rect, titleRect, subTitleRect);
+        teams = new Text("© TEAM OHM 2021");
+        teams.setFont(Font.font(null, FontWeight.BOLD, 26));
+        teams.setFill(Color.WHITE);
+        teams.setTranslateX(200);
+        teams.setTranslateY(890);
+
+        groupMainMenu.getChildren().addAll(rect, titleRect, subTitleRect, teams);
         groupMainMenu.getChildren().addAll(mainMenuBtn);
 
         return root;
