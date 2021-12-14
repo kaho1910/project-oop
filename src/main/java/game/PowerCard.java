@@ -114,9 +114,11 @@ public class PowerCard implements Card {
                 System.out.println("\nswitch card id: 43");
                 if (player.getCards()[0].getCardID() == 11) {
                     player.setCards(new PowerCard(controller, player, false, false), 1);
+                    player.setNumCardOnHand(2);
                 } else {
                     player.setCards(new PowerCard(controller, player, false, false), 0);
                     player.setCards(new PowerCard(controller, player, false, true), 1);
+                    player.setNumCardOnHand(1);
                 }
                 player.setCards(new PowerCard(controller, player, false, true), 2);
                 break;
