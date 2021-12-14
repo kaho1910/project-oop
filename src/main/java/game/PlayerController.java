@@ -159,7 +159,7 @@ public class PlayerController implements Runnable {
         }
         Platform.runLater(new Runnable(){
             public void run() {
-                Info info = new Info(winnerList, thisMain);
+                new Info(winnerList, thisMain);
             }
         });
     }
