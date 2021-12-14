@@ -337,6 +337,18 @@ public class Main extends Application {
         return offSetY;
     }
 
+    public void setMediaPlayer(MediaPlayer mediaPlayer) {
+        this.mediaPlayer = mediaPlayer;
+    }
+
+    public Media getMedia() {
+        return media;
+    }
+
+    public void setMedia(Media media) {
+        this.media = media;
+    }
+
     public MediaPlayer getMediaPlayer() {
         return mediaPlayer;
     }

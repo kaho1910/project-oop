@@ -9,6 +9,8 @@ import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
@@ -48,6 +50,13 @@ public class Info {
     }
 
     public Info(int[] winnerList, Main main){
+        main.getMediaPlayer().stop();
+        main.setMedia(new Media(getClass().getResource("/sound/Victory.mp3").toExternalForm()));
+        main.setMediaPlayer(new MediaPlayer(main.getMedia()));
+        main.getMediaPlayer().setCycleCount(MediaPlayer.INDEFINITE);
+        main.getMediaPlayer().setVolume(0.6);
+        main.getMediaPlayer().play();
+
         int numWinner = winnerList.length;
 
         mainStage = new Stage();
