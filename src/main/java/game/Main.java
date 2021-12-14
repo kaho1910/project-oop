@@ -51,7 +51,10 @@ public class Main extends Application {
     private MediaPlayer mediaPlayer;
     private Media media;
 
-    private Parent mainMenu() {
+    private Main thisMain = this;
+    private Stage primaryStage;
+
+    public Parent mainMenu() {
         StackPane root = new StackPane();
         root.setBackground(new Background(new BackgroundFill(Color.web("#d7d7d7"), CornerRadii.EMPTY, Insets.EMPTY)));
         root.getChildren().addAll(groupMainMenu);
@@ -153,10 +156,17 @@ public class Main extends Application {
     }
 
     public void start(Stage primaryStage) {
+        this.primaryStage = primaryStage;
         sceneMainMenu = new Scene(mainMenu());
-        primaryStage.setTitle("Snakes and Ladders");
-        primaryStage.setScene(sceneMainMenu);
-        primaryStage.show();
+        this.primaryStage.setTitle("Snakes and Ladders");
+        this.primaryStage.show();
+
+        startGame();
+    }
+
+    public void startGame(){
+        this.primaryStage.setScene(sceneMainMenu);
+        this.primaryStage.centerOnScreen();
 
         media = new Media(getClass().getResource("/sound/BGM-LOCO.mp3").toExternalForm());
         mediaPlayer = new MediaPlayer(media);
@@ -166,7 +176,7 @@ public class Main extends Application {
         info = new Info("How to play");
         info.getMainStage().close();
 
-        primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+        this.primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
             public void handle(WindowEvent e) {
                 Platform.exit();
                 System.exit(0);
@@ -189,7 +199,7 @@ public class Main extends Application {
                     selector.getBtn()[i].setOnAction(new EventHandler<ActionEvent>() {
                         public void handle(ActionEvent actionEvent) {
                             //                GAME
-                            playerController = new PlayerController(cardPool);
+                            playerController = new PlayerController(cardPool, thisMain);
                             int mapSelected;
                             if (actionEvent.getSource().equals(selector.getBtn()[0])) {
                                 mapSelected = 1;
@@ -291,6 +301,18 @@ public class Main extends Application {
         launch(args);
     }
 
+    public Stage getPrimaryStage() {
+        return primaryStage;
+    }
+
+    public Scene getSceneMainMenu() {
+        return sceneMainMenu;
+    }
+
+    public void setSceneMainMenu(Scene sceneMainMenu) {
+        this.sceneMainMenu = sceneMainMenu;
+    }
+
     public static int getPlayerNum() {
         return playerNum;
     }
@@ -313,5 +335,9 @@ public class Main extends Application {
 
     public static int getOffSetY() {
         return offSetY;
+    }
+
+    public MediaPlayer getMediaPlayer() {
+        return mediaPlayer;
     }
 }

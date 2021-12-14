@@ -4,8 +4,6 @@ import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
 import javafx.scene.shape.Rectangle;
 
 public class PlayerController implements Runnable {
@@ -26,8 +24,11 @@ public class PlayerController implements Runnable {
 
     private Button useCardBtn;
 
-    public PlayerController(int[] cardPool) {
+    private Main thisMain;
+
+    public PlayerController(int[] cardPool, Main main) {
         controller = this;
+        thisMain = main;
         this.cardPool = cardPool;
         for (int i :
                 cardPool) {
@@ -138,13 +139,24 @@ public class PlayerController implements Runnable {
                 endTurnChecker(players[i]);
             }
         }
+        int numWinner = 0;
         for (int i = 0; i < players.length; i++) {
             if (players[i].getPosition() == 100) {
                 playerAtGoal += "" + players[i].getID() + ", ";
+                numWinner++;
             }
         }
         System.out.println("\nGame END");
         System.out.println("Player(s) ID: " + playerAtGoal.substring(0, playerAtGoal.length() - 2) + " win");
+
+        int[] winnerList = new int[numWinner];
+        for (int i=0; i < players.length; i++){
+            if (players[i].getPosition() == 100) {
+                winnerList[winnerList.length - numWinner] = players[i].getID();
+                numWinner--;
+            }
+        }
+        new Info(winnerList, thisMain);
     }
 
     public void onLadder(Player player) {
