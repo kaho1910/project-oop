@@ -86,11 +86,11 @@ public class Table {
                 diceButton.setDisable(true);
                 media = new Media(getClass().getResource("/sound/Dice.mp3").toExternalForm());
                 mediaPlayer = new MediaPlayer(media);
-                mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
-                mediaPlayer.play();
+                mediaPlayer.setVolume(0.2);
                 Thread thread = new Thread() {
                     public void run() {
 //                        System.out.println("Dice rolled");
+                        mediaPlayer.play();
                         setTurn(false);
                         try {
                             for (int i = 0; i < 15; i++) {
@@ -103,7 +103,6 @@ public class Table {
                             }
                             Thread.sleep(500);
                             pressed = true;
-                            mediaPlayer.stop();
                         } catch (InterruptedException e) {
                             e.printStackTrace();
                         }

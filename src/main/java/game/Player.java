@@ -121,12 +121,12 @@ public class Player extends Rectangle {
                 int k = 0;
                 try {
                     //System.out.println(this.getId());
+                    media = new Media(getClass().getResource("/sound/Walk.mp3").toExternalForm());
+                    mediaPlayer = new MediaPlayer(media);
+                    mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
+                    mediaPlayer.setVolume(0.1);
+                    mediaPlayer.play();
                     while (threadRun | (k % 3) != 2) {
-                        media = new Media(getClass().getResource("/sound/Walk.mp3").toExternalForm());
-                        mediaPlayer = new MediaPlayer(media);
-                        mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
-                        mediaPlayer.play();
-
                         img = new Image(getClass().getResourceAsStream("/img/sprite/" + ID + "_" + (k % 3 + 1) + ".png"));
                         imgPattern = new ImagePattern(img);
                         setFill(imgPattern);
