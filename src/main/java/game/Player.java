@@ -152,8 +152,8 @@ public class Player extends Rectangle {
                 moveTo(this.position + 1);
             }
             if (gHundred) {
-                setPosition(temp);
                 mediaPlayer.stop();
+                setPosition(temp);
             }
         } else {
             for (int i = run; i < 0; i++) {
