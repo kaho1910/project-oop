@@ -10,7 +10,6 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="project-oop" target="16" />
       <module name="Project-OOP" target="16" />
     </bytecodeTargetLevel>
   </component>

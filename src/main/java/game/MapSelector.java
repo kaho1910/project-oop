@@ -23,7 +23,7 @@ public class MapSelector {
     private Button[] btn = new Button[mapNum];
     private String[] mapName = {"Yume no Taiki", "Judai in The City", "Yuji on Train"};
 
-    private int[][] map1Ladder = {{14, 7}, {16, 25}, {32, 49}, {60, 42}, {46, 66}, {89, 72}, {77, 84}, {98, 78}};
+    private int[][] map1Ladder = {{14, 7}, {16, 25}, {32, 49}, {60, 41}, {46, 66}, {89, 72}, {77, 84}, {98, 78}};
     private int[][] map2Ladder = {{3, 18}, {30, 11}, {22, 37}, {66, 46}, {80, 61}, {90, 73}, {74, 87}, {77, 97}};
     private int[][] map3Ladder = {{18, 3}, {11, 30}, {25, 36}, {41, 61}, {68, 53}, {63, 78}, {92, 72}, {99, 82}};
 
@@ -36,7 +36,7 @@ public class MapSelector {
     private Stage popUpStage;
     private Scene scene;
 
-    private Parent mapSelect(){
+    private Parent mapSelect() {
         StackPane root = new StackPane();
         root.getChildren().add(group);
         root.setAlignment(Pos.CENTER);
@@ -51,7 +51,7 @@ public class MapSelector {
         Image[] img = new Image[mapNum];
         ImagePattern[] bgImg = new ImagePattern[mapNum];
 
-        for(int i=0; i < mapNum; i++){
+        for (int i = 0; i < mapNum; i++) {
             img[i] = new Image(getClass().getResourceAsStream(String.format("/img/map/preview%d.jpg", i + 1)));
             bgImg[i] = new ImagePattern(img[i]);
         }
@@ -61,7 +61,7 @@ public class MapSelector {
         container.setFitWidth(240);
         container.setFitHeight(42.5);
 
-        for(int i=0; i < mapNum; i++){
+        for (int i = 0; i < mapNum; i++) {
             btn[i] = new Button(mapName[i]);
             btn[i].setFont(Font.font(16));
         }
@@ -121,6 +121,7 @@ public class MapSelector {
 
         return root;
     }
+
     public void display() {
         popUpStage = new Stage();
         scene = new Scene(mapSelect());
@@ -139,7 +140,7 @@ public class MapSelector {
         return btn;
     }
 
-    public static int getMapNum(){
+    public static int getMapNum() {
         return mapNum;
     }
 

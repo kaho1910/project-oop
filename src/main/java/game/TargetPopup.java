@@ -23,7 +23,7 @@ public class TargetPopup {
     private boolean selected;
     private boolean cancelled;
 
-    public TargetPopup(PlayerController controller){
+    public TargetPopup(PlayerController controller) {
 //        constructor += Player fromPlayer
         this.controller = controller;
         this.players = this.controller.getPlayers();
@@ -36,7 +36,7 @@ public class TargetPopup {
 //        this.fromPlayer = this.controller.getPlayers()[0];
 //    }
 
-    public void display(){
+    public void display() {
         this.selected = false;
         this.cancelled = false;
         popUpStage = new Stage();
@@ -46,7 +46,7 @@ public class TargetPopup {
         framebox = new Rectangle[4];
         innerframebox = new Rectangle[4];
         pbutton = new Button[4];
-        for (int i=0; i<=3;i++){
+        for (int i = 0; i <= 3; i++) {
 //            MAKE THIS WORK!
 //            player[i] = new Player(i + 1);
             pbutton[i] = new Button();
@@ -63,37 +63,36 @@ public class TargetPopup {
             innerframebox[i].setWidth(120);
             innerframebox[i].setFill(new ImagePattern(profile[i]));
 
-            if ((i + 1)%2 ==0){
+            if ((i + 1) % 2 == 0) {
                 framebox[i].setTranslateX(200);
                 innerframebox[i].setTranslateX(200);
                 pbutton[i].setTranslateX(200);
                 //framebox[i].setTranslateY();
-            }
-            else{
+            } else {
                 framebox[i].setTranslateX(-200);
                 innerframebox[i].setTranslateX(-200);
                 pbutton[i].setTranslateX(-200);
             }
-            if ((i + 1) / 3 < 1){
+            if ((i + 1) / 3 < 1) {
                 framebox[i].setTranslateY(-150);
                 innerframebox[i].setTranslateY(-150);
                 pbutton[i].setTranslateY(-30);
-            }
-            else{
+            } else {
                 framebox[i].setTranslateY(100);
                 innerframebox[i].setTranslateY(100);
                 pbutton[i].setTranslateY(220);
             }
             select_pane.getChildren().addAll(framebox[i], innerframebox[i], pbutton[i]);
         }
-        for (j=0;j<=3;j++) {
+        for (j = 0; j <= 3; j++) {
             pbutton[j].setOnMouseClicked(new EventHandler<MouseEvent>() {
                 String s = pbutton[j].toString();
                 int num = j;
+
                 public void handle(MouseEvent mouseEvent) {
 //                    System.out.println(mouseEvent.getSource().toString().equals(s));
-                    if (mouseEvent.getSource().toString().equals(s)){
-                        for (int k=0;k<=3;k++){
+                    if (mouseEvent.getSource().toString().equals(s)) {
+                        for (int k = 0; k <= 3; k++) {
                             pbutton[k].setDisable(true);
                         }
                         target = num;
@@ -117,7 +116,8 @@ public class TargetPopup {
             }
         });
     }
-    public int getTarget(){
+
+    public int getTarget() {
         return this.target;
     }
 

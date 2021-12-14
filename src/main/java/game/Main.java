@@ -4,15 +4,20 @@ import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.geometry.Insets;
 import javafx.scene.Cursor;
 import javafx.scene.Group;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.StackPane;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
@@ -27,7 +32,7 @@ public class Main extends Application {
     private static final int TileSize = 80;
     private static final int Width = 10;
     private static final int Height = 10;
-    private static final int offSetX = 400;
+    private static final int offSetX = TileSize * Width / 2;
     private static final int offSetY = 80;
     private PlayerController playerController;
     private Player[] players;
@@ -38,52 +43,82 @@ public class Main extends Application {
 
     private Scene sceneMainMenu;
     private MapSelector selector;
-    private Text startBtn;
+    private Text[] mainMenuBtn;
+    private String[] txtBtn = {"Start", "How to play", "Cards", "Developers"};
+    private Info info;
+    private Text teams;
 
-    private Parent mainMenu(){
+    private MediaPlayer mediaPlayer;
+    private Media media;
+
+    private Main thisMain = this;
+    private Stage primaryStage;
+
+    public Parent mainMenu() {
         StackPane root = new StackPane();
+        root.setBackground(new Background(new BackgroundFill(Color.web("#d7d7d7"), CornerRadii.EMPTY, Insets.EMPTY)));
         root.getChildren().addAll(groupMainMenu);
         root.setPrefSize(Width * TileSize + offSetX * 2, Height * TileSize + offSetY * 2);
 
-        Image bg = new Image(getClass().getResourceAsStream("/img/menu.png"));
+        Image bg = new Image(getClass().getResourceAsStream("/img/menu.gif"));
         ImagePattern bgPattern = new ImagePattern(bg);
         Rectangle rect = new Rectangle();
         rect.setFill(bgPattern);
         rect.setWidth(Width * TileSize + offSetX * 2);
         rect.setHeight(Height * TileSize + offSetY * 2);
 
-//        Text gameTitle = new Text();
-//        gameTitle.setText("Snake And Ladder");
-//        gameTitle.setFont(Font.font(60));
+        mainMenuBtn = new Text[4];
+        for (int i = 0; i < mainMenuBtn.length; i++) {
+            mainMenuBtn[i] = new Text(txtBtn[i]);
+            mainMenuBtn[i].setFont(Font.font(null, FontWeight.BOLD, 72));
+            mainMenuBtn[i].setFill(Color.WHITE);
+            mainMenuBtn[i].setTranslateX(200);
+            mainMenuBtn[i].setTranslateY(470 + i * 110);
 
-//        startBtn = new Button("Start");
-//        startBtn = new Button("Start");
-        startBtn = new Text("Start");
-        startBtn.setFont(Font.font(null, FontWeight.BOLD, 72));
-        startBtn.setFill(Color.WHITE);
-        startBtn.setTranslateX(300);
-        startBtn.setTranslateY(500);
+            mainMenuBtn[i].setOnMouseEntered(new EventHandler<MouseEvent>() {
+                public void handle(MouseEvent mouseEvent) {
+                    sceneMainMenu.setCursor(Cursor.HAND);
+                }
+            });
 
-        Button devIntro = new Button("developer");
-//
-        startBtn.setOnMouseEntered(new EventHandler<MouseEvent>() {
-            public void handle(MouseEvent mouseEvent) {
-                sceneMainMenu.setCursor(Cursor.HAND);
-            }
-        });
+            mainMenuBtn[i].setOnMouseExited(new EventHandler<MouseEvent>() {
+                public void handle(MouseEvent mouseEvent) {
+                    sceneMainMenu.setCursor(Cursor.DEFAULT);
+                }
+            });
+        }
 
-        startBtn.setOnMouseExited(new EventHandler<MouseEvent>() {
-            public void handle(MouseEvent mouseEvent) {
-                sceneMainMenu.setCursor(Cursor.DEFAULT);
-            }
-        });
+        Image title = new Image(getClass().getResourceAsStream("/img/title.png"));
+        ImagePattern titleBox = new ImagePattern(title);
+        Rectangle titleRect = new Rectangle();
+        titleRect.setFill(titleBox);
+        titleRect.setWidth(1105);
+        titleRect.setHeight(123.5);
+        titleRect.setTranslateX(100);
+        titleRect.setTranslateY(130);
 
-        groupMainMenu.getChildren().addAll(rect, startBtn);
+        Image subTitle = new Image(getClass().getResourceAsStream("/img/subtitle.png"));
+        ImagePattern subTitleBox = new ImagePattern(subTitle);
+        Rectangle subTitleRect = new Rectangle();
+        subTitleRect.setFill(subTitleBox);
+        subTitleRect.setWidth(433);
+        subTitleRect.setHeight(61);
+        subTitleRect.setTranslateX(110);
+        subTitleRect.setTranslateY(290);
+
+        teams = new Text("© TEAM OHM 2021");
+        teams.setFont(Font.font(null, FontWeight.BOLD, 26));
+        teams.setFill(Color.WHITE);
+        teams.setTranslateX(200);
+        teams.setTranslateY(890);
+
+        groupMainMenu.getChildren().addAll(rect, titleRect, subTitleRect, teams);
+        groupMainMenu.getChildren().addAll(mainMenuBtn);
 
         return root;
     }
 
-    private Parent mapGenerator(int mapSelected){
+    private Parent mapGenerator(int mapSelected) {
         StackPane root = new StackPane();
         root.getChildren().addAll(groupMap);
         root.setPrefSize(Width * TileSize + offSetX * 2, Height * TileSize + offSetY * 2);
@@ -99,58 +134,78 @@ public class Main extends Application {
         Image img = new Image(getClass().getResourceAsStream(String.format("/img/map/map%d.png", mapSelected)));
         ImageView bgImg = new ImageView(img);
 //        bgImg.setImage(img);
-        bgImg.setFitHeight(800);
-        bgImg.setFitWidth(800);
+        bgImg.setFitHeight(Height * TileSize);
+        bgImg.setFitWidth(Width * TileSize);
         bgImg.setTranslateX(offSetX);
         bgImg.setTranslateY(offSetY);
         groupMap.getChildren().add(bgImg);
 
         players = playerController.getPlayers();
-        PlayerTable playerTable;
+        Table ptb;
         StackPane pane;
-        for(int i=0; i < playerNum; i++){
-            playerTable = players[i].getPlayerTable();
-            pane = playerTable.getLayout();
-            pane.setPrefSize(400, 400);
-            pane.setTranslateX((i % 2) * 1200);
-            pane.setTranslateY(i > 1 ? 480 : 80);
+        for (int i = 0; i < playerNum; i++) {
+            ptb = players[i].getPlayerTable();
+            pane = ptb.getLayout();
+            pane.setPrefSize(Width * TileSize / 2, Height * TileSize / 2);
+            pane.setTranslateX((i % 2) * Width * TileSize / 2 * 3);
+            pane.setTranslateY(i > 1 ? Width * TileSize / 2 + 80 : 80);
             groupMap.getChildren().add(pane);
         }
 
         return root;
     }
 
-    public void start(Stage primaryStage){
+    public void start(Stage primaryStage) {
+        this.primaryStage = primaryStage;
         sceneMainMenu = new Scene(mainMenu());
-        primaryStage.setTitle("Snakes and Ladders");
-        primaryStage.setScene(sceneMainMenu);
-        primaryStage.show();
+        this.primaryStage.setTitle("Snakes and Ladders");
+        this.primaryStage.show();
 
-        primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+        startGame();
+    }
+
+    public void startGame(){
+        this.primaryStage.setScene(sceneMainMenu);
+        this.primaryStage.centerOnScreen();
+
+        media = new Media(getClass().getResource("/sound/BGM-LOCO.mp3").toExternalForm());
+        mediaPlayer = new MediaPlayer(media);
+        mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
+        mediaPlayer.play();
+
+        info = new Info("How to play");
+        info.getStage().close();
+
+        this.primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
             public void handle(WindowEvent e) {
                 Platform.exit();
                 System.exit(0);
             }
         });
 
-        startBtn.setOnMouseClicked(new EventHandler<MouseEvent>() {
+        mainMenuBtn[0].setOnMouseClicked(new EventHandler<MouseEvent>() {
             public void handle(MouseEvent mouseEvent) {
-                if (selector != null){
+                if (selector != null) {
                     selector.getPopUpStage().close();
                 }
                 selector = new MapSelector();
                 selector.display();
-                for(int i=0; i < selector.getMapNum(); i++){
+
+                if (!info.equals(null)) {
+                    info.getStage().close();
+                }
+
+                for (int i = 0; i < selector.getMapNum(); i++) {
                     selector.getBtn()[i].setOnAction(new EventHandler<ActionEvent>() {
                         public void handle(ActionEvent actionEvent) {
                             //                GAME
-                            playerController = new PlayerController(cardPool);
+                            playerController = new PlayerController(cardPool, thisMain);
                             int mapSelected;
-                            if (actionEvent.getSource().equals(selector.getBtn()[0])){
+                            if (actionEvent.getSource().equals(selector.getBtn()[0])) {
                                 mapSelected = 1;
                                 playerController.setLadder(selector.getMap1Ladder());
                                 playerController.setPickCard(selector.getMap1PickCard());
-                            } else if (actionEvent.getSource().equals(selector.getBtn()[1])){
+                            } else if (actionEvent.getSource().equals(selector.getBtn()[1])) {
                                 mapSelected = 2;
                                 playerController.setLadder(selector.getMap2Ladder());
                                 playerController.setPickCard(selector.getMap2PickCard());
@@ -162,15 +217,23 @@ public class Main extends Application {
 
                             selector.getPopUpStage().close();
 
+                            mediaPlayer.stop();
+
+                            media = new Media(getClass().getResource(String.format("/sound/map%d.mp3", mapSelected)).toExternalForm());
+                            mediaPlayer = new MediaPlayer(media);
+                            mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
+                            mediaPlayer.setVolume(0.65);
+                            mediaPlayer.play();
+
                             Scene sceneGame = new Scene(mapGenerator(mapSelected));
                             primaryStage.setScene(sceneGame);
 
                             Player[] players = playerController.getPlayers();
-                            for (Player p:
+                            for (Player p :
                                     players) {
                                 Rectangle[] cardFrames = p.getPlayerTable().getCardFrame();
-                                for (Rectangle cardFrame:
-                                     cardFrames) {
+                                for (Rectangle cardFrame :
+                                        cardFrames) {
                                     cardFrame.setOnMouseEntered(new EventHandler<MouseEvent>() {
                                         public void handle(MouseEvent mouseEvent) {
                                             sceneGame.setCursor(Cursor.HAND);
@@ -206,26 +269,63 @@ public class Main extends Application {
             }
         });
 
+        mainMenuBtn[1].setOnMouseClicked(new EventHandler<MouseEvent>() {
+            public void handle(MouseEvent mouseEvent) {
+                if (info != null) {
+                    info.getStage().close();
+                }
+                info = new Info(txtBtn[1]);
+            }
+        });
 
+        mainMenuBtn[2].setOnMouseClicked(new EventHandler<MouseEvent>() {
+            public void handle(MouseEvent mouseEvent) {
+                if (info != null) {
+                    info.getStage().close();
+                }
+                info = new Info(txtBtn[2]);
+            }
+        });
+
+        mainMenuBtn[3].setOnMouseClicked(new EventHandler<MouseEvent>() {
+            public void handle(MouseEvent mouseEvent) {
+                if (info != null) {
+                    info.getStage().close();
+                }
+                info = new Info(txtBtn[3]);
+            }
+        });
     }
 
-    public static void main(String[] args){
+    public static void main(String[] args) {
         launch(args);
     }
 
-    public static int getPlayerNum(){
+    public Stage getPrimaryStage() {
+        return primaryStage;
+    }
+
+    public Scene getSceneMainMenu() {
+        return sceneMainMenu;
+    }
+
+    public void setSceneMainMenu(Scene sceneMainMenu) {
+        this.sceneMainMenu = sceneMainMenu;
+    }
+
+    public static int getPlayerNum() {
         return playerNum;
     }
 
-    public static int getTileSize(){
+    public static int getTileSize() {
         return TileSize;
     }
 
-    public static int getWidth(){
+    public static int getWidth() {
         return Width;
     }
 
-    public static int getHeight(){
+    public static int getHeight() {
         return Height;
     }
 
@@ -235,5 +335,21 @@ public class Main extends Application {
 
     public static int getOffSetY() {
         return offSetY;
+    }
+
+    public void setMediaPlayer(MediaPlayer mediaPlayer) {
+        this.mediaPlayer = mediaPlayer;
+    }
+
+    public Media getMedia() {
+        return media;
+    }
+
+    public void setMedia(Media media) {
+        this.media = media;
+    }
+
+    public MediaPlayer getMediaPlayer() {
+        return mediaPlayer;
     }
 }
