@@ -48,6 +48,8 @@ public class Info {
     }
 
     public Info(int[] winnerList, Main main){
+        int numWinner = winnerList.length;
+
         mainStage = new Stage();
         StackPane panel = new StackPane();
 
@@ -57,13 +59,18 @@ public class Info {
         bg.setHeight(810);
 
         Rectangle title = new Rectangle();
-        title.setFill(new ImagePattern(new Image(getClass().getResourceAsStream("/img/winner.png"))));
-        title.setWidth(540);
-        title.setHeight(80);
-        title.setTranslateX(270);
+        if (numWinner == 1){
+            title.setFill(new ImagePattern(new Image(getClass().getResourceAsStream("/img/winner.png"))));
+            title.setWidth(327);
+            title.setTranslateX(376.5);
+        } else {
+            title.setFill(new ImagePattern(new Image(getClass().getResourceAsStream("/img/winners.png"))));
+            title.setWidth(371);
+            title.setTranslateX(354.5);
+        }
+        title.setHeight(95);
         title.setTranslateY(70);
 
-        int numWinner = winnerList.length;
         Rectangle[] winner = new Rectangle[numWinner];
         Rectangle[] frame = new Rectangle[numWinner];
         for (int i=0; i < numWinner; i++){
@@ -74,7 +81,7 @@ public class Info {
             frame[i] = new Rectangle();
             frame[i].setHeight(280);
             frame[i].setWidth(280);
-            frame[i].setFill(new ImagePattern(new Image(getClass().getResourceAsStream("/img/blog.png"))));
+            frame[i].setFill(new ImagePattern(new Image(getClass().getResourceAsStream("/img/frame.png"))));
         }
 
         switch (numWinner){
@@ -147,6 +154,7 @@ public class Info {
 
         txt[0].setOnMouseClicked(new EventHandler<MouseEvent>() {
             public void handle(MouseEvent event) {
+                mainStage.close();
                 main.getMediaPlayer().stop();
                 main.setSceneMainMenu(new Scene(main.mainMenu()));
                 main.startGame();
@@ -162,8 +170,8 @@ public class Info {
 
         Group group = new Group(title);
         group.getChildren().addAll(winner);
-        group.getChildren().addAll(frame);
         group.getChildren().addAll(txt);
+        group.getChildren().addAll(frame);
         panel.getChildren().addAll(bg, group);
         Scene scene = new Scene(panel, 1080, 810);
         mainStage.setScene(scene);

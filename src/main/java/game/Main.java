@@ -165,8 +165,6 @@ public class Main extends Application {
     }
 
     public void startGame(){
-        int[] list = {1, 2, 3, 4};
-        new Info(list, thisMain);
         this.primaryStage.setScene(sceneMainMenu);
         this.primaryStage.centerOnScreen();
 
