@@ -149,7 +149,7 @@ public class Info {
             winner[i].setFill(new ImagePattern(new Image(getClass().getResourceAsStream(String.format("/img/characters/%d-positive.png", winnerList[i])))));
         }
 
-        Text[] txt = {new Text("Restart"), new Text("Exit")};
+        Text[] txt = {new Text("Menu"), new Text("Exit")};
         for (int i=0; i < txt.length; i++){
             txt[i].setCursor(Cursor.HAND);
             txt[i].setFont(Font.font(null, FontWeight.BOLD, 48));
