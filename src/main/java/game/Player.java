@@ -13,7 +13,7 @@ import java.util.concurrent.TimeUnit;
 
 public class Player extends Rectangle {
     private final int ID;
-    private int position = 96;
+    private int position = 1;
     private PowerCard[] cards = new PowerCard[3];
     private int numCardOnHand;
     private final int tileSize = Main.getTileSize();
@@ -182,6 +182,10 @@ public class Player extends Rectangle {
     public void subtractNumCardOnHand() {
         this.numCardOnHand--;
         System.out.println("id: " + ID + " numCardOnHand: " + numCardOnHand);
+    }
+
+    public void setNumCardOnHand(int i){
+        this.numCardOnHand = i;
     }
 
     public PowerCard[] getCards() {

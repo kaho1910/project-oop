@@ -19,12 +19,29 @@ public class TrapTile {
         this.used = false;
         this.random = new Random();
         System.out.println("\nTrap is set at " + tileNum + " trapID: " + this.trapID);
+        new Notice("Snakes and Ladders", "Player: " + fromPlayer.getID() + " set Trap at " + tileNum);
     }
 
     public void action(Player targetPlayer) {
         this.targetPlayer = targetPlayer;
 
         System.out.println("\nTrap triggered\nid: " + targetPlayer.getID() + " tileNum: " + tileNum + "\nfrom id: " + fromPlayer.getID());
+        String txt = "";
+        switch (trapID){
+            case 1:
+                txt = "Player: " + targetPlayer.getID() + " swap card with Player: " + fromPlayer.getID();
+                break;
+            case 2:
+                txt = "Player: " + fromPlayer.getID() + " steal card from Player: " + targetPlayer.getID();
+                break;
+            case 3:
+                txt = "Player: " + targetPlayer.getID() + " next turn will be skipped";
+                break;
+            case 4:
+                txt = "Player: " + targetPlayer.getID() + " random jump -5 or 5 tiles";
+                break;
+        }
+        new Notice("Trap Triggered at Player: " + targetPlayer.getID(), txt);
 
         boolean isAngeled = false;
         for (int i = 0; i < 3; i++) {
@@ -40,6 +57,7 @@ public class TrapTile {
 
         if (isAngeled) {
             System.out.println("Player " + targetPlayer.getID() + " is protected by Ohm-angel Card");
+            new Notice("Snakes and Ladders", "Player: " + targetPlayer.getID() + " is protected by Ohm-angel Card");
             playerEmotion = "negative";
             targetEmotion = "positive";
         } else {
@@ -66,6 +84,7 @@ public class TrapTile {
                         targetEmotion = "negative";
                         int playerNoCard = fromPlayer.cardCount() == 0 ? fromPlayer.getID() : targetPlayer.getID();
                         System.out.println("id: " + playerNoCard + " has no card");
+                        new Notice("Snakes and Ladders", "Player: " + playerNoCard + " has no card");
                     }
                     break;
                 case 2:
@@ -87,11 +106,13 @@ public class TrapTile {
                             }
                         } else {
                             System.out.println("id: " + fromPlayer.getID() + " has no card slot left");
+                            new Notice("Snakes and Ladders", "Player: " + fromPlayer.getID() + " has no card slot left");
                         }
                     } else {
                         playerEmotion = "negative";
                         targetEmotion = "positive";
                         System.out.println("id: " + targetPlayer.getID() + " has no card");
+                        new Notice("Snakes and Ladders", "Player: " + targetPlayer.getID() + " has no card");
                     }
                     break;
                 case 3:
