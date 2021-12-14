@@ -115,6 +115,7 @@ public class PlayerController implements Runnable {
                 players[i].getPlayerTable().setTurn(true);
                 players[i].getPlayerTable().getDiceButton().setDisable(false);
                 players[i].getPlayerTable().setPressed(false);
+                players[i].getPlayerTable().updateEmotion("normal");
                 while (true) {
 //                    if (players[i].getPlayerTable().getDice_button().isDisabled()) {
                     System.out.print(""); // ศักดิ์สิทธิ์ ห้ามลบ

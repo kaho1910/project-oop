@@ -199,10 +199,13 @@ public class Table {
 
     public void setIsBlackGlass(String isBlackGlass) {
         this.isBlackGlass = isBlackGlass;
+        updateEmotion("normal");
     }
 
     public void updateEmotion(String feedback) {
         if (feedback.equals("normal")) {
+            im2 = new Image(getClass().getResourceAsStream(String.format("/img/characters/%d-%s%s.png", ID, "normal", isBlackGlass)));
+            inner_frame.setFill(new ImagePattern(im2));
             return;
         }
         Thread t = new Thread() {
