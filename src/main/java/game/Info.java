@@ -38,7 +38,7 @@ public class Info {
         in.setHeight(810);
         StackPane panel = new StackPane();
         Image out_img = new Image(getClass().getResourceAsStream("/img/" + checker + ".png"));
-        Image in_img = new Image(getClass().getResourceAsStream("/img/4_3.png"));
+        Image in_img = new Image(getClass().getResourceAsStream("/img/4_3.gif"));
         in.setFill(new ImagePattern(in_img));
         out.setFill(new ImagePattern(out_img));
         panel.getChildren().addAll(in, out);
