@@ -52,32 +52,58 @@ public class Info {
         StackPane panel = new StackPane();
 
         Rectangle bg = new Rectangle();
-        Image img = new Image(getClass().getResourceAsStream("/img/4_3.png"));
-        bg.setFill(new ImagePattern(img));
+        bg.setFill(new ImagePattern(new Image(getClass().getResourceAsStream("/img/4_3.png"))));
         bg.setWidth(1080);
         bg.setHeight(810);
 
+        Rectangle title = new Rectangle();
+        title.setFill(new ImagePattern(new Image(getClass().getResourceAsStream("/img/winner.png"))));
+        title.setWidth(540);
+        title.setHeight(80);
+        title.setTranslateX(270);
+        title.setTranslateY(70);
+
         int numWinner = winnerList.length;
+        Rectangle[] winner = new Rectangle[numWinner];
         Rectangle[] frame = new Rectangle[numWinner];
         for (int i=0; i < numWinner; i++){
+            winner[i] = new Rectangle();
+            winner[i].setHeight(240);
+            winner[i].setWidth(240);
+
             frame[i] = new Rectangle();
             frame[i].setHeight(280);
             frame[i].setWidth(280);
+            frame[i].setFill(new ImagePattern(new Image(getClass().getResourceAsStream("/img/blog.png"))));
         }
 
         switch (numWinner){
             case 1:
+                winner[0].setTranslateX(420);
+                winner[0].setTranslateY(285);
+
                 frame[0].setTranslateX(400);
-                frame[0].setTranslateY(170);
-                System.out.println("case 1");
+                frame[0].setTranslateY(265);
                 break;
             case 2:
+                winner[0].setTranslateX(255);
+                winner[0].setTranslateY(285);
+                winner[1].setTranslateX(585);
+                winner[1].setTranslateY(285);
+
                 frame[0].setTranslateX(235);
-                frame[0].setTranslateY(170);
+                frame[0].setTranslateY(265);
                 frame[1].setTranslateX(565);
-                frame[1].setTranslateY(170);
+                frame[1].setTranslateY(265);
                 break;
             case 3:
+                winner[0].setTranslateX(255);
+                winner[0].setTranslateY(190);
+                winner[1].setTranslateX(585);
+                winner[1].setTranslateY(190);
+                winner[2].setTranslateX(420);
+                winner[2].setTranslateY(520);
+
                 frame[0].setTranslateX(235);
                 frame[0].setTranslateY(170);
                 frame[1].setTranslateX(565);
@@ -86,6 +112,15 @@ public class Info {
                 frame[2].setTranslateY(500);
                 break;
             case 4:
+                winner[0].setTranslateX(255);
+                winner[0].setTranslateY(190);
+                winner[1].setTranslateX(585);
+                winner[1].setTranslateY(190);
+                winner[2].setTranslateX(255);
+                winner[2].setTranslateY(520);
+                winner[3].setTranslateX(585);
+                winner[3].setTranslateY(520);
+
                 frame[0].setTranslateX(235);
                 frame[0].setTranslateY(170);
                 frame[1].setTranslateX(565);
@@ -98,7 +133,7 @@ public class Info {
         }
 
         for (int i=0; i < numWinner; i++){
-            frame[i].setFill(new ImagePattern(new Image(getClass().getResourceAsStream(String.format("/img/characters/%d-positive.png", winnerList[i])))));
+            winner[i].setFill(new ImagePattern(new Image(getClass().getResourceAsStream(String.format("/img/characters/%d-positive.png", winnerList[i])))));
         }
 
         Text[] txt = {new Text("Restart"), new Text("Exit")};
@@ -107,7 +142,7 @@ public class Info {
             txt[i].setFont(Font.font(null, FontWeight.BOLD, 48));
             txt[i].setFill(Color.WHITE);
             txt[i].setTranslateX(300 + 370 * i);
-            txt[i].setTranslateY(850);
+            txt[i].setTranslateY(830);
         }
 
         txt[0].setOnMouseClicked(new EventHandler<MouseEvent>() {
@@ -125,7 +160,9 @@ public class Info {
             }
         });
 
-        Group group = new Group(frame);
+        Group group = new Group(title);
+        group.getChildren().addAll(winner);
+        group.getChildren().addAll(frame);
         group.getChildren().addAll(txt);
         panel.getChildren().addAll(bg, group);
         Scene scene = new Scene(panel, 1080, 810);
