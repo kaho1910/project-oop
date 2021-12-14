@@ -44,7 +44,6 @@ public class PowerCard implements Card {
         String emotion = "normal";
         powerCrisis = false;
 //        switch แยก action ของแต่ละ ID
-        player.getPlayerTable().updateEmotion("negative");
         switch (this.getCardID()) {
             case 11:
                 System.out.println("\nswitch card id: 11");

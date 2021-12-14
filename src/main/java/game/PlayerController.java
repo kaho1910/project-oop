@@ -1,5 +1,6 @@
 package game;
 
+import javafx.application.Platform;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
@@ -156,7 +157,11 @@ public class PlayerController implements Runnable {
                 numWinner--;
             }
         }
-        new Info(winnerList, thisMain);
+        Platform.runLater(new Runnable(){
+            public void run() {
+                Info info = new Info(winnerList, thisMain);
+            }
+        });
     }
 
     public void onLadder(Player player) {

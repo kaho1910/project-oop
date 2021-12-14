@@ -5,7 +5,6 @@ import javafx.event.EventHandler;
 import javafx.scene.Cursor;
 import javafx.scene.Group;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
@@ -21,7 +20,7 @@ import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
 public class Info {
-    private Stage mainStage;
+    private Stage stage;
 
     public Info(String checker) {
         if (checker.equals("How to play")) {
@@ -31,7 +30,7 @@ public class Info {
         } else if (checker.equals("Developers")) {
             checker = "dev";
         }
-        mainStage = new Stage();
+        stage = new Stage();
         Rectangle out = new Rectangle();
         Rectangle in = new Rectangle();
         out.setWidth(1080);
@@ -45,22 +44,20 @@ public class Info {
         out.setFill(new ImagePattern(out_img));
         panel.getChildren().addAll(in, out);
         Scene scene = new Scene(panel, 1080, 810);
-        mainStage.setScene(scene);
-        mainStage.show();
+        stage.setScene(scene);
+        stage.show();
     }
 
     public Info(int[] winnerList, Main main){
         main.getMediaPlayer().stop();
         main.setMedia(new Media(getClass().getResource("/sound/Victory.mp3").toExternalForm()));
         main.setMediaPlayer(new MediaPlayer(main.getMedia()));
-        main.getMediaPlayer().setCycleCount(MediaPlayer.INDEFINITE);
-        main.getMediaPlayer().setVolume(0.6);
+        main.getMediaPlayer().setVolume(0.4);
         main.getMediaPlayer().play();
 
         int numWinner = winnerList.length;
 
-        mainStage = new Stage();
-        StackPane panel = new StackPane();
+        stage = new Stage();
 
         Rectangle bg = new Rectangle();
         bg.setFill(new ImagePattern(new Image(getClass().getResourceAsStream("/img/4_3.png"))));
@@ -163,7 +160,7 @@ public class Info {
 
         txt[0].setOnMouseClicked(new EventHandler<MouseEvent>() {
             public void handle(MouseEvent event) {
-                mainStage.close();
+                stage.close();
                 main.getMediaPlayer().stop();
                 main.setSceneMainMenu(new Scene(main.mainMenu()));
                 main.startGame();
@@ -181,12 +178,13 @@ public class Info {
         group.getChildren().addAll(winner);
         group.getChildren().addAll(txt);
         group.getChildren().addAll(frame);
+        StackPane panel = new StackPane();
         panel.getChildren().addAll(bg, group);
         Scene scene = new Scene(panel, 1080, 810);
-        mainStage.setScene(scene);
-        mainStage.show();
+        stage.setScene(scene);
+        stage.show();
 
-        mainStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+        stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
             public void handle(WindowEvent e) {
                 Platform.exit();
                 System.exit(0);
@@ -194,8 +192,8 @@ public class Info {
         });
     }
 
-    public Stage getMainStage() {
-        return mainStage;
+    public Stage getStage() {
+        return stage;
     }
 }
 

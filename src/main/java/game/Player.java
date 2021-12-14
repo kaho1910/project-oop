@@ -13,7 +13,7 @@ import java.util.concurrent.TimeUnit;
 
 public class Player extends Rectangle {
     private final int ID;
-    private int position = 1;
+    private int position = 96;
     private PowerCard[] cards = new PowerCard[3];
     private int numCardOnHand;
     private final int tileSize = Main.getTileSize();
@@ -153,6 +153,7 @@ public class Player extends Rectangle {
             }
             if (gHundred) {
                 setPosition(temp);
+                mediaPlayer.stop();
             }
         } else {
             for (int i = run; i < 0; i++) {

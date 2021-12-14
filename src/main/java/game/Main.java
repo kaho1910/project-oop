@@ -174,7 +174,7 @@ public class Main extends Application {
         mediaPlayer.play();
 
         info = new Info("How to play");
-        info.getMainStage().close();
+        info.getStage().close();
 
         this.primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
             public void handle(WindowEvent e) {
@@ -192,7 +192,7 @@ public class Main extends Application {
                 selector.display();
 
                 if (!info.equals(null)) {
-                    info.getMainStage().close();
+                    info.getStage().close();
                 }
 
                 for (int i = 0; i < selector.getMapNum(); i++) {
@@ -272,7 +272,7 @@ public class Main extends Application {
         mainMenuBtn[1].setOnMouseClicked(new EventHandler<MouseEvent>() {
             public void handle(MouseEvent mouseEvent) {
                 if (info != null) {
-                    info.getMainStage().close();
+                    info.getStage().close();
                 }
                 info = new Info(txtBtn[1]);
             }
@@ -281,7 +281,7 @@ public class Main extends Application {
         mainMenuBtn[2].setOnMouseClicked(new EventHandler<MouseEvent>() {
             public void handle(MouseEvent mouseEvent) {
                 if (info != null) {
-                    info.getMainStage().close();
+                    info.getStage().close();
                 }
                 info = new Info(txtBtn[2]);
             }
@@ -290,7 +290,7 @@ public class Main extends Application {
         mainMenuBtn[3].setOnMouseClicked(new EventHandler<MouseEvent>() {
             public void handle(MouseEvent mouseEvent) {
                 if (info != null) {
-                    info.getMainStage().close();
+                    info.getStage().close();
                 }
                 info = new Info(txtBtn[3]);
             }
