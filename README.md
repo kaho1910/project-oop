@@ -3,8 +3,8 @@
 #### for OOP Project
 
 ## by *Team Ohm*
-1. Kamonchet  Pherai                **63070002**
-2. Jakarin    Yensuk                **63070017**
-3. Chaowat    Intarapanit           **63070040**
-4. Tada       Ampornprasert         **63070083**
-5. Thirawee   Thitiwattanakornsiri  **63070088**
+1. **63070002** Kamonchet  Pherai                
+2. **63070017** Jakarin    Yensuk                
+3. **63070040** Chaowat    Intarapanit          
+4. **63070083** Tada       Ampornprasert         
+5. **63070088** Thirawee   Thitiwattanakornsiri  
