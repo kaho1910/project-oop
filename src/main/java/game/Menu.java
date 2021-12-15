@@ -27,7 +27,7 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
-public class Main extends Application {
+public class Menu extends Application {
     private static final int playerNum = 4;
     private static final int TileSize = 80;
     private static final int Width = 10;
@@ -51,7 +51,7 @@ public class Main extends Application {
     private MediaPlayer mediaPlayer;
     private Media media;
 
-    private Main thisMain = this;
+    private Menu thisMenu = this;
     private Stage primaryStage;
 
     public Parent mainMenu() {
@@ -199,7 +199,7 @@ public class Main extends Application {
                     selector.getBtn()[i].setOnAction(new EventHandler<ActionEvent>() {
                         public void handle(ActionEvent actionEvent) {
                             //                GAME
-                            playerController = new PlayerController(cardPool, thisMain);
+                            playerController = new PlayerController(cardPool, thisMenu);
                             int mapSelected;
                             if (actionEvent.getSource().equals(selector.getBtn()[0])) {
                                 mapSelected = 1;
@@ -297,7 +297,7 @@ public class Main extends Application {
         });
     }
 
-    public static void main(String[] args) {
+    public static void begin(String[] args) {
         launch(args);
     }
 

@@ -16,11 +16,11 @@ public class Player extends Rectangle {
     private int position = 1;
     private PowerCard[] cards = new PowerCard[3];
     private int numCardOnHand;
-    private final int tileSize = Main.getTileSize();
-    private final int width = Main.getWidth();
-    private final int height = Main.getHeight();
-    private final int offSetX = Main.getOffSetX();
-    private final int offSetY = Main.getOffSetY();
+    private final int tileSize = Menu.getTileSize();
+    private final int width = Menu.getWidth();
+    private final int height = Menu.getHeight();
+    private final int offSetX = Menu.getOffSetX();
+    private final int offSetY = Menu.getOffSetY();
     private Table table;
     private int[] pickCardHistory;
     private PlayerController controller;

@@ -48,12 +48,12 @@ public class Info {
         stage.show();
     }
 
-    public Info(int[] winnerList, Main main){
-        main.getMediaPlayer().stop();
-        main.setMedia(new Media(getClass().getResource("/sound/Victory.mp3").toExternalForm()));
-        main.setMediaPlayer(new MediaPlayer(main.getMedia()));
-        main.getMediaPlayer().setVolume(0.4);
-        main.getMediaPlayer().play();
+    public Info(int[] winnerList, Menu menu){
+        menu.getMediaPlayer().stop();
+        menu.setMedia(new Media(getClass().getResource("/sound/Victory.mp3").toExternalForm()));
+        menu.setMediaPlayer(new MediaPlayer(menu.getMedia()));
+        menu.getMediaPlayer().setVolume(0.4);
+        menu.getMediaPlayer().play();
 
         int numWinner = winnerList.length;
 
@@ -161,9 +161,9 @@ public class Info {
         txt[0].setOnMouseClicked(new EventHandler<MouseEvent>() {
             public void handle(MouseEvent event) {
                 stage.close();
-                main.getMediaPlayer().stop();
-                main.setSceneMainMenu(new Scene(main.mainMenu()));
-                main.startGame();
+                menu.getMediaPlayer().stop();
+                menu.setSceneMainMenu(new Scene(menu.mainMenu()));
+                menu.startGame();
             }
         });
 

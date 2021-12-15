@@ -8,7 +8,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.Rectangle;
 
 public class PlayerController implements Runnable {
-    private int playerNum = Main.getPlayerNum();
+    private int playerNum = Menu.getPlayerNum();
     private Player[] players;
     private boolean lastTurn = false;
     private int[][] ladder;
@@ -25,11 +25,11 @@ public class PlayerController implements Runnable {
 
     private Button useCardBtn;
 
-    private Main thisMain;
+    private Menu thisMenu;
 
-    public PlayerController(int[] cardPool, Main main) {
+    public PlayerController(int[] cardPool, Menu menu) {
         controller = this;
-        thisMain = main;
+        thisMenu = menu;
         this.cardPool = cardPool;
         for (int i :
                 cardPool) {
@@ -161,7 +161,7 @@ public class PlayerController implements Runnable {
         }
         Platform.runLater(new Runnable(){
             public void run() {
-                new Info(winnerList, thisMain);
+                new Info(winnerList, thisMenu);
             }
         });
     }
