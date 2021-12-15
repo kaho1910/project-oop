@@ -47,6 +47,7 @@ public class Menu extends Application {
     private String[] txtBtn = {"Start", "How to play", "Cards", "Developers"};
     private Info info;
     private Text teams;
+    private Rectangle exit;
 
     private MediaPlayer mediaPlayer;
     private Media media;
@@ -112,7 +113,22 @@ public class Menu extends Application {
         teams.setTranslateX(200);
         teams.setTranslateY(890);
 
-        groupMainMenu.getChildren().addAll(rect, titleRect, subTitleRect, teams);
+        exit = new Rectangle();
+        exit.setFill(new ImagePattern(new Image(getClass().getResourceAsStream("/img/exit.png"))));
+        exit.setWidth(48);
+        exit.setHeight(48);
+        exit.setTranslateX(1470);
+        exit.setTranslateY(860);
+        exit.setCursor(Cursor.HAND);
+
+        exit.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            public void handle(MouseEvent event) {
+                Platform.exit();
+                System.exit(0);
+            }
+        });
+
+        groupMainMenu.getChildren().addAll(rect, titleRect, subTitleRect, teams, exit);
         groupMainMenu.getChildren().addAll(mainMenuBtn);
 
         return root;
