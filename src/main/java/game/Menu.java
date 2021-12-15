@@ -71,10 +71,10 @@ public class Menu extends Application {
         mainMenuBtn = new Text[4];
         for (int i = 0; i < mainMenuBtn.length; i++) {
             mainMenuBtn[i] = new Text(txtBtn[i]);
-            mainMenuBtn[i].setFont(Font.font(null, FontWeight.BOLD, 72));
+            mainMenuBtn[i].setFont(Font.font(null, FontWeight.BOLD, 60));
             mainMenuBtn[i].setFill(Color.WHITE);
             mainMenuBtn[i].setTranslateX(200);
-            mainMenuBtn[i].setTranslateY(470 + i * 110);
+            mainMenuBtn[i].setTranslateY(450 + i * 110);
 
             mainMenuBtn[i].setOnMouseEntered(new EventHandler<MouseEvent>() {
                 public void handle(MouseEvent mouseEvent) {
@@ -96,7 +96,7 @@ public class Menu extends Application {
         titleRect.setWidth(1105);
         titleRect.setHeight(123.5);
         titleRect.setTranslateX(100);
-        titleRect.setTranslateY(130);
+        titleRect.setTranslateY(90);
 
         Image subTitle = new Image(getClass().getResourceAsStream("/img/subtitle.png"));
         ImagePattern subTitleBox = new ImagePattern(subTitle);
@@ -105,12 +105,12 @@ public class Menu extends Application {
         subTitleRect.setWidth(433);
         subTitleRect.setHeight(61);
         subTitleRect.setTranslateX(110);
-        subTitleRect.setTranslateY(290);
+        subTitleRect.setTranslateY(250);
 
         teams = new Text("© TEAM OHM 2021");
         teams.setFont(Font.font(null, FontWeight.BOLD, 26));
         teams.setFill(Color.WHITE);
-        teams.setTranslateX(200);
+        teams.setTranslateX(100);
         teams.setTranslateY(890);
 
         exit = new Rectangle();
