@@ -27,6 +27,7 @@ public class Player extends Rectangle {
     private int willSkip;
     private double runTimes;
     private int runPlus;
+    private int[] coordinate;
 
     private boolean threadRun;
     private TranslateTransition animate;
@@ -82,7 +83,7 @@ public class Player extends Rectangle {
 
     public void moveTo(int pos) {
         this.position = pos;
-        int[] coordinate = calculateXY();
+        coordinate = calculateXY();
         animate = new TranslateTransition(Duration.millis(400), this);
         animate.setToX(coordinate[0]);
         animate.setToY(coordinate[1]);
