@@ -165,7 +165,7 @@ public class PowerCard implements Card {
                         if (player.getPlayerTable().isTurn()) {
 //                            targetPopup.setCancelled(true);
                             for (int i = 0; i < targetPopup.getPbutton().length; i++) {
-                                if (player.getID() - 1 != i & player.getPosition() != 100) {
+                                if (player.getID() - 1 != i & player.getPosition() != 100 & player.getWillSkip() != -1) {
                                     targetPopup.getPbutton()[i].setDisable(false);
                                 }
                             }
