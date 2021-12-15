@@ -68,14 +68,14 @@ public class Info {
         if (numWinner == 1){
             title.setFill(new ImagePattern(new Image(getClass().getResourceAsStream("/img/winner.png"))));
             title.setWidth(327);
-            title.setTranslateX(376.5);
+            title.setTranslateX(-163.5);
         } else {
             title.setFill(new ImagePattern(new Image(getClass().getResourceAsStream("/img/winners.png"))));
             title.setWidth(371);
-            title.setTranslateX(354.5);
+            title.setTranslateX(-185.5);
         }
         title.setHeight(95);
-        title.setTranslateY(70);
+        title.setTranslateY(-340);
 
         Rectangle[] winner = new Rectangle[numWinner];
         Rectangle[] frame = new Rectangle[numWinner];
@@ -92,56 +92,62 @@ public class Info {
 
         switch (numWinner){
             case 1:
-                winner[0].setTranslateX(420);
-                winner[0].setTranslateY(285);
+                winner[0].setTranslateX(-120);
+                winner[0].setTranslateY(-180);
 
-                frame[0].setTranslateX(400);
-                frame[0].setTranslateY(265);
+                frame[0].setTranslateX(-140);
+                frame[0].setTranslateY(-200);
                 break;
             case 2:
-                winner[0].setTranslateX(255);
-                winner[0].setTranslateY(285);
-                winner[1].setTranslateX(585);
-                winner[1].setTranslateY(285);
+                winner[0].setTranslateX(-285);
+                winner[0].setTranslateY(-180);
+                winner[1].setTranslateX(45);
+                winner[1].setTranslateY(-180);
 
-                frame[0].setTranslateX(235);
-                frame[0].setTranslateY(265);
-                frame[1].setTranslateX(565);
-                frame[1].setTranslateY(265);
+                frame[0].setTranslateX(-305);
+                frame[0].setTranslateY(-200);
+                frame[1].setTranslateX(25);
+                frame[1].setTranslateY(-200);
                 break;
             case 3:
-                winner[0].setTranslateX(255);
-                winner[0].setTranslateY(190);
-                winner[1].setTranslateX(585);
-                winner[1].setTranslateY(190);
-                winner[2].setTranslateX(420);
-                winner[2].setTranslateY(520);
+                title.setTranslateY(-410);
+                winner[0].setTranslateX(-270);
+                winner[0].setTranslateY(-285);
+                winner[1].setTranslateX(30);
+                winner[1].setTranslateY(-285);
 
-                frame[0].setTranslateX(235);
-                frame[0].setTranslateY(170);
-                frame[1].setTranslateX(565);
-                frame[1].setTranslateY(170);
-                frame[2].setTranslateX(400);
-                frame[2].setTranslateY(500);
+                winner[2].setTranslateX(-120);
+                winner[2].setTranslateY(15);
+
+                frame[0].setTranslateX(-290);
+                frame[0].setTranslateY(-305);
+                frame[1].setTranslateX(10);
+                frame[1].setTranslateY(-305);
+
+                frame[2].setTranslateX(-140);
+                frame[2].setTranslateY(-5);
                 break;
             case 4:
-                winner[0].setTranslateX(255);
-                winner[0].setTranslateY(190);
-                winner[1].setTranslateX(585);
-                winner[1].setTranslateY(190);
-                winner[2].setTranslateX(255);
-                winner[2].setTranslateY(520);
-                winner[3].setTranslateX(585);
-                winner[3].setTranslateY(520);
+                title.setTranslateY(-410);
+                winner[0].setTranslateX(-270);
+                winner[0].setTranslateY(-285);
+                winner[1].setTranslateX(30);
+                winner[1].setTranslateY(-285);
 
-                frame[0].setTranslateX(235);
-                frame[0].setTranslateY(170);
-                frame[1].setTranslateX(565);
-                frame[1].setTranslateY(170);
-                frame[2].setTranslateX(235);
-                frame[2].setTranslateY(500);
-                frame[3].setTranslateX(565);
-                frame[3].setTranslateY(500);
+                winner[2].setTranslateX(-270);
+                winner[2].setTranslateY(15);
+                winner[3].setTranslateX(30);
+                winner[3].setTranslateY(15);
+
+                frame[0].setTranslateX(-290);
+                frame[0].setTranslateY(-305);
+                frame[1].setTranslateX(10);
+                frame[1].setTranslateY(-305);
+
+                frame[2].setTranslateX(-290);
+                frame[2].setTranslateY(-5);
+                frame[3].setTranslateX(10);
+                frame[3].setTranslateY(-5);
                 break;
         }
 
@@ -149,16 +155,14 @@ public class Info {
             winner[i].setFill(new ImagePattern(new Image(getClass().getResourceAsStream(String.format("/img/characters/%d-positive.png", winnerList[i])))));
         }
 
-        Text[] txt = {new Text("Menu"), new Text("Exit")};
-        for (int i=0; i < txt.length; i++){
-            txt[i].setCursor(Cursor.HAND);
-            txt[i].setFont(Font.font(null, FontWeight.BOLD, 48));
-            txt[i].setFill(Color.WHITE);
-            txt[i].setTranslateX(300 + 370 * i);
-            txt[i].setTranslateY(830);
-        }
+        Text txt = new Text("BACK TO MENU");
+        txt.setCursor(Cursor.HAND);
+        txt.setFont(Font.font(null, FontWeight.BOLD, 40));
+        txt.setFill(Color.WHITE);
+        txt.setTranslateX(-370);
+        txt.setTranslateY(370);
 
-        txt[0].setOnMouseClicked(new EventHandler<MouseEvent>() {
+        txt.setOnMouseClicked(new EventHandler<MouseEvent>() {
             public void handle(MouseEvent event) {
                 stage.close();
                 menu.getMediaPlayer().stop();
@@ -167,27 +171,22 @@ public class Info {
             }
         });
 
-        txt[1].setOnMouseClicked(new EventHandler<MouseEvent>() {
-            public void handle(MouseEvent event) {
-                Platform.exit();
-                System.exit(0);
-            }
-        });
-
         Group group = new Group(title);
         group.getChildren().addAll(winner);
-        group.getChildren().addAll(txt);
         group.getChildren().addAll(frame);
         StackPane panel = new StackPane();
         panel.getChildren().addAll(bg, group);
+        panel.getChildren().addAll(txt);
         Scene scene = new Scene(panel, 1080, 810);
         stage.setScene(scene);
         stage.show();
 
         stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
             public void handle(WindowEvent e) {
-                Platform.exit();
-                System.exit(0);
+                stage.close();
+                menu.getMediaPlayer().stop();
+                menu.setSceneMainMenu(new Scene(menu.mainMenu()));
+                menu.startGame();
             }
         });
     }

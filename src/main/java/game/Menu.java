@@ -295,6 +295,9 @@ public class Menu extends Application {
                 info = new Info(txtBtn[3]);
             }
         });
+
+        int[] list = {1};
+        new Info(list, thisMenu);
     }
 
     public static void begin(String[] args) {
