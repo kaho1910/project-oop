@@ -184,7 +184,7 @@ public class PlayerController implements Runnable {
             if (player.getPosition() == pickCard[i]) {
                 if (player.getPickCardHistory()[i] == 0) {
                     System.out.println("id: " + player.getID() + " already been here");
-                    new Notice("Snakes and Ladders", "Player: " + player.getID() + " already been here");
+                    new Notice("Snakes and Ladders", "Player " + player.getID() + " already been here");
                 } else if (player.getNumCardOnHand() == 3) {
                     System.out.println("maximum card on hand");
                     new Notice("Snakes and Ladders", "maximum card on hand");
@@ -192,7 +192,7 @@ public class PlayerController implements Runnable {
                     for (int j = 0; j < 3; j++) {
                         if (player.getCards()[j].getCardID() == 0) {
                             System.out.println("id: " + player.getID() + " Pick new card");
-                            new Notice("Snakes and Ladders", "Player: " + player.getID() + " Pick new card");
+                            new Notice("Snakes and Ladders", "Player " + player.getID() + " Pick new card");
                             player.setCards(new PowerCard(this, player, false, false), j);
                             player.getPickCardHistory()[i] = 0;
                             break;
@@ -247,12 +247,12 @@ public class PlayerController implements Runnable {
     public void endTurnChecker(Player player) {
         onLadder(player);
         onTrap(player);
-        new Notice("Player: " + player.getID(), "at " + player.getPosition());
+        new Notice("Player " + player.getID(), "at " + player.getPosition());
         onPickCard(player);
         if (isLastTurn() & !lastTurnAlert) {
             lastTurnAlert = true;
             System.out.println("\nPlayer " + player.getID() + " has TRIGGER Last Turn");
-            new Notice("Snakes and Ladders", "Player: " + player.getID() + " has TRIGGER Last Turn");
+            new Notice("Snakes and Ladders", "Player " + player.getID() + " has TRIGGER Last Turn");
         }
     }
 

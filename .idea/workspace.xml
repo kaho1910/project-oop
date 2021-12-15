@@ -6,13 +6,13 @@
   <component name="ChangeListManager">
     <list default="true" id="0ca7bf75-45b4-4a3c-ab30-c8b2c9d260a8" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/game/Menu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/game/Menu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/game/Table.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/game/Table.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/game/Menu.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/game/Menu.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/game/Table$1$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/game/Table$1$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/game/Table$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/game/Table$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/game/Table$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/game/Table$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/game/Table.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/game/Table.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/game/PlayerController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/game/PlayerController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/game/PowerCard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/game/PowerCard.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/game/TrapTile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/game/TrapTile.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/game/PlayerController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/game/PlayerController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/game/PowerCard$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/game/PowerCard$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/game/PowerCard.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/game/PowerCard.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/game/TrapTile.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/game/TrapTile.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -94,7 +94,7 @@
       <workItem from="1639403792612" duration="12351000" />
       <workItem from="1639454929855" duration="25378000" />
       <workItem from="1639489757434" duration="115000" />
-      <workItem from="1639541560560" duration="12600000" />
+      <workItem from="1639541560560" duration="13620000" />
     </task>
     <servers />
   </component>
