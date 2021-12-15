@@ -164,6 +164,12 @@ public class Player extends Rectangle {
             }
         }
         threadRun = false;
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        controller.endTurnChecker(this);
     }
 
     public int getPosition() {

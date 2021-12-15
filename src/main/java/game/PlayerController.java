@@ -121,7 +121,7 @@ public class PlayerController implements Runnable {
                     System.out.print(""); // ศักดิ์สิทธิ์ ห้ามลบ
                     if (players[i].getPlayerTable().isPressed()) {
 //                        System.out.println(players[i].getID() + "-check");
-                        try {
+//                        try {
                             if (players[i].getPosition() < 99 || players[i].getPosition() > 1) {
 //                                System.out.println(players[i].getPlayerTable().getK());
 //                                players[i].setPosition(rand.nextInt(6) + 1);
@@ -130,16 +130,16 @@ public class PlayerController implements Runnable {
                                     new Notice("Snakes and Ladders", "Player: " + players[i].getID() + " at Goal");
                                     lastTurn = true;
                                 }
-                                Thread.sleep(1000);
-                            }
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
+//                                Thread.sleep(1000);
+//                            }
+//                        } catch (InterruptedException e) {
+//                            e.printStackTrace();
                         }
                         players[i].getPlayerTable().setPressed(false);
                         break;
                     }
                 }
-                endTurnChecker(players[i]);
+//                endTurnChecker(players[i]);
             }
         }
         int numWinner = 0;
