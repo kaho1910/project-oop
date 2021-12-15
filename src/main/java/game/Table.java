@@ -4,10 +4,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.CornerRadii;
-import javafx.scene.layout.StackPane;
+import javafx.scene.layout.*;
 import javafx.scene.image.*;
 
 import javafx.scene.media.Media;
@@ -15,6 +12,8 @@ import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.*;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 
 import java.util.Random;
 
@@ -37,12 +36,24 @@ public class Table {
     private MediaPlayer mediaPlayer;
     private Media media;
 
+    private String emotion = "normal";
+
     public Table(int id, Player player) {
         this.ID = id;
         this.player = player;
         isBlackGlass = "";
         layout = new StackPane();
         layout.setBackground(new Background(new BackgroundFill(Color.web("#ffffff"), CornerRadii.EMPTY, Insets.EMPTY)));
+        Image tableBg = new Image(getClass().getResourceAsStream("/img/123.png"));
+        if (id % 2 == 1) {
+            tableBg = new Image(getClass().getResourceAsStream("/img/321.png"));
+        }
+        layout.setBackground(new Background(new BackgroundImage(tableBg,
+                BackgroundRepeat.NO_REPEAT,
+                BackgroundRepeat.NO_REPEAT,
+                BackgroundPosition.DEFAULT,
+                BackgroundSize.DEFAULT)));
+
         diceButton = new Button();
         player_frame = new Rectangle();
         inner_frame = new Rectangle();
@@ -55,29 +66,30 @@ public class Table {
         player_frame.setWidth(170);
         player_frame.setHeight(170);
         player_frame.setTranslateX(0);
-        player_frame.setTranslateY(-100);
+        player_frame.setTranslateY(-80);
         im1 = new Image(getClass().getResourceAsStream("/img/blog.png"));
         player_frame.setFill(new ImagePattern(im1));
         //inner
         inner_frame.setWidth(147);
         inner_frame.setHeight(147);
         inner_frame.setTranslateX(-0);
-        inner_frame.setTranslateY(-100);
+        inner_frame.setTranslateY(-80);
 
-        im2 = new Image(getClass().getResourceAsStream(String.format("/img/characters/%d-%s%s.png", id, "normal", isBlackGlass)));
+        im2 = new Image(getClass().getResourceAsStream(String.format("/img/characters/%d-%s%s.png", id, emotion, isBlackGlass)));
 
         inner_frame.setFill(new ImagePattern(im2));
         ///dice
         dice_frame.setWidth(80);
         dice_frame.setHeight(80);
         dice_frame.setTranslateX(-120);
-        dice_frame.setTranslateY(90);
+        dice_frame.setTranslateY(80);
         Image im3 = new Image(getClass().getResourceAsStream("/img/dice/dice1.png"));
         dice_frame.setFill(new ImagePattern(im3));
         //dice button
         diceButton.setText("Roll");
+        diceButton.setFont(Font.font(null, FontWeight.BOLD, 14));
         diceButton.setTranslateX(-120);
-        diceButton.setTranslateY(150);
+        diceButton.setTranslateY(145);
         //System.out.println("/img/dice/dice"+(random.nextInt(6)+1)+".png");
         diceButton.setDisable(true);
         diceButton.setOnAction(new EventHandler<ActionEvent>() {
@@ -115,12 +127,12 @@ public class Table {
             cardFrame[i] = new Rectangle();
             cardFrame[i].setWidth(60);
             cardFrame[i].setHeight(72);
-            cardFrame[i].setTranslateX(-20 + 80 * i);
+            cardFrame[i].setTranslateX(-20 + 70 * i);
             cardFrame[i].setTranslateY(90);
             innercardFrame[i] = new Rectangle();
             innercardFrame[i].setWidth(60);
             innercardFrame[i].setHeight(72);
-            innercardFrame[i].setTranslateX(-20 + 80 * i);
+            innercardFrame[i].setTranslateX(-20 + 70 * i);
             innercardFrame[i].setTranslateY(90);
             innercardFrame[i].setFill(new ImagePattern(new Image(getClass().getResourceAsStream("/img/cards/frameCard.jpg"))));
         }
@@ -207,6 +219,11 @@ public class Table {
             im2 = new Image(getClass().getResourceAsStream(String.format("/img/characters/%d-%s%s.png", ID, "normal", isBlackGlass)));
             inner_frame.setFill(new ImagePattern(im2));
             return;
+        } else if (feedback.equals("out")){
+            im2 = new Image(getClass().getResourceAsStream(String.format("/img/characters/%d-%s%s.png", ID, "out", isBlackGlass)));
+            inner_frame.setFill(new ImagePattern(im2));
+            this.emotion = "out";
+            return;
         }
         Thread t = new Thread() {
             public void run() {
@@ -222,5 +239,9 @@ public class Table {
             }
         };
         t.start();
+    }
+
+    public String getEmotion() {
+        return emotion;
     }
 }

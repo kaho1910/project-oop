@@ -8,7 +8,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.Rectangle;
 
 public class PlayerController implements Runnable {
-    private int playerNum = Main.getPlayerNum();
+    private int playerNum = Menu.getPlayerNum();
     private Player[] players;
     private boolean lastTurn = false;
     private int[][] ladder;
@@ -25,11 +25,11 @@ public class PlayerController implements Runnable {
 
     private Button useCardBtn;
 
-    private Main thisMain;
+    private Menu thisMenu;
 
-    public PlayerController(int[] cardPool, Main main) {
+    public PlayerController(int[] cardPool, Menu menu) {
         controller = this;
-        thisMain = main;
+        thisMenu = menu;
         this.cardPool = cardPool;
         for (int i :
                 cardPool) {
@@ -115,13 +115,14 @@ public class PlayerController implements Runnable {
                 players[i].getPlayerTable().setTurn(true);
                 players[i].getPlayerTable().getDiceButton().setDisable(false);
                 players[i].getPlayerTable().setPressed(false);
-                players[i].getPlayerTable().updateEmotion("normal");
+                players[i].getPlayerTable().updateEmotion(players[i].getPlayerTable().getEmotion());
+                System.out.println(players[i].getPlayerTable().getEmotion());
                 while (true) {
 //                    if (players[i].getPlayerTable().getDice_button().isDisabled()) {
                     System.out.print(""); // ศักดิ์สิทธิ์ ห้ามลบ
                     if (players[i].getPlayerTable().isPressed()) {
 //                        System.out.println(players[i].getID() + "-check");
-                        try {
+//                        try {
                             if (players[i].getPosition() < 99 || players[i].getPosition() > 1) {
 //                                System.out.println(players[i].getPlayerTable().getK());
 //                                players[i].setPosition(rand.nextInt(6) + 1);
@@ -130,16 +131,16 @@ public class PlayerController implements Runnable {
                                     new Notice("Snakes and Ladders", "Player: " + players[i].getID() + " at Goal");
                                     lastTurn = true;
                                 }
-                                Thread.sleep(1000);
-                            }
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
+//                                Thread.sleep(1000);
+//                            }
+//                        } catch (InterruptedException e) {
+//                            e.printStackTrace();
                         }
                         players[i].getPlayerTable().setPressed(false);
                         break;
                     }
                 }
-                endTurnChecker(players[i]);
+//                endTurnChecker(players[i]);
             }
         }
         int numWinner = 0;
@@ -161,7 +162,7 @@ public class PlayerController implements Runnable {
         }
         Platform.runLater(new Runnable(){
             public void run() {
-                new Info(winnerList, thisMain);
+                new Info(winnerList, thisMenu);
             }
         });
     }
@@ -184,7 +185,7 @@ public class PlayerController implements Runnable {
             if (player.getPosition() == pickCard[i]) {
                 if (player.getPickCardHistory()[i] == 0) {
                     System.out.println("id: " + player.getID() + " already been here");
-                    new Notice("Snakes and Ladders", "Player: " + player.getID() + " already been here");
+                    new Notice("Snakes and Ladders", "Player " + player.getID() + " already been here");
                 } else if (player.getNumCardOnHand() == 3) {
                     System.out.println("maximum card on hand");
                     new Notice("Snakes and Ladders", "maximum card on hand");
@@ -192,7 +193,7 @@ public class PlayerController implements Runnable {
                     for (int j = 0; j < 3; j++) {
                         if (player.getCards()[j].getCardID() == 0) {
                             System.out.println("id: " + player.getID() + " Pick new card");
-                            new Notice("Snakes and Ladders", "Player: " + player.getID() + " Pick new card");
+                            new Notice("Snakes and Ladders", "Player " + player.getID() + " Pick new card");
                             player.setCards(new PowerCard(this, player, false, false), j);
                             player.getPickCardHistory()[i] = 0;
                             break;
@@ -247,12 +248,12 @@ public class PlayerController implements Runnable {
     public void endTurnChecker(Player player) {
         onLadder(player);
         onTrap(player);
-        new Notice("Player: " + player.getID(), "at " + player.getPosition());
+        new Notice("Player " + player.getID(), "at " + player.getPosition());
         onPickCard(player);
         if (isLastTurn() & !lastTurnAlert) {
             lastTurnAlert = true;
             System.out.println("\nPlayer " + player.getID() + " has TRIGGER Last Turn");
-            new Notice("Snakes and Ladders", "Player: " + player.getID() + " has TRIGGER Last Turn");
+            new Notice("Snakes and Ladders", "Player " + player.getID() + " has TRIGGER Last Turn");
         }
     }
 

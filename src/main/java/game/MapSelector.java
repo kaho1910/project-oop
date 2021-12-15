@@ -15,6 +15,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
@@ -45,8 +46,8 @@ public class MapSelector {
         ImagePattern bgPattern = new ImagePattern(bg);
         rect.setFill(bgPattern);
 //        rect.setFill(Color.TRANSPARENT);
-        rect.setWidth(400);
-        rect.setHeight(400);
+        rect.setWidth(600);
+        rect.setHeight(600);
 
         Image[] img = new Image[mapNum];
         ImagePattern[] bgImg = new ImagePattern[mapNum];
@@ -58,12 +59,13 @@ public class MapSelector {
 
         Image title = new Image(getClass().getResourceAsStream("/img/select.png"));
         ImageView container = new ImageView(title);
-        container.setFitWidth(240);
-        container.setFitHeight(42.5);
+        container.setFitWidth(360);
+        container.setFitHeight(56);
 
         for (int i = 0; i < mapNum; i++) {
             btn[i] = new Button(mapName[i]);
-            btn[i].setFont(Font.font(16));
+            btn[i].setFont(Font.font(null, FontWeight.THIN, 20));
+            btn[i].setPrefSize(220, 50);
         }
 
         btn[0].setOnMouseEntered(new EventHandler<MouseEvent>() {
@@ -113,9 +115,9 @@ public class MapSelector {
         VBox box = new VBox(container, vBox);
         box.setSpacing(70);
         box.setAlignment(Pos.CENTER);
-        box.setPrefSize(400, 400);
+        box.setPrefSize(600, 600);
 
-        root.setPrefSize(400, 400);
+        root.setPrefSize(600, 600);
 
         group.getChildren().addAll(rect, box);
 

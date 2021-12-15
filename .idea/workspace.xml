@@ -6,8 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="0ca7bf75-45b4-4a3c-ab30-c8b2c9d260a8" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/game/Info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/game/Info.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/game/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/game/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/game/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/game/Player.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -28,7 +27,9 @@
     <option name="stateVersion" value="1" />
   </component>
   <component name="ProjectId" id="22EXapiLNlIk4pEeqvMKJSgeAJF" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="1" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -40,6 +41,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="jdk.selected.JAVA_MODULE" value="16" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -47,9 +49,16 @@
       <recent name="C:\Users\User\Documents\GitHub\project-oop\src\main\java\game" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Application.Main">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="game.Main" />
+      <option name="MAIN_CLASS_NAME" value="MainGame.Main" />
+      <module name="Project-OOP" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Menu" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="game.Menu" />
       <module name="Project-OOP" />
       <extension name="coverage">
         <pattern>
@@ -64,6 +73,7 @@
     <recent_temporary>
       <list>
         <item itemvalue="Application.Main" />
+        <item itemvalue="Application.Menu" />
       </list>
     </recent_temporary>
   </component>
@@ -76,7 +86,10 @@
       <option name="presentableId" value="Default" />
       <updated>1639403788554</updated>
       <workItem from="1639403792612" duration="12351000" />
-      <workItem from="1639454929855" duration="19671000" />
+      <workItem from="1639454929855" duration="25378000" />
+      <workItem from="1639489757434" duration="115000" />
+      <workItem from="1639541560560" duration="20914000" />
+      <workItem from="1639573869427" duration="3416000" />
     </task>
     <servers />
   </component>

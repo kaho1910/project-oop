@@ -16,17 +16,18 @@ public class Player extends Rectangle {
     private int position = 1;
     private PowerCard[] cards = new PowerCard[3];
     private int numCardOnHand;
-    private final int tileSize = Main.getTileSize();
-    private final int width = Main.getWidth();
-    private final int height = Main.getHeight();
-    private final int offSetX = Main.getOffSetX();
-    private final int offSetY = Main.getOffSetY();
+    private final int tileSize = Menu.getTileSize();
+    private final int width = Menu.getWidth();
+    private final int height = Menu.getHeight();
+    private final int offSetX = Menu.getOffSetX();
+    private final int offSetY = Menu.getOffSetY();
     private Table table;
     private int[] pickCardHistory;
     private PlayerController controller;
     private int willSkip;
     private double runTimes;
     private int runPlus;
+    private int[] coordinate;
 
     private boolean threadRun;
     private TranslateTransition animate;
@@ -82,7 +83,7 @@ public class Player extends Rectangle {
 
     public void moveTo(int pos) {
         this.position = pos;
-        int[] coordinate = calculateXY();
+        coordinate = calculateXY();
         animate = new TranslateTransition(Duration.millis(400), this);
         animate.setToX(coordinate[0]);
         animate.setToY(coordinate[1]);
@@ -164,6 +165,12 @@ public class Player extends Rectangle {
             }
         }
         threadRun = false;
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        controller.endTurnChecker(this);
     }
 
     public int getPosition() {

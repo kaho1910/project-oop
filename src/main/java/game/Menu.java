@@ -27,7 +27,7 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
-public class Main extends Application {
+public class Menu extends Application {
     private static final int playerNum = 4;
     private static final int TileSize = 80;
     private static final int Width = 10;
@@ -47,16 +47,16 @@ public class Main extends Application {
     private String[] txtBtn = {"Start", "How to play", "Cards", "Developers"};
     private Info info;
     private Text teams;
+    private Rectangle exit;
 
     private MediaPlayer mediaPlayer;
     private Media media;
 
-    private Main thisMain = this;
+    private Menu thisMenu = this;
     private Stage primaryStage;
 
     public Parent mainMenu() {
         StackPane root = new StackPane();
-        root.setBackground(new Background(new BackgroundFill(Color.web("#d7d7d7"), CornerRadii.EMPTY, Insets.EMPTY)));
         root.getChildren().addAll(groupMainMenu);
         root.setPrefSize(Width * TileSize + offSetX * 2, Height * TileSize + offSetY * 2);
 
@@ -70,10 +70,10 @@ public class Main extends Application {
         mainMenuBtn = new Text[4];
         for (int i = 0; i < mainMenuBtn.length; i++) {
             mainMenuBtn[i] = new Text(txtBtn[i]);
-            mainMenuBtn[i].setFont(Font.font(null, FontWeight.BOLD, 72));
+            mainMenuBtn[i].setFont(Font.font(null, FontWeight.BOLD, 60));
             mainMenuBtn[i].setFill(Color.WHITE);
             mainMenuBtn[i].setTranslateX(200);
-            mainMenuBtn[i].setTranslateY(470 + i * 110);
+            mainMenuBtn[i].setTranslateY(450 + i * 110);
 
             mainMenuBtn[i].setOnMouseEntered(new EventHandler<MouseEvent>() {
                 public void handle(MouseEvent mouseEvent) {
@@ -95,7 +95,7 @@ public class Main extends Application {
         titleRect.setWidth(1105);
         titleRect.setHeight(123.5);
         titleRect.setTranslateX(100);
-        titleRect.setTranslateY(130);
+        titleRect.setTranslateY(90);
 
         Image subTitle = new Image(getClass().getResourceAsStream("/img/subtitle.png"));
         ImagePattern subTitleBox = new ImagePattern(subTitle);
@@ -104,15 +104,30 @@ public class Main extends Application {
         subTitleRect.setWidth(433);
         subTitleRect.setHeight(61);
         subTitleRect.setTranslateX(110);
-        subTitleRect.setTranslateY(290);
+        subTitleRect.setTranslateY(250);
 
         teams = new Text("© TEAM OHM 2021");
         teams.setFont(Font.font(null, FontWeight.BOLD, 26));
         teams.setFill(Color.WHITE);
-        teams.setTranslateX(200);
+        teams.setTranslateX(100);
         teams.setTranslateY(890);
 
-        groupMainMenu.getChildren().addAll(rect, titleRect, subTitleRect, teams);
+        exit = new Rectangle();
+        exit.setFill(new ImagePattern(new Image(getClass().getResourceAsStream("/img/exit.png"))));
+        exit.setWidth(48);
+        exit.setHeight(48);
+        exit.setTranslateX(1470);
+        exit.setTranslateY(860);
+        exit.setCursor(Cursor.HAND);
+
+        exit.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            public void handle(MouseEvent event) {
+                Platform.exit();
+                System.exit(0);
+            }
+        });
+
+        groupMainMenu.getChildren().addAll(rect, titleRect, subTitleRect, teams, exit);
         groupMainMenu.getChildren().addAll(mainMenuBtn);
 
         return root;
@@ -122,6 +137,7 @@ public class Main extends Application {
         StackPane root = new StackPane();
         root.getChildren().addAll(groupMap);
         root.setPrefSize(Width * TileSize + offSetX * 2, Height * TileSize + offSetY * 2);
+        root.setBackground(new Background(new BackgroundFill(Color.web("#d7d7d7"), CornerRadii.EMPTY, Insets.EMPTY)));
 
 //        for(int i=0; i < Height; i++){
 //            for(int j=0; j < Width; j++){
@@ -148,7 +164,7 @@ public class Main extends Application {
             pane = ptb.getLayout();
             pane.setPrefSize(Width * TileSize / 2, Height * TileSize / 2);
             pane.setTranslateX((i % 2) * Width * TileSize / 2 * 3);
-            pane.setTranslateY(i > 1 ? Width * TileSize / 2 + 80 : 80);
+            pane.setTranslateY(i > 1 ? Width * TileSize / 2 + 120 : 40);
             groupMap.getChildren().add(pane);
         }
 
@@ -199,7 +215,7 @@ public class Main extends Application {
                     selector.getBtn()[i].setOnAction(new EventHandler<ActionEvent>() {
                         public void handle(ActionEvent actionEvent) {
                             //                GAME
-                            playerController = new PlayerController(cardPool, thisMain);
+                            playerController = new PlayerController(cardPool, thisMenu);
                             int mapSelected;
                             if (actionEvent.getSource().equals(selector.getBtn()[0])) {
                                 mapSelected = 1;
@@ -297,7 +313,7 @@ public class Main extends Application {
         });
     }
 
-    public static void main(String[] args) {
+    public static void begin(String[] args) {
         launch(args);
     }
 

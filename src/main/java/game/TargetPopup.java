@@ -8,6 +8,8 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
@@ -54,13 +56,14 @@ public class TargetPopup {
             frame[i] = controller.getPlayers()[i].getPlayerTable().getIm1();
             framebox[i] = new Rectangle();
             innerframebox[i] = new Rectangle();
-            pbutton[i].setText("select");
+            pbutton[i].setText("Select");
+            pbutton[i].setFont(Font.font(null, FontWeight.BOLD, 16));
             pbutton[i].setDisable(true);
             framebox[i].setHeight(170);
             framebox[i].setWidth(170);
             framebox[i].setFill(new ImagePattern(frame[i]));
-            innerframebox[i].setHeight(120);
-            innerframebox[i].setWidth(120);
+            innerframebox[i].setHeight(148);
+            innerframebox[i].setWidth(148);
             innerframebox[i].setFill(new ImagePattern(profile[i]));
 
             if ((i + 1) % 2 == 0) {

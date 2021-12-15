@@ -53,6 +53,7 @@ public class PowerCard implements Card {
             case 12:
                 System.out.println("\nswitch card id: 12");
                 player.getPlayerTable().setIsBlackGlass("-g");
+                player.getPlayerTable().updateEmotion("normal");
                 break;
             case 13:
                 System.out.println("\nswitch card id: 13");
@@ -164,7 +165,7 @@ public class PowerCard implements Card {
                         if (player.getPlayerTable().isTurn()) {
 //                            targetPopup.setCancelled(true);
                             for (int i = 0; i < targetPopup.getPbutton().length; i++) {
-                                if (player.getID() - 1 != i & player.getPosition() != 100) {
+                                if (player.getID() - 1 != i & player.getPosition() != 100 & controller.getPlayers()[i].getWillSkip() > -1) {
                                     targetPopup.getPbutton()[i].setDisable(false);
                                 }
                             }
@@ -198,7 +199,7 @@ public class PowerCard implements Card {
                     boolean isAngeled = false;
 
                     if (needTarget != 0) {
-                        System.out.println("Target: " + (target + 1));
+                        System.out.println("Target: Player " + (target + 1));
                         Player targetPlayer = controller.getPlayers()[target];
 
                         for (int i = 0; i < 3; i++) {
@@ -220,33 +221,34 @@ public class PowerCard implements Card {
                             case 13:
                             case 14:
                                 targetPlayer.setWillSkip(-1);
-                                new Notice("Snakes and Ladders", "Player: " + targetPlayer.getID() + " is removed from game");
+                                targetEmotion = "out";
+                                new Notice("Snakes and Ladders", "Player " + targetPlayer.getID() + " is removed from game");
                                 break;
                             case 31:
                                 targetPlayer.setPosition(2);
                                 controller.endTurnChecker(targetPlayer);
                                 targetEmotion = "positive";
                                 playerEmotion = "negative";
-                                new Notice("Snakes and Ladders", "Player: " + targetPlayer.getID() + " move forward 2 tiles");
+                                new Notice("Snakes and Ladders", "Player " + targetPlayer.getID() + " move forward 2 tiles");
                                 break;
                             case 32:
                                 targetPlayer.setPosition(-2);
                                 controller.endTurnChecker(targetPlayer);
-                                new Notice("Snakes and Ladders", "Player: " + targetPlayer.getID() + " move backward 2 tiles");
+                                new Notice("Snakes and Ladders", "Player " + targetPlayer.getID() + " move backward 2 tiles");
                                 break;
                             case 33:
                                 targetPlayer.setRunTimes(2);
                                 targetEmotion = "positive";
                                 playerEmotion = "negative";
-                                new Notice("Snakes and Ladders", "Player: " + targetPlayer.getID() + " next turn move will be doubled");
+                                new Notice("Snakes and Ladders", "Player " + targetPlayer.getID() + " next turn move will be doubled");
                                 break;
                             case 34:
                                 targetPlayer.setRunTimes(0.5);
-                                new Notice("Snakes and Ladders", "Player: " + targetPlayer.getID() + " next turn move will be half");
+                                new Notice("Snakes and Ladders", "Player " + targetPlayer.getID() + " next turn move will be half");
                                 break;
                             default:
                                 System.out.println("Player " + targetPlayer.getID() + " is protected by Ohm-angel Card");
-                                new Notice("Snakes and Ladders", "Player: " + targetPlayer.getID() + " is protected by Ohm-angel Card");
+                                new Notice("Snakes and Ladders", "Player " + targetPlayer.getID() + " is protected by Ohm-angel Card");
                                 targetEmotion = "positive";
                                 playerEmotion = "negative";
                                 break;
@@ -289,7 +291,7 @@ public class PowerCard implements Card {
 
 //        PowerCard test return HERE
 
-//        return rand.nextInt(2) + 41;
+//        return rand.nextInt(4) + 11;
 
 
 //        Production return HERE
