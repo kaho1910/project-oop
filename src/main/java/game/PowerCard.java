@@ -53,6 +53,7 @@ public class PowerCard implements Card {
             case 12:
                 System.out.println("\nswitch card id: 12");
                 player.getPlayerTable().setIsBlackGlass("-g");
+                player.getPlayerTable().updateEmotion("normal");
                 break;
             case 13:
                 System.out.println("\nswitch card id: 13");
