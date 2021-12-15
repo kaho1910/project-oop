@@ -36,6 +36,8 @@ public class Table {
     private MediaPlayer mediaPlayer;
     private Media media;
 
+    private String emotion = "normal";
+
     public Table(int id, Player player) {
         this.ID = id;
         this.player = player;
@@ -73,7 +75,7 @@ public class Table {
         inner_frame.setTranslateX(-0);
         inner_frame.setTranslateY(-80);
 
-        im2 = new Image(getClass().getResourceAsStream(String.format("/img/characters/%d-%s%s.png", id, "normal", isBlackGlass)));
+        im2 = new Image(getClass().getResourceAsStream(String.format("/img/characters/%d-%s%s.png", id, emotion, isBlackGlass)));
 
         inner_frame.setFill(new ImagePattern(im2));
         ///dice
@@ -217,6 +219,11 @@ public class Table {
             im2 = new Image(getClass().getResourceAsStream(String.format("/img/characters/%d-%s%s.png", ID, "normal", isBlackGlass)));
             inner_frame.setFill(new ImagePattern(im2));
             return;
+        } else if (feedback.equals("out")){
+            im2 = new Image(getClass().getResourceAsStream(String.format("/img/characters/%d-%s%s.png", ID, "negative", isBlackGlass)));
+            inner_frame.setFill(new ImagePattern(im2));
+            this.emotion = "out";
+            return;
         }
         Thread t = new Thread() {
             public void run() {
@@ -232,5 +239,9 @@ public class Table {
             }
         };
         t.start();
+    }
+
+    public String getEmotion() {
+        return emotion;
     }
 }

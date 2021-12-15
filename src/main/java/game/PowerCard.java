@@ -165,7 +165,7 @@ public class PowerCard implements Card {
                         if (player.getPlayerTable().isTurn()) {
 //                            targetPopup.setCancelled(true);
                             for (int i = 0; i < targetPopup.getPbutton().length; i++) {
-                                if (player.getID() - 1 != i & player.getPosition() != 100 & player.getWillSkip() != -1) {
+                                if (player.getID() - 1 != i & player.getPosition() != 100 & controller.getPlayers()[i].getWillSkip() > -1) {
                                     targetPopup.getPbutton()[i].setDisable(false);
                                 }
                             }
@@ -221,6 +221,7 @@ public class PowerCard implements Card {
                             case 13:
                             case 14:
                                 targetPlayer.setWillSkip(-1);
+                                targetPlayer.getPlayerTable().updateEmotion("out");
                                 new Notice("Snakes and Ladders", "Player " + targetPlayer.getID() + " is removed from game");
                                 break;
                             case 31:

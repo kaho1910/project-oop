@@ -110,7 +110,7 @@ public class Info {
                 frame[1].setTranslateY(-200);
                 break;
             case 3:
-                title.setTranslateY(-410);
+                title.setTranslateY(-425);
                 winner[0].setTranslateX(-270);
                 winner[0].setTranslateY(-285);
                 winner[1].setTranslateX(30);
@@ -128,7 +128,7 @@ public class Info {
                 frame[2].setTranslateY(-5);
                 break;
             case 4:
-                title.setTranslateY(-410);
+                title.setTranslateY(-425);
                 winner[0].setTranslateX(-270);
                 winner[0].setTranslateY(-285);
                 winner[1].setTranslateX(30);
@@ -157,9 +157,9 @@ public class Info {
 
         Text txt = new Text("BACK TO MENU");
         txt.setCursor(Cursor.HAND);
-        txt.setFont(Font.font(null, FontWeight.BOLD, 40));
+        txt.setFont(Font.font(null, FontWeight.BOLD, 28));
         txt.setFill(Color.WHITE);
-        txt.setTranslateX(-370);
+        txt.setTranslateX(-400);
         txt.setTranslateY(370);
 
         txt.setOnMouseClicked(new EventHandler<MouseEvent>() {
