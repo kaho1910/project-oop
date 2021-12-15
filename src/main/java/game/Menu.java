@@ -57,7 +57,6 @@ public class Menu extends Application {
 
     public Parent mainMenu() {
         StackPane root = new StackPane();
-        root.setBackground(new Background(new BackgroundFill(Color.web("#d7d7d7"), CornerRadii.EMPTY, Insets.EMPTY)));
         root.getChildren().addAll(groupMainMenu);
         root.setPrefSize(Width * TileSize + offSetX * 2, Height * TileSize + offSetY * 2);
 
@@ -138,6 +137,7 @@ public class Menu extends Application {
         StackPane root = new StackPane();
         root.getChildren().addAll(groupMap);
         root.setPrefSize(Width * TileSize + offSetX * 2, Height * TileSize + offSetY * 2);
+        root.setBackground(new Background(new BackgroundFill(Color.web("#d7d7d7"), CornerRadii.EMPTY, Insets.EMPTY)));
 
 //        for(int i=0; i < Height; i++){
 //            for(int j=0; j < Width; j++){
