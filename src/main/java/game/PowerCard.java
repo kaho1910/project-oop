@@ -221,7 +221,7 @@ public class PowerCard implements Card {
                             case 13:
                             case 14:
                                 targetPlayer.setWillSkip(-1);
-                                targetPlayer.getPlayerTable().updateEmotion("out");
+                                targetEmotion = "out";
                                 new Notice("Snakes and Ladders", "Player " + targetPlayer.getID() + " is removed from game");
                                 break;
                             case 31:
@@ -291,7 +291,7 @@ public class PowerCard implements Card {
 
 //        PowerCard test return HERE
 
-//        return rand.nextInt(2) + 41;
+//        return rand.nextInt(4) + 11;
 
 
 //        Production return HERE

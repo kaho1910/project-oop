@@ -220,7 +220,7 @@ public class Table {
             inner_frame.setFill(new ImagePattern(im2));
             return;
         } else if (feedback.equals("out")){
-            im2 = new Image(getClass().getResourceAsStream(String.format("/img/characters/%d-%s%s.png", ID, "negative", isBlackGlass)));
+            im2 = new Image(getClass().getResourceAsStream(String.format("/img/characters/%d-%s%s.png", ID, "out", isBlackGlass)));
             inner_frame.setFill(new ImagePattern(im2));
             this.emotion = "out";
             return;
