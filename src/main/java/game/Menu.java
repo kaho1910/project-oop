@@ -44,7 +44,7 @@ public class Menu extends Application {
     private Scene sceneMainMenu;
     private MapSelector selector;
     private Text[] mainMenuBtn;
-    private String[] txtBtn = {"Start", "How to play", "Cards", "Developers"};
+    private String[] txtBtn = {"Start", "How to play", "Cards", "Team members"};
     private Info info;
     private Text teams;
     private Rectangle exit;
