@@ -164,7 +164,7 @@ public class Menu extends Application {
             pane = ptb.getLayout();
             pane.setPrefSize(Width * TileSize / 2, Height * TileSize / 2);
             pane.setTranslateX((i % 2) * Width * TileSize / 2 * 3);
-            pane.setTranslateY(i > 1 ? Width * TileSize / 2 + 80 : 80);
+            pane.setTranslateY(i > 1 ? Width * TileSize / 2 + 120 : 40);
             groupMap.getChildren().add(pane);
         }
 
