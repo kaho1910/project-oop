@@ -240,7 +240,7 @@ public class PlayerController implements Runnable {
         onTrap(player);
         new Notice("Player " + player.getID(), "at " + player.getPosition());
         onPickCard(player);
-        if (isLastTurn() & !lastTurnAlert & player.getPosition() == 100) {
+        if (isLastTurn() & !lastTurnAlert) {
             lastTurnAlert = true;
             System.out.println("\nPlayer " + player.getID() + " has TRIGGER Last Turn");
             new Notice("Snakes and Ladders", "Player " + player.getID() + " has TRIGGER Last Turn");
