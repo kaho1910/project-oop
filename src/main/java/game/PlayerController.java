@@ -125,6 +125,11 @@ public class PlayerController implements Runnable {
                                 if (players[i].getPosition() == 100) {
                                     new Notice("Snakes and Ladders", "Player: " + players[i].getID() + " at Goal");
                                     lastTurn = true;
+                                    if (!lastTurnAlert) {
+                                        lastTurnAlert = true;
+                                        System.out.println("\nPlayer " + players[i].getID() + " has TRIGGER Last Turn");
+                                        new Notice("Snakes and Ladders", "Player " + players[i].getID() + " has TRIGGER Last Turn");
+                                    }
                                 }
                         }
                         players[i].getPlayerTable().setPressed(false);
@@ -240,11 +245,6 @@ public class PlayerController implements Runnable {
         onTrap(player);
         new Notice("Player " + player.getID(), "at " + player.getPosition());
         onPickCard(player);
-        if (isLastTurn() & !lastTurnAlert) {
-            lastTurnAlert = true;
-            System.out.println("\nPlayer " + player.getID() + " has TRIGGER Last Turn");
-            new Notice("Snakes and Ladders", "Player " + player.getID() + " has TRIGGER Last Turn");
-        }
     }
 
     public TargetPopup newTargetPopUp() {
