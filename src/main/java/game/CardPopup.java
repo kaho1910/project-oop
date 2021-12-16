@@ -30,8 +30,6 @@ public class CardPopup {
         imgView.setFitHeight(600);
         imgView.setFitWidth(500);
 
-//        card_pane.getChildren().add(imgView);
-
         useCardBtn.setFont(Font.font(24));
 
         VBox box = new VBox(imgView, useCardBtn);
@@ -39,8 +37,6 @@ public class CardPopup {
         box.setPrefSize(500, 660);
         box.setSpacing(10);
         card_pane.getChildren().add(box);
-
-//        card_pane.getChildren().add(useCardBtn);
 
         Scene scene = new Scene(card_pane, 500, 690);
         popUpStage.setScene(scene);

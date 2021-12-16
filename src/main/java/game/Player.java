@@ -46,7 +46,6 @@ public class Player extends Rectangle {
         this.runPlus = 0;
         this.willSkip = 0;
         for (int i = 0; i < cards.length; i++) {
-//            cards[i] = new PowerCard(i * 11);
             if (i < 2) {
                 cards[i] = new PowerCard(controller, this, true, false);
             } else {
@@ -90,8 +89,6 @@ public class Player extends Rectangle {
         animate.setAutoReverse(false);
         animate.play();
         System.out.println("id: " + this.ID + " at [" + this.position + "]");
-//        System.out.println("x : " + (this.position - 1) % width + ", " + coordinate[0]);
-//        System.out.println("y : " + ((this.position - 1) / height) + ", " + coordinate[1]);
         try {
             TimeUnit.MILLISECONDS.sleep(400);
         } catch (InterruptedException e) {
@@ -121,7 +118,6 @@ public class Player extends Rectangle {
             public void run() {
                 int k = 0;
                 try {
-                    //System.out.println(this.getId());
                     media = new Media(getClass().getResource("/sound/Walk.mp3").toExternalForm());
                     mediaPlayer = new MediaPlayer(media);
                     mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);

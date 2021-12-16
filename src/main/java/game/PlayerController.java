@@ -118,29 +118,19 @@ public class PlayerController implements Runnable {
                 players[i].getPlayerTable().updateEmotion(players[i].getPlayerTable().getEmotion());
                 System.out.println(players[i].getPlayerTable().getEmotion());
                 while (true) {
-//                    if (players[i].getPlayerTable().getDice_button().isDisabled()) {
                     System.out.print(""); // ศักดิ์สิทธิ์ ห้ามลบ
                     if (players[i].getPlayerTable().isPressed()) {
-//                        System.out.println(players[i].getID() + "-check");
-//                        try {
                             if (players[i].getPosition() < 99 || players[i].getPosition() > 1) {
-//                                System.out.println(players[i].getPlayerTable().getK());
-//                                players[i].setPosition(rand.nextInt(6) + 1);
                                 players[i].setPosition(players[i].getPlayerTable().getK());
                                 if (players[i].getPosition() == 100) {
                                     new Notice("Snakes and Ladders", "Player: " + players[i].getID() + " at Goal");
                                     lastTurn = true;
                                 }
-//                                Thread.sleep(1000);
-//                            }
-//                        } catch (InterruptedException e) {
-//                            e.printStackTrace();
                         }
                         players[i].getPlayerTable().setPressed(false);
                         break;
                     }
                 }
-//                endTurnChecker(players[i]);
             }
         }
         int numWinner = 0;

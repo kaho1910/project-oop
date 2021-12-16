@@ -272,18 +272,15 @@ public class PowerCard implements Card {
         Random rand = new Random();
         while (true) {
             if (controller.getSumCardPool() == 0) {
-//                alert card pool empty HERE
                 System.out.println("card pool is empty");
                 new Notice("Snakes and Ladders", "card pool is empty");
                 break;
             }
             num = rand.nextInt(controller.getCardPool().length);
             if (controller.getCardPool()[num] != 0 & !(isInit & (controller.getCardPool()[num] / 10 == 1))) {
-//                System.out.println(controller.getCardPool()[num]);
                 ans += controller.getCardPool()[num];
                 controller.cutSumCardPool(ans);
                 controller.setCardPool(0, num);
-//                System.out.println(playerID - 1);
                 player.addNumCardOnHand();
                 break;
             }

@@ -27,7 +27,7 @@ public class Info {
             checker = "htp";
         } else if (checker.equals("Cards")) {
             checker = "cardinfo";
-        } else if (checker.equals("Developers")) {
+        } else if (checker.equals("Team members")) {
             checker = "dev";
         }
         stage = new Stage();
