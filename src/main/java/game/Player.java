@@ -166,7 +166,9 @@ public class Player extends Rectangle {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        controller.endTurnChecker(this);
+        if (!gHundred) {
+            controller.endTurnChecker(this);
+        }
     }
 
     public int getPosition() {

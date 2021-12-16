@@ -165,7 +165,7 @@ public class PowerCard implements Card {
                         if (player.getPlayerTable().isTurn()) {
 //                            targetPopup.setCancelled(true);
                             for (int i = 0; i < targetPopup.getPbutton().length; i++) {
-                                if (player.getID() - 1 != i & player.getPosition() != 100 & controller.getPlayers()[i].getWillSkip() > -1) {
+                                if (player.getID() - 1 != i & controller.getPlayers()[i].getPosition() != 100 & controller.getPlayers()[i].getWillSkip() > -1) {
                                     targetPopup.getPbutton()[i].setDisable(false);
                                 }
                             }
@@ -288,7 +288,7 @@ public class PowerCard implements Card {
 
 //        PowerCard test return HERE
 
-//        return rand.nextInt(4) + 11;
+//        return rand.nextInt(1) + 31;
 
 
 //        Production return HERE

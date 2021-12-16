@@ -108,6 +108,9 @@ public class PlayerController implements Runnable {
         }
         while (!isLastTurn()) {
             for (int i = 0; i < playerNum; i++) {
+                if (players[i].getPosition() == 100){
+                    continue;
+                }
                 if (players[i].getWillSkip() != 0) {
                     players[i].setWillSkip(players[i].getWillSkip() - 1);
                     continue;
@@ -122,15 +125,6 @@ public class PlayerController implements Runnable {
                     if (players[i].getPlayerTable().isPressed()) {
                             if (players[i].getPosition() < 99 || players[i].getPosition() > 1) {
                                 players[i].setPosition(players[i].getPlayerTable().getK());
-                                if (players[i].getPosition() == 100) {
-                                    new Notice("Snakes and Ladders", "Player: " + players[i].getID() + " at Goal");
-                                    lastTurn = true;
-                                    if (!lastTurnAlert) {
-                                        lastTurnAlert = true;
-                                        System.out.println("\nPlayer " + players[i].getID() + " has TRIGGER Last Turn");
-                                        new Notice("Snakes and Ladders", "Player " + players[i].getID() + " has TRIGGER Last Turn");
-                                    }
-                                }
                         }
                         players[i].getPlayerTable().setPressed(false);
                         break;
@@ -245,6 +239,15 @@ public class PlayerController implements Runnable {
         onTrap(player);
         new Notice("Player " + player.getID(), "at " + player.getPosition());
         onPickCard(player);
+        if (player.getPosition() == 100) {
+            new Notice("Snakes and Ladders", "Player: " + player.getID() + " at Goal");
+            lastTurn = true;
+            if (!lastTurnAlert) {
+                lastTurnAlert = true;
+                System.out.println("\nPlayer " + player.getID() + " has TRIGGER Last Turn");
+                new Notice("Snakes and Ladders", "Player " + player.getID() + " has TRIGGER Last Turn");
+            }
+        }
     }
 
     public TargetPopup newTargetPopUp() {
